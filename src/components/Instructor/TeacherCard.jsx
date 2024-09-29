@@ -65,7 +65,7 @@ const TeacherCard = ({ Session, Student, language }) => {
                     {dataUser.type === "student" ? Student.name : dataUser.name}
                   </div>
                   <div className="font-normal text-gray-500">
-                    {t('country')}: {Student.country}
+                     {Student.country}
                   </div>
                 </div>
               </th>

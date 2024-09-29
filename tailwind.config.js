@@ -16,5 +16,6 @@ module.exports = {
     require("flowbite/plugin"),
     require("daisyui"),
     require("tw-elements-react/dist/plugin.cjs"),
+    require('daisyui'),
   ],
 };

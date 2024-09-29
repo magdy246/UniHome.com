@@ -9,11 +9,15 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function NavBar({
-  showChat = true,
+  link1 = "Link",
+  link2 = "Link",
+  link3 = "Link",
+  link4 = "Link",
   showLink1 = true,
   showLink2 = true,
   showLink3 = true,
   showLink4 = true,
+  showChat = true,
 }) {
   const dataUser = JSON.parse(sessionStorage.getItem("user"));
   const navigate = useNavigate();
@@ -50,80 +54,109 @@ export default function NavBar({
     navigate("/login");
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);
-      }
-    };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [dropdownRef]);
 
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
         <div className="max-w-screen-xl m-auto flex flex-row items-center justify-between mx-auto px-4 py-2">
           <div className="flex justify-center items-center gap-2">
-            <NavLink to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+            <NavLink
+              to="/"
+              className="flex items-center space-x-3 rtl:space-x-reverse"
+            >
               <img src={UniHomeLogo} className="w-20 h-20" alt="Logo" />
             </NavLink>
             <span>
               <button
                 onClick={() => handleLanguageChange(isEnglish ? 'ar' : 'en')}
-                className="group relative bg-gray-100 p-2 rounded-md overflow-hidden focus:outline-none focus:shadow-outline hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                className="group relative p-2 rounded-md overflow-hidden focus:outline-none focus:shadow-outline hover:shadow-lg transition-shadow duration-300 ease-in-out"
               >
+                <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500 ease-in-out"></div>
                 <img
-                  src={currentLanguage === "ar" ? USA : EUA}
-                  alt={currentLanguage === "ar" ? 'English' : 'Arabic'}
-                  className="h-6 w-8 transform transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:rotate-6"
+                  src={isEnglish ? USA : EUA}
+                  alt={isEnglish ? 'English' : 'Arabic'}
+                  className="h-6 w-8 transform transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:rotate-3"
                 />
               </button>
+
             </span>
           </div>
 
+          {/* {showLink2 && (
+            <NavLink to="/" className="hideUniHome  ">
+              <h1 className="text-7xl font-[AntonSC-R]">
+                <span className="text-blue-600">Uni</span>
+                <span className="text-orange-500">Home</span>
+              </h1>
+              <p className="text-blue-600 text-md font-bold text-center">
+                Online University From Home
+              </p>
+            </NavLink>
+          )} */}
           {showLink1 && (
             <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse md:gap-6 gap-0">
+              {/* Chat Icon */}
+              {showChat && (
+                <div className="gap-x-3 sm:flex justify-center items-center hidden">
+                  <div className="indicator h-[42px] relative cursor-pointer mr-3">
+                    <span className="indicator-item text-xs bg-red-500 badge text-white">
+                      ?
+                    </span>
+                    <NavLink to="Chat">
+                      <BsChatText className="inline text-blue-600 text-3xl mt-2" />
+                    </NavLink>
+                  </div>
+                </div>
+              )}
+
+              {/* Notification Icon */}
+              {/* {showLink3 && (
+                <div className="indicator relative cursor-pointer group mr-3">
+                  <div className="hidden p-3 absolute z-[70] -left-40 top-11 group-hover:block rounded-lg min-h-80 min-w-60 border-2 bg-neutral-100 sm:min-w-80 md:min-w-96 lg:min-w-72 md:right-0 md:top-9">
+                    <div className="bg-white p-2 rounded-md w-full">
+                      <h2 className="text-base md:text-lg lg:text-xl">Title</h2>
+                      <p className="text-xs md:text-sm lg:text-base text-slate-400">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing
+                        elit.
+                      </p>
+                    </div>
+                  </div>
+                  <span className="indicator-item text-xs bg-blue-600 badge text-white">
+                    2
+                  </span>
+                  <MdNotificationsActive className="text-4xl text-yellow-300 mt-2" />
+                </div>
+              )} */}
               <div className="text-xl font-bold text-gray-500 flex justify-center gap-2 items-center capitalize">
-                <span className="text-orange-500 text-2xl">{t('Hi')}</span>
+                <span className="text-orange-500 text-2xl">Hi </span>
                 {dataUser?.firstname}
               </div>
-              <button
-                type="button"
-                className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                id="user-menu-button"
-                aria-expanded={isDropdownOpen}
-                data-dropdown-toggle="user-dropdown"
-                data-dropdown-placement="bottom"
-              >
-                <span className="sr-only">Open user menu</span>
-                <img
-                  id="animation-register"
-                  className="w-16 h-16 rounded-full"
-                  src={dataUser?.image}
-                  alt="user"
-                />
-              </button>
-              <div
-                ref={dropdownRef}
-                className={`z-50 ${isDropdownOpen ? 'block' : 'hidden'} my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
-                id="user-dropdown"
-              >
-                <div className="px-4 py-3 bg-gray-200 rounded-t-lg">
-                  <span className="block text-sm font-bold text-gray-900 capitalize dark:text-white">
-                    {dataUser?.firstname} {dataUser?.lastname}
-                  </span>
-                  <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
-                    {dataUser?.email}
-                  </span>
+              {/* User Profile */}
+              <div className="dropdown dropdown-end">
+                <div tabIndex={0} role="button" className="w-16 h-16 btn btn-ghost btn-circle avatar">
+                  <div className="rounded-full" id="animation-register">
+                    <img
+                      className="w-full h-full rounded-full"
+                      src={dataUser?.image}
+                      alt="user"
+                    />
+                  </div>
                 </div>
-                <ul className="p-4 rounded-x-lg rounded-b-lg text-center bg-blue-200 font-bold" aria-labelledby="user-menu-button">
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                  <div className="px-4 py-3 bg-gray-200 rounded-lg mb-2">
+                    <span className="block text-sm font-bold text-gray-500 capitalize dark:text-white">
+                      {dataUser?.firstname} {dataUser?.lastname}
+                    </span>
+                    <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
+                      {dataUser?.email}
+                    </span>
+                  </div>
                   <li>
                     <NavLink
-                      className="border-2 border-orange-500 bg-orange-500 hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                       to="Chat"
                     >
                       {t('Chat')}
@@ -131,7 +164,7 @@ export default function NavBar({
                   </li>
                   <li>
                     <NavLink
-                      className="border-2 border-orange-500 bg-orange-500 hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                       to="/Dashboard"
                     >
                       {t('Dashboard')}
@@ -140,7 +173,7 @@ export default function NavBar({
                   <li>
                     <NavLink
                       to="/TeacherS"
-                      className="border-2 border-orange-500 bg-orange-500 hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                     >
                       {t('Teachers')}
                     </NavLink>
@@ -148,7 +181,7 @@ export default function NavBar({
                   <li>
                     <NavLink
                       to="/setting"
-                      className="border-2 border-orange-500 bg-orange-500 hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                     >
                       {t('Settings')}
                     </NavLink>
@@ -156,7 +189,7 @@ export default function NavBar({
                   <li>
                     <NavLink
                       to="/wallet"
-                      className="border-2 border-orange-500 bg-orange-500 hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                     >
                       {t('Wallet')}
                     </NavLink>
@@ -167,7 +200,7 @@ export default function NavBar({
                         logOut();
                         window.location.reload();
                       }}
-                      className="border-2 border-orange-500 bg-orange-500 hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                     >
                       {t('SignOut')}
                     </Link>
@@ -177,32 +210,69 @@ export default function NavBar({
             </div>
           )}
           {showLink4 && (<>
+            <div className="md:flex justify-end items-center gap-3 hidden">
+              <span>
+                <NavLink
+                  className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500  w-full text-white font-bold px-3 py-2 rounded-3xl focus:outline-none focus:shadow-outline"
+                  to="/"
+                >
+                  {t("Home")}
+                </NavLink>
+              </span>
+              <span>
+                <NavLink
+                  to="/TeacherS"
+                  className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500  w-full text-white font-bold px-3 py-2 rounded-3xl focus:outline-none focus:shadow-outline"
+                >
+                  {t("Teachers")}
+                </NavLink>
+              </span>
+              <span>
+                <NavLink
+                  to="/about"
+                  className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500  w-full text-white font-bold px-3 py-2 rounded-3xl focus:outline-none focus:shadow-outline"
+                >
+                  {t("About")}
+                </NavLink>
+              </span>
+            </div>
+
             <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse md:gap-6 gap-0">
-              <button
-                type="button"
-                className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                id="user-menu-button"
-                aria-expanded={isDropdownOpen}
-                data-dropdown-toggle="user-dropdown"
-                data-dropdown-placement="bottom"
-              >
-                <span className="sr-only">Open user menu</span>
-                <img
-                  id="animation-register"
-                  className="w-16 h-16 rounded-full"
-                  src={unknown}
-                  alt="user"
-                />
-              </button>
-              <div
-                ref={dropdownRef}
-                className={`z-50 ${isDropdownOpen ? 'block' : 'hidden'} my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
-                id="user-dropdown"
-              >
-                <ul className="p-4 rounded-lg rounded-b-lg text-center bg-blue-200 font-bold" aria-labelledby="user-menu-button">
+              <div className="md:flex justify-end items-center gap-3 hidden">
+                <span>
+                  <NavLink
+                    to="/login"
+                    className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500  w-full text-white font-bold p-3 rounded-xl focus:outline-none focus:shadow-outline"
+                  >
+                    {t("signIn.login")}
+                  </NavLink>
+                </span>
+                <span>
+                  <NavLink
+                    to="/register"
+                    className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500  w-full text-white font-bold p-3 rounded-xl focus:outline-none focus:shadow-outline"
+                  >
+                    {t("Register")}
+                  </NavLink>
+                </span>
+              </div>
+              {/* User Profile */}
+              <div className="dropdown dropdown-end">
+                <div tabIndex={0} role="button" className="w-16 h-16 btn btn-ghost btn-circle avatar">
+                  <div className="rounded-full" id="animation-register">
+                    <img
+                      className="w-full h-full rounded-full"
+                      src={dataUser?.image}
+                      alt="user"
+                    />
+                  </div>
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                   <li>
                     <NavLink
-                      className="border-2 border-orange-500 bg-orange-500 hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 my-1 block rounded-xl focus:outline-none focus:shadow-outline"
                       to="/"
                     >
                       {t("Home")}
@@ -211,7 +281,7 @@ export default function NavBar({
                   <li>
                     <NavLink
                       to="/about"
-                      className="border-2 border-orange-500 bg-orange-500 hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                     >
                       {t("About")}
                     </NavLink>
@@ -219,32 +289,31 @@ export default function NavBar({
                   <li>
                     <NavLink
                       to="/TeacherS"
-                      className="border-2 border-orange-500 bg-orange-500 hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                     >
                       {t("Teachers")}
                     </NavLink>
                   </li>
                   <li>
                     <NavLink
-                      to="/register"
-                      className="border-2 border-orange-500 bg-orange-500 hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      to="/login"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                     >
-                      {t("Register")}
+                      {t("signIn.login")}
                     </NavLink>
                   </li>
                   <li>
                     <NavLink
-                      to="/login"
-                      className="border-2 border-orange-500 bg-orange-500 hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      to="/register"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                     >
-                      {t("signIn.login")}
+                      {t("Register")}
                     </NavLink>
                   </li>
                 </ul>
               </div>
             </div>
-          </>
-          )}
+          </>)}
         </div>
       </nav>
     </>

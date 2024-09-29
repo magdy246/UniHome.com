@@ -69,21 +69,24 @@ export default function App() {
   }, 660000);
 
   useEffect(() => {
-    const getWalletData = async () => {
-      try {
-        const res = await axios.get("https://yousab-tech.com/unihome/public/api/auth/wallets", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setDataUse(res.data.data.wallets);
-      } catch (error) {
-        console.log("Error fetching wallet data:", error);
-      }
-    };
-
-    getWalletData();
+    if(refAPI !== null)
+    {
+      const getWalletData = async () => {
+        try {
+          const res = await axios.get("https://yousab-tech.com/unihome/public/api/auth/wallets", {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          setDataUse(res.data.data.wallets);
+        } catch (error) {
+          console.log("Error fetching wallet data:", error);
+        }
+      };
+  
+      getWalletData();
+    }
   }, [loc.pathname, refAPI]);
 
   return (
