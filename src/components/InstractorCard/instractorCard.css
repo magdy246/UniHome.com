@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Container Styles */
+.card-container {
+  @apply min-w-[80%] w-[80%] bg-gray-200 p-4 m-5 cursor-pointer flex justify-between items-center text-center flex-col gap-5 rounded-lg shadow-xl;
+}
+
+/* Dark Mode */
+.dark-mode-bg {
+  @apply bg-gray-800; /* Use your preferred dark mode color */
+}
+
+/* Avatar Styles */
+.avatar-container img {
+  @apply w-32 rounded-3xl; /* Equivalent to width: 8rem; and border-radius: 50%; */
+}
+
+/* Name and Rating Styles */
+.name-rating {
+  @apply font-bold flex flex-col items-center capitalize;
+}
+.name {
+  @apply text-gray-800;
+}
+.rating {
+  @apply flex gap-1;
+}
+.rating-color {
+  @apply text-yellow-300; /* Background color for the rating mask */
+}
+
+/* Info Section Styles */
+.info-section {
+  @apply flex flex-col justify-between w-full p-5 md:flex-row;
+}
+.info-column {
+  @apply flex flex-col gap-3 mt-3;
+}
+.info-badge {
+  @apply bg-gray-300 p-2 rounded-md;
+}
+
+/* Description Styles */
+.description {
+  @apply max-w-full text-gray-500 overflow-hidden;
+}
+.line-clamp {
+  @apply line-clamp-3; /* Requires the @tailwindcss/line-clamp plugin */
+}
+
+/* Button Styles */
+.button {
+  @apply inline-flex items-center gap-2 bg-blue-900 p-2 px-4 text-white rounded-3xl transition-all duration-300 ease-in-out;
+}
+
+.button:hover {
+  @apply bg-orange-500; /* Custom hover color */
+}

@@ -1,0 +1,5 @@
+@media screen and (min-width:235px) and (max-width:275px) {
+    .login .formLogin {
+        width: 200px;
+    }
+}

@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply text-neutral-800;
+  }
+
+  html.dark {
+    @apply text-neutral-50;
+    @apply bg-neutral-800;
+  }
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  max-width: 90%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-next-arrow::after,
+.custom-next-arrow::before {
+  @apply text-2xl text-blue-600 !important;
+}
+
+.auth_button {
+  @apply border-2 border-orange-500 bg-orange-500 text-white font-bold w-full py-3 px-4 rounded-full hover:bg-white hover:text-black duration-500 focus:outline-none focus:ring !important;
+}
+
+
+.colorPAbout {
+  @apply text-[#FF911A] mr-3;
+}
+
+.bgColorPAbout {
+  @apply text-[#9c9c9c] rounded-md;
+}
+
+/* .linkTabs {
+  @apply text-2xl border-none target:text-blue-400 active:bg-blue-700 text-black font-medium w-full capitalize !important;
+} */
+
+.hideUniHome {
+  @apply block;
+}
+
+@media (max-width: 768px) {
+  .hideUniHome {
+    @apply hidden;
+  }
+}
+
+.submitSupport {
+  @apply bg-orange-500 text-white py-3 px-6 rounded-3xl hover:bg-orange-700 transition-all duration-500 !important;
+}
+
+/* .buttonIn{
+  @apply  space-x-2 rounded-md bg-blue-700 px-6 pb-2 pt-2.5 hover:bg-orange-400  text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] !important;
+} */
+
+@font-face {
+  font-family: "Jomhuria-R";
+  src: url("./components/Assets/fonts/Jomhuria-Regular.ttf");
+}
+
+@font-face {
+  font-family: "AntonSC-R";
+  src: url("./components/Assets/fonts/Anton_SC/AntonSC-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Cairo-B";
+  src: url("./components/Assets/fonts/Cairo-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Cairo-R";
+  src: url("./components/Assets/fonts/Cairo-Regular.ttf");
+}
+
+/**************Shadow of Quiz Card**************/
+.cardShadow {
+  box-shadow: 0px 18px 53px -18px rgba(0, 0, 0, 0.91);
+}
+
+.active {
+  @apply bg-white text-black duration-500 !important
+}
+
+#animation-register {
+  animation-duration: 2s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-name: shadow-throb;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes shadow-throb {
+  0%, 100% {
+    box-shadow: 0px 0px 4px 4px orange, 0px 0px 4px 4px orange, 0px 0px 4px 4px orange;
+  }
+
+  50% {
+    box-shadow: 0px 0px 7px 7px orange, 0px 0px 7px 7px orange, 0px 0px 7px 7px orange;
+  }
+}
+
