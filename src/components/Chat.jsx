@@ -30,7 +30,7 @@ export default function Chat() {
     const fetchUsers = async () => {
       try {
         let request = await axios.get(
-          "https://unih0me.com/api/auth/chat/users",
+          "https://yousab-tech.com/unihome/public/api/auth/chat/users",
           {
             headers: {
               "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export default function Chat() {
       const sendMsgToAPI = async () => {
         try {
           await axios.post(
-            "https://unih0me.com/api/auth/chat/store",
+            "https://yousab-tech.com/unihome/public/api/auth/chat/store",
             {
               receiver_id: verticalActive, // يجب إرسال الرسالة إلى المستخدم الحالي
               message: newMessage,
@@ -92,7 +92,7 @@ export default function Chat() {
       const fetchMessages = async () => {
         try {
           const res = await axios.get(
-            `https://unih0me.com/api/auth/chats/${verticalActive}`,
+            `https://yousab-tech.com/unihome/public/api/auth/chats/${verticalActive}`,
             {
               headers: {
                 "Content-type": "application/json",
@@ -115,7 +115,7 @@ export default function Chat() {
         const sendNewMsgToAPI = async () => {
           try {
             let res = await axios.post(
-              "https://unih0me.com/api/auth/chat/store",
+              "https://yousab-tech.com/unihome/public/api/auth/chat/store",
               {
                 receiver_id: idT, // يجب إرسال الرسالة إلى المستخدم الحالي
                 message: "Hello",

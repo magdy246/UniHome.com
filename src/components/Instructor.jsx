@@ -17,7 +17,7 @@ export const Instructor = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://unih0me.com/api/teachers');
+      const response = await axios.get('https://yousab-tech.com/unihome/public/api/teachers');
       setInstructors(response.data.data.teachers);
     } catch (error) {
       console.error(error);

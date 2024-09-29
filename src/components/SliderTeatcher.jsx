@@ -12,7 +12,7 @@ export default function SliderTeatcher() {
 
   const apiData = async () => {
     try {
-      const res = await axios.get("https://unih0me.com/api/teachers");
+      const res = await axios.get("https://yousab-tech.com/unihome/public/api/teachers");
       setDataApi(res.data.data.teachers);
 
       setLoading(false);

@@ -16,7 +16,7 @@ export default function ResultQuestionForTeacher() {
       setLoading(true); // Start loading
       try {
         const token = Cookies.get("accessToken");
-        const response = await axios.get("https://unih0me.com/api/quizs", {
+        const response = await axios.get("https://yousab-tech.com/unihome/public/api/quizs", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -42,7 +42,7 @@ export default function ResultQuestionForTeacher() {
     try {
       const token = Cookies.get("accessToken");
       const response = await axios.get(
-        `https://unih0me.com/api/testings/quiz/${id_Quiz}`,
+        `https://yousab-tech.com/unihome/public/api/testings/quiz/${id_Quiz}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

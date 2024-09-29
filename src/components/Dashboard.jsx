@@ -94,7 +94,7 @@ export default function Dashboard() {
     let sessions = async () => {
       try {
         let response = await axios.get(
-          "https://unih0me.com/api/auth/sessions",
+          "https://yousab-tech.com/unihome/public/api/auth/sessions",
           {
             headers: {
               "Content-Type": "application/json",
@@ -112,7 +112,7 @@ export default function Dashboard() {
     dataSession.map(async (e) => {
       const userId = dataUser.type === "student" ? e.teacher_id.id : e.student_id;
       let request = await axios.get(
-        `https://unih0me.com/api/teacher/${userId}`,
+        `https://yousab-tech.com/unihome/public/api/teacher/${userId}`,
         {
           headers: {
             "Content-Type": "application",

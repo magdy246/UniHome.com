@@ -66,7 +66,7 @@ const LessonCard = (Session) => {
   async function cancelSession() {
     try {
       const response = await axios.post(
-        "https://unih0me.com/api/cancel/session",
+        "https://yousab-tech.com/unihome/public/api/cancel/session",
         { session_id: sessionId },
         {
           headers: {
@@ -83,7 +83,7 @@ const LessonCard = (Session) => {
   async function reschdeuleSession() {
     try {
       const response = await axios.post(
-        "https://unih0me.com/api/reschdeule/session",
+        "https://yousab-tech.com/unihome/public/api/reschdeule/session",
         { session_id: sessionId },
         {
           headers: {

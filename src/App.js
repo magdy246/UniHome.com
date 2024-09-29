@@ -35,7 +35,7 @@ export default function App() {
   const loc = useLocation();
 
   let usersData = async () => {
-    let userTable = await axios.get("https://unih0me.com/api/teachers");
+    let userTable = await axios.get("https://yousab-tech.com/unihome/public/api/teachers");
     setUserTable(userTable);
   };
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function App() {
       if (token) {
         try {
           const res = await axios.post(
-            "https://unih0me.com/api/auth/refresh",
+            "https://yousab-tech.com/unihome/public/api/auth/refresh",
             {},
             {
               headers: {
@@ -71,7 +71,7 @@ export default function App() {
   useEffect(() => {
     const getWalletData = async () => {
       try {
-        const res = await axios.get("https://unih0me.com/api/auth/wallets", {
+        const res = await axios.get("https://yousab-tech.com/unihome/public/api/auth/wallets", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

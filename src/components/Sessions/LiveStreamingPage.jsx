@@ -42,7 +42,7 @@ const LiveStreamingPage = (Session) => {
   async function compeletSession() {
     try {
       const response = await axios.post(
-        "https://unih0me.com/api/complete/session",
+        "https://yousab-tech.com/unihome/public/api/complete/session",
         { session_id: sessionId },
         {
           headers: {
@@ -58,7 +58,7 @@ const LiveStreamingPage = (Session) => {
   async function inCompeletSession() {
     try {
       const response = await axios.post(
-        "https://unih0me.com/api/incomplete/session",
+        "https://yousab-tech.com/unihome/public/api/incomplete/session",
         { session_id: sessionId },
         {
           headers: {
@@ -97,7 +97,7 @@ const LiveStreamingPage = (Session) => {
   const handleBookingConfirm = async () => {
     try {
       let res = await axios.post(
-        "https://unih0me.com/api/auth/session/store",
+        "https://yousab-tech.com/unihome/public/api/auth/session/store",
         { session_id: dataSession.id },
         {
           headers: {
@@ -117,7 +117,7 @@ const LiveStreamingPage = (Session) => {
     let sessions = async () => {
       try {
         let response = await axios.get(
-          "https://unih0me.com/api/auth/sessions",
+          "https://yousab-tech.com/unihome/public/api/auth/sessions",
           {
             headers: {
               "Content-Type": "application/json",

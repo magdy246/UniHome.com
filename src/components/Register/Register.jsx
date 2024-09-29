@@ -33,7 +33,7 @@ export default function Register() {
 
     try {
       let response = await axios.post(
-        `https://unih0me.com/api/auth/register/${teacherOrStudent}`,
+        `https://yousab-tech.com/unihome/public/api/auth/register/${teacherOrStudent}`,
         registerInput
       );
 

@@ -11,7 +11,7 @@ export default function SubmitAnswer() {
 
   const fetchQuizzes = async () => {
     try {
-      const response = await axios.get("https://unih0me.com/api/quizs");
+      const response = await axios.get("https://yousab-tech.com/unihome/public/api/quizs");
       const sortedQuizzes = response?.data?.data?.quizs.sort((a, b) =>
         a.title.localeCompare(b.title)
       );
@@ -56,7 +56,7 @@ export default function SubmitAnswer() {
       };
 
       const response = await axios.post(
-        "https://unih0me.com/api/testing",
+        "https://yousab-tech.com/unihome/public/api/testing",
         submissionData,
         {
           headers: {

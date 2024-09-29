@@ -38,7 +38,7 @@ export default function EditPassword() {
         setLoading(true)
 
         try {
-            let response = await axios.post(`https://unih0me.com/api/auth/user-profile/${dataUser.type}`, values, {
+            let response = await axios.post(`https://yousab-tech.com/unihome/public/api/auth/user-profile/${dataUser.type}`, values, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }

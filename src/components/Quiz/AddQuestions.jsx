@@ -82,7 +82,7 @@ export default function AddQuestions() {
       };
 
       const response = await axios.post(
-        "https://unih0me.com/api/quiz",
+        "https://yousab-tech.com/unihome/public/api/quiz",
         payload
       );
 

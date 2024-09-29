@@ -167,7 +167,7 @@ const BookPopup = ({ event, onClose, forceUpdate, teacher }) => {
 
     setLoading(true);
     try {
-      const res = await fetch(`https://unih0me.com/api/auth/session/store`, {
+      const res = await fetch(`https://yousab-tech.com/unihome/public/api/auth/session/store`, {
         method: "POST",
         headers: {
           // "Content-Type": "multipart/form-data",

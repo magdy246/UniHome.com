@@ -34,7 +34,7 @@ export default function Reviews(teacher) {
   async function getData() {
     try {
       let response = await axios.get(
-        `https://unih0me.com/api/reviews/${teach}`
+        `https://yousab-tech.com/unihome/public/api/reviews/${teach}`
       );
       setData(response.data.data.reviews);
       console.log(response.data.data.reviews);
@@ -47,7 +47,7 @@ export default function Reviews(teacher) {
   async function inputData() {
     try {
       let response = await axios.post(
-        `https://unih0me.com/api/auth/review`,
+        `https://yousab-tech.com/unihome/public/api/auth/review`,
         inputComment,
         {
           headers: {

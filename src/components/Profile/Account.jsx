@@ -22,7 +22,7 @@ export default function Account() {
 
   async function profile() {
     let response = await axios.post(
-      "https://unih0me.com/api/auth/user-profile/teacher",
+      "https://yousab-tech.com/unihome/public/api/auth/user-profile/teacher",
       profileInput,
       {
         headers: {

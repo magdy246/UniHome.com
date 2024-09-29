@@ -39,7 +39,7 @@ export default function Teacher() {
   async function getData() {
     try {
       let response = await axios.get(
-        `https://unih0me.com/api/reviews/${Teacher_id}`
+        `https://yousab-tech.com/unihome/public/api/reviews/${Teacher_id}`
       );
       setData(response.data.data.reviews);
       console.log(response.data.data.reviews);
@@ -62,7 +62,7 @@ export default function Teacher() {
     const apiData = async () => {
       try {
         const res = await axios.get(
-          `https://unih0me.com/api/teacher/${Teacher_id}`,
+          `https://yousab-tech.com/unihome/public/api/teacher/${Teacher_id}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -137,7 +137,7 @@ export default function Teacher() {
   const handleBookingConfirm = async () => {
     try {
       await axios.post(
-        "https://unih0me.com/api/auth/session/store",
+        "https://yousab-tech.com/unihome/public/api/auth/session/store",
         { sessiontable_id: singleSession.id },
         {
           headers: {
