@@ -19,7 +19,7 @@ export default function Login() {
   async function login() {
     try {
       let response = await axios.post(
-        "https://yousab-tech.com/unihome/public/api/login",
+        "https://yousab-tech.com/unihome/public/api/auth/login",
         loginInput
       );
       Cookies.set("accessToken", response.data.access_token);
