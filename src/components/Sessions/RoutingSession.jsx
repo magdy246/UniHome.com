@@ -65,9 +65,6 @@ export default function RoutingSession({ Session, Student }) {
   }
 
 
-
-
-
   return (
     <div className="mb-3">
       {/* Centered Tabs */}

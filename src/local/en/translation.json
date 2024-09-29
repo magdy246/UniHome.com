@@ -173,7 +173,7 @@
     "videoLectures": "Video Lectures",
     "social": "Social",
     "contactUs": "Contact Us",
-    "address": "El-doky, Egypt",
+    "address": "El-Dokki, Egypt",
     "Reviews": "Reviews",
     "Confirm Booking": "Confirm Booking",
     "Hourly Rate": "Hourly Rate",
@@ -214,5 +214,12 @@
     "reBooked": "ReBooked",
     "done": "Done",
     "action": "Action",
-    "country": "Country"
+    "country": "Country",
+    "Start Lesson": "Start Lesson",
+    "Available": "Available",
+    "not Available": "Not Available",
+    "60 Minutes Of Lesson": "60 Minutes Of Lesson",
+    "End Lesson": "End Lesson",
+    "Create Quiz": "Create Quiz",
+    "Cut Lesson": "Cut Lesson"
 }

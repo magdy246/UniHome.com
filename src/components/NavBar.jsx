@@ -5,7 +5,7 @@ import unknown from "./Assets/images/profile.jpg";
 import EUA from "./Assets/images/Flag_of_the_United_Arab_Emirates.svg.png";
 import USA from "./Assets/images/Flag_of_the_United_States.png";
 import Cookies from "js-cookie";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function NavBar({
@@ -22,10 +22,11 @@ export default function NavBar({
   const dataUser = JSON.parse(sessionStorage.getItem("user"));
   const navigate = useNavigate();
   const [isEnglish, setIsEnglish] = useState(true);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
   const { t, i18n } = useTranslation();
   const [currentLanguage, setCurrentLanguage] = useState('en');
+  const [showNavBar, setShowNavBar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
 
   useEffect(() => {
     const savedLang = localStorage.getItem("lang");
@@ -54,11 +55,30 @@ export default function NavBar({
     navigate("/login");
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        setShowNavBar(false);
+      } else {
+        setShowNavBar(true);
+      }
+      setLastScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
 
 
   return (
     <>
-      <nav className="bg-white border-gray-200 dark:bg-gray-900">
+      <nav
+        className={`bg-white border-gray-200 dark:bg-gray-900 fixed w-full z-50 transition-transform duration-300 ease-in-out ${showNavBar ? "translate-y-0" : "-translate-y-full"
+          }`}
+      >
         <div className="max-w-screen-xl m-auto flex flex-row items-center justify-between mx-auto px-4 py-2">
           <div className="flex justify-center items-center gap-2">
             <NavLink

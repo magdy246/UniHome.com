@@ -110,7 +110,7 @@ export default function App() {
               <NavBar showLink4={true} showLink1={false} />
             </div>
           )}
-          <main className="min-h-screen  w-full bg-[#eee]">
+          <main className="min-h-screen w-full pt-24 bg-[#eee]">
             <Outlet /> {/* لعرض المحتويات المخصصة حسب المسار */}
           </main>
           <SupportIcon />

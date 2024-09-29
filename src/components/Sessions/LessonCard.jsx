@@ -27,7 +27,6 @@ const addOneHour = (time24) => {
 
 const LessonCard = (Session) => {
   const teacherId = Session?.Session?.teacher_id?.id
-  console.log(Session.Session.id);
 
   let dateSection = new Date(`${Session.Session.session_table.date} ${Session.Session.session_table.time}`);
   let dateNew = new Date().getTime();
@@ -131,7 +130,7 @@ const LessonCard = (Session) => {
   );
   const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-  return (
+  return (<>
     <div id={Session?.Session?.id} className="p-4" dir={Lang === "ar" ? "rtl" : "ltr"}>
       <div className="bg-white rounded-lg shadow-md px-6 py-10 mx-auto max-w-lg sm:max-w-xl lg:max-w-4xl mt-6 relative">
         {/* Date Styled Inside the Card */}
@@ -202,7 +201,7 @@ const LessonCard = (Session) => {
           </div>
           <div>
             <h3 className="text-gray-500 text-sm lg:text-base mb-3">{t("Actions")}</h3>
-            <div className="flex flex-wrap justify-center space-x-2">
+            <div className="flex flex-wrap justify-center gap-2">
 
               <Link
                 to={`/chat?id=${teacherId}`}
@@ -238,6 +237,7 @@ const LessonCard = (Session) => {
         </Link>
       </div>
     </div>
+  </>
   );
 };
 

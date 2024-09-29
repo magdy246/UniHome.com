@@ -29,28 +29,35 @@ export default function Header() {
             <div className="absolute inset-0 bg-black opacity-70"></div>
 
             {/* Text Overlay */}
-            <div className="absolute inset-0 flex flex-col justify-end py-10 md:py-20 gap-8 md:gap-14 text-white ps-6 md:ps-10">
-                <h1 className="text-4xl md:text-6xl font-bold mb-2 md:mb-4 w-full md:w-1/2 font-[Cairo-B]">
-                    {/* Render header title with strong tags for styling */}
-                    <span className="font-extrabold">
-                        {t('headerTitle').includes('يوني') ? 'مع ' : 'With '}
-                    </span>
-                    <strong className="text-blue-600 font-extrabold">
-                        {t('headerTitle').includes('يوني') ? 'يوني' : 'Uni'}
-                    </strong>
-                    <strong className="text-orange-500 font-extrabold">
-                        {t('headerTitle').includes('يوني') ? 'هوم...' : 'Home...'}
-                    </strong>
-                    <p>{t('subtitle')}</p>
-                </h1>
-                <p className="text-lg md:text-2xl w-full md:w-2/3 font-[Cairo-R]">
+            <div className="absolute inset-0 flex flex-col justify-end gap-4 md:gap-8 lg:gap-12 p-4 md:p-10 text-white">
+                <div>
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 md:mb-3 w-full lg:w-2/3 font-[Cairo-B] leading-tight">
+                        {/* Render header title with strong tags for styling */}
+                        <span className="font-extrabold">
+                            {t('headerTitle').includes('يوني') ? 'مع ' : 'With '}
+                        </span>
+                        <strong className="text-blue-600 font-extrabold">
+                            {t('headerTitle').includes('يوني') ? 'يوني' : 'Uni'}
+                        </strong>
+                        <strong className="text-orange-500 font-extrabold">
+                            {t('headerTitle').includes('يوني') ? 'هوم...' : 'Home...'}
+                        </strong>
+                    </h1>
+                    <p className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl w-full lg:w-1/2 font-[Cairo-B]">
+                        {t('subtitle')}
+                    </p>
+                </div>
+
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl w-full lg:w-2/3 font-[Cairo-R]">
                     {t('description')}
                 </p>
+
                 <Link
                     to="/TeacherS"
-                    className="font-[Cairo-B] text-xl w-fit border-2 border-orange-500 bg-orange-500 hover:bg-white hover:text-black duration-500 text-white font-bold py-4 px-5 rounded-full focus:outline-none focus:shadow-outline"
+                    className="font-[Cairo-B] text-lg sm:text-xl md:text-2xl w-fit border-2 border-orange-500 bg-orange-500 hover:bg-white hover:text-black duration-500 text-white font-bold py-3 px-4 md:py-4 md:px-5 rounded-full focus:outline-none focus:shadow-outline"
                 >
-                    {t('buttonText')} <span className="ms-3">
+                    {t('buttonText')}
+                    <span className="ms-3">
                         <FontAwesomeIcon
                             className="fa-solid fa-poo-bolt fa-beat-fade"
                             style={{
@@ -63,5 +70,6 @@ export default function Header() {
                 </Link>
             </div>
         </div>
+
     );
 }

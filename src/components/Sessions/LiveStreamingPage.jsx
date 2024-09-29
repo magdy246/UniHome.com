@@ -7,6 +7,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 
 const LiveStreamingPage = (Session) => {
   const [sessionId, setSessionId] = useState(null)
@@ -22,7 +23,9 @@ const LiveStreamingPage = (Session) => {
   let DateAll = dateSection - dateNew;
   const [timeLeft, setTimeLeft] = useState(DateAll > 0 ? DateAll : 0);
   let dataUser = JSON.parse(sessionStorage.getItem("user"));
-  const teacherId = dataSession?.teacher_id?.id
+  const teacherId = dataSession?.teacher?.id
+  console.log(dataSession);
+
 
   let nav = useNavigate();
 
@@ -179,6 +182,8 @@ const LiveStreamingPage = (Session) => {
     )}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   };
 
+  const { t } = useTranslation();
+
   return (
     <div className="liveStream">
       {/* Main Content Area */}
@@ -212,7 +217,7 @@ const LiveStreamingPage = (Session) => {
                 onClick={handleDis}
                 className="flex disabled:border-none disabled:transform-none disabled:bg-slate-500 items-center justify-center text-white text-lg rounded-3xl py-2 px-4 font-bold bg-blue-600 border-b-4 border-blue-800 transition-transform duration-300 hover:border-b-0 hover:translate-y-0.5 active:outline-none active:bg-blue-700 active:scale-95"
               >
-                Start Lesson
+                {t("Start Lesson")}
               </Link>
             </div>
 
@@ -234,40 +239,40 @@ const LiveStreamingPage = (Session) => {
         <ul className="space-y-4">
           <Link
             to="/Dashboard">
-              <FontAwesomeIcon className="text-orange-500 text-2xl right-0 top-0 absolute p-3" icon={faCircleXmark} />
+            <FontAwesomeIcon className="text-orange-500 text-2xl rtl:left-0 ltr:right-0  top-0 absolute p-3" icon={faCircleXmark} />
           </Link>
           <div className="flex items-center space-x-4 mb-4 sm:mb-0">
             <div>
               {/* Profile Avatar */}
               <img
                 className="w-16 h-16 sm:w-24 sm:h-24 rounded-3xl"
-                src={Avatar} // Placeholder for Avatar
+                src={dataSession?.teacher?.image}
                 alt="User Avatar"
               />
             </div>
             <div>
               {/* User Name & Country */}
-              <h2 className="text-black font-bold text-lg">{dataUser.type}</h2>
+              <h2 className="text-black font-bold text-lg">Teacher</h2>
               <h2 className="text-gray-700 font-bold text-md">
-                {dataUser.firstname} {dataUser.lastname}
+                {dataSession?.teacher?.firstname} {dataSession?.teacher?.lastname}
               </h2>
-              <p className="text-gray-400 text-sm">{dataUser.country}</p>
+              <p className="text-gray-400 text-sm">{dataSession?.teacher?.country}</p>
             </div>
           </div>
-          <h3 className="text-xl font-semibold mb-4">Lesson Details:</h3>
+          <h3 className="text-xl font-semibold mb-4">{t("Lesson Details")}:</h3>
           <div className="bg-gray-100 p-3 rounded-lg">
             <h3 className="text-gray-700">
-              Status :{" "}
+              {t("Status")} :{" "}
               {sideTimer > 0 ? (
-                <span className=" text-green-700">Available</span>
+                <span className=" text-green-700">{t("Available")}</span>
               ) : (
-                <span className=" text-red-700">not Available</span>
+                <span className=" text-red-700">{t("not Available")}</span>
               )}
             </h3>
           </div>
           <div className="bg-gray-100 p-3 rounded-lg">
             <h3 className="text-gray-700">
-              Details : <span className="text-black">60 Minutes Of Lesson</span>
+              {t("Details")} : <span className="text-black">{t("60 Minutes Of Lesson")}</span>
             </h3>
           </div>
           <div className="my-2 flex justify-center">
@@ -294,27 +299,27 @@ const LiveStreamingPage = (Session) => {
 
               className="flex items-center text-white text-lg rounded-3xl py-1 px-3 font-bold bg-blue-600 border-b-4 border-blue-800 transition-transform duration-300 hover:border-b-0 hover:translate-y-0.5 active:outline-none active:bg-blue-700 active:scale-95"
             >
-              End Lesson
+              {t("End Lesson")}
             </button>
             {dataUser.type === "teacher" ?
               <Link
                 to="/addQuestion"
                 className="flex items-center justify-center text-white text-lg rounded-3xl py-1 px-3 font-bold bg-green-600 border-b-4 border-green-800 transition-transform duration-300 hover:border-b-0 hover:translate-y-0.5 active:outline-none active:bg-green-700 active:scale-95">
-                Create Quiz
+                {t("Create Quiz")}
               </Link> : null
             }
             <button
               onClick={() => inCompeletSession()}
               className="flex items-center justify-center text-white text-lg rounded-3xl py-1 px-3 font-bold bg-orange-500 border-b-4 border-orange-800 transition-transform duration-300 hover:border-b-0 hover:translate-y-0.5 active:outline-none active:bg-orange-700 active:scale-95">
-              Cut Lesson
+              {t("Cut Lesson")}
             </button>
           </div>
           <div className="bg-gray-100 p-3 rounded-lg">
-            <h3 className="text-gray-700 mb-3">Actions</h3>
+            <h3 className="text-gray-700 mb-3">{t("Actions")}</h3>
             <Link
               to={`/chat?id=${teacherId}`}
               className="p-3 bg-orange-500 me-3 rounded-full hover:scale-110 transition-all duration-500">
-              <span className="text-white font-bold">Message</span>
+              <span className="text-white font-bold">{t("message")}</span>
             </Link>
           </div>
         </ul>
