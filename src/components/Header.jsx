@@ -29,7 +29,7 @@ export default function Header() {
             <div className="absolute inset-0 bg-black opacity-70"></div>
 
             {/* Text Overlay */}
-            <div className="absolute inset-0 flex flex-col justify-end gap-4 md:gap-8 lg:gap-12 p-4 md:p-10 text-white">
+            <div className="absolute inset-0 flex flex-col justify-end gap-4 md:gap-8 pb-10 lg:gap-12 p-4 md:p-10 text-white">
                 <div>
                     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 md:mb-3 w-full lg:w-2/3 font-[Cairo-B] leading-tight">
                         {/* Render header title with strong tags for styling */}
