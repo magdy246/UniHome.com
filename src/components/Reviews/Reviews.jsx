@@ -38,10 +38,8 @@ export default function Reviews(teacher) {
       );
       setData(response.data.data.reviews);
       console.log(response.data.data.reviews);
-      toast.success("success")
     } catch (error) {
       setError(error.message);
-      toast.error("field")
     }
   }
   async function inputData() {
@@ -94,11 +92,11 @@ export default function Reviews(teacher) {
         <div>
           <h1 className="mt-5 mb-4 text-3xl font-semibold text-black">{t("Reviews")}</h1>
         </div>
-        <div className="overflow-y-scroll h-screen">
+        <div className="overflow-y-scroll h-screen p-4">
           {data.map((item, index) => (
             <div
               key={index}
-              className="mt-5 flex justify-between items-start p-5 bg-white shadow-lg rounded-lg hover:shadow-xl transition duration-300 ease-in-out"
+              className="mt-5 flex justify-between items-start p-5 bg-gray-100 shadow-lg rounded-3xl hover:shadow-xl transition duration-300 ease-in-out"
             >
               {/* User Info and Rating */}
               <div className="flex gap-4 items-center">
@@ -136,39 +134,42 @@ export default function Reviews(teacher) {
         </div>
 
         {user.type === "student" && (
-          <form onSubmit={handleReview} className="mt-5 d-flex">
+          <form onSubmit={handleReview} className="mt-5 bg-gray-100 shadow-lg rounded-lg p-6 flex flex-col md:flex-row items-center">
             <input
               type="text"
-              className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
+              className="p-3 text-gray-800 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 w-full md:w-3/4 mb-4 md:mb-0 transition duration-300 ease-in-out hover:shadow-md"
               placeholder={t("Type your text here")}
               name="comment"
               value={inputComment.comment}
               onChange={registerComment}
               required
             />
-            <div className="mx-2 selectLevelReview">
+
+            <div className="flex items-center space-x-2 md:mx-2">
               {[...Array(5)].map((_, i) => (
                 <span
                   key={i}
                   onClick={() => handleStarClick(i + 1)}
                   style={{
                     cursor: "pointer",
-                    fontSize: "30px",
-                    color: i < rating ? "gold" : "gray",
+                    fontSize: "32px",
+                    color: i < rating ? "#FFD700" : "#B0B0B0", // Gold and Gray colors
                   }}
-                  className="mx-2"
+                  className="transition duration-200 ease-in-out transform hover:scale-125"
                 >
                   ★
                 </span>
               ))}
             </div>
+
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-5 rounded-full transition duration-300 ease-in-out shadow-md"
             >
               {t("Send")}
             </button>
           </form>
+
         )}
       </section>
     </>

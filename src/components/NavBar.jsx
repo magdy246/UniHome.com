@@ -21,12 +21,10 @@ export default function NavBar({
 }) {
   const dataUser = JSON.parse(sessionStorage.getItem("user"));
   const navigate = useNavigate();
-  const [isEnglish, setIsEnglish] = useState(true);
   const { t, i18n } = useTranslation();
-  const [currentLanguage, setCurrentLanguage] = useState('en');
   const [showNavBar, setShowNavBar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-
+  const [currentLanguage, setCurrentLanguage] = useState('en');
 
   useEffect(() => {
     const savedLang = localStorage.getItem("lang");
@@ -47,8 +45,9 @@ export default function NavBar({
     i18n.changeLanguage(lng);
     localStorage.setItem("lang", JSON.stringify(lng));
     setCurrentLanguage(lng);
-    setIsEnglish(lng === 'en');
   };
+
+  const isEnglish = currentLanguage === 'en';
 
   const logOut = () => {
     Cookies.remove("accessToken");

@@ -60,7 +60,7 @@ const Support = () => {
                 }
             );
     };
-  const { t } = useTranslation();
+    const { t } = useTranslation();
 
     return (
         <div className="support-page p-8 max-w-4xl mx-auto">

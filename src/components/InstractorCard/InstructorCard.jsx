@@ -37,7 +37,7 @@ const CardComponent = ({
             {[...Array(5)].map((_, index) => (
               <FontAwesomeIcon
                 key={index}
-                className="text-yellow-500"
+                className="text-yellow-300"
                 icon={faStar}
               />
             ))}
@@ -62,7 +62,7 @@ const CardComponent = ({
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit error totam, assumenda, soluta beatae, aperiam facere voluptatem qui reiciendis nulla laudantium quia sint sapiente eos officia exercitationem impedit optio illo?
           </p>
           <button
-            className="text-blue-600 mt-2 focus:outline-none hover:underline"
+            className="text-blue-600 pt-4 focus:outline-none hover:underline"
             onClick={toggleReadMore}
           >
             {isExpanded ? t('Read Less') : t('Read More')}

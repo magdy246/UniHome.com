@@ -14,11 +14,11 @@ export default function App() {
 
   const { i18n } = useTranslation();
   const storedLanguage = JSON.parse(localStorage.getItem("lang")) || "en";
+  
   const currentLanguage = i18n.language;
   useEffect(() => {
     const direction = i18n.dir(currentLanguage);
     document.body.setAttribute("dir", direction);
-    console.log("currentLanguage: ", currentLanguage);
   }, [currentLanguage, i18n]);
   
   useEffect(() => {

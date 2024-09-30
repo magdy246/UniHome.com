@@ -23,10 +23,6 @@ export default function Teacher() {
   const [singleSession, setSingleSession] = useState({});
   const { Teacher } = useParams();
   const [data, setData] = useState([]);
-  console.log(dataApi);
-
-
-
 
   const getCountryFlag = (countryName) => {
     const country = countries.find((c) => c.country === countryName);
@@ -54,7 +50,10 @@ export default function Teacher() {
   }, [])
 
   const totalRate = data.reduce((sum, review) => sum + review.rate, 0);
-  const averageRate = (totalRate / data.length).toFixed(1);
+  let averageRate = (totalRate / data.length).toFixed(1);
+  if (averageRate === "NaN") {
+    averageRate = 0
+  }
 
 
   // Fetch teacher data

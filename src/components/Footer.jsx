@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaInstagram } from "react-icons/fa";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
@@ -45,17 +45,17 @@ const Footer = () => {
               <h6 className="text-[#ff5a1f] py-3 text-base md:text-lg font-bold uppercase">Links</h6>
               <ul className="text-white dark:text-gray-400 font-medium mt-4 space-y-2">
                 <li>
-                  <Link to="#" onClick={() => handleOpenModal('FAQ', 'This is the FAQ section of unihome.com')} className="hover:underline">
+                  <Link to="#" onClick={() => handleOpenModal('FAQ', ' This section provides answers to the most common questions about UniHome. Whether you have queries about our services, the platform, or any other topic, you can find clear and concise answers here. If you don’t find your question answered, feel free to reach out to us!')} className="hover:underline">
                     FAQ
                   </Link>
                 </li>
                 <li>
-                  <Link to="#" onClick={() => handleOpenModal('Get in Touch', 'Here is how you can contact UniHome')} className="hover:underline">
+                  <Link to="#" onClick={() => handleOpenModal('Get in Touch', `We're here to help! If you have any inquiries or need assistance, please don't hesitate to contact us. You can reach us through our social media channels, email, or by filling out the contact form on our website. We look forward to hearing from you!`)} className="hover:underline">
                     Get in Touch
                   </Link>
                 </li>
                 <li>
-                  <Link to="#" onClick={() => handleOpenModal('Contact', 'Contact UniHome at info@unihome.com')} className="hover:underline">
+                  <Link to="#" onClick={() => handleOpenModal('Contact', 'For more specific inquiries, please contact us directly at info@unihome.com. Our dedicated support team is ready to assist you with any questions or concerns you may have regarding our services or your account.')} className="hover:underline">
                     Contact
                   </Link>
                 </li>
@@ -67,17 +67,17 @@ const Footer = () => {
               <h6 className="text-[#ff5a1f] py-3 text-base md:text-lg font-bold uppercase">Platform</h6>
               <ul className="text-white dark:text-gray-400 font-medium mt-4 space-y-2">
                 <li>
-                  <Link to="#" onClick={() => handleOpenModal('About Us', 'Learn more about UniHome')} className="hover:underline">
+                  <Link to="#" onClick={() => handleOpenModal('About Us', 'At UniHome, we strive to create an innovative platform that connects students and educational resources. Our mission is to enhance the learning experience by providing comprehensive support and access to essential services. Learn more about our journey and the team behind UniHome.')} className="hover:underline">
                     About Us
                   </Link>
                 </li>
                 <li>
-                  <Link to="#" onClick={() => handleOpenModal('Services', 'Details about UniHome services')} className="hover:underline">
+                  <Link to="#" onClick={() => handleOpenModal('Services', 'UniHome offers a range of services designed to support students in their academic pursuits. From tutoring and study materials to mental health resources and community support, we are dedicated to helping you succeed in your educational journey.')} className="hover:underline">
                     Services
                   </Link>
                 </li>
                 <li>
-                  <Link to="#" onClick={() => handleOpenModal('Reviews', 'See what users say about UniHome')} className="hover:underline">
+                  <Link to="#" onClick={() => handleOpenModal('Reviews', `Don't just take our word for it! See what our users have to say about their experiences with UniHome. Read real testimonials and reviews that highlight the benefits of our platform and how we've made a positive impact on our community.`)} className="hover:underline">
                     Reviews
                   </Link>
                 </li>
@@ -94,16 +94,25 @@ const Footer = () => {
               <a href="mailto:info@unih0me.com" className="text-white mb-1 text-sm md:text-base hover:underline block">
                 <i className="bi bi-envelope"></i> info@unih0me.com
               </a>
-              <Link to="/" className="text-white text-sm md:text-base hover:underline">
-                <i className="bi bi-skype"></i> UniHome
+              <Link to="/" className="text-white text-sm md:text-base font-bold hover:bg-gray-800 duration-500 transition-all bg-black px-2 py-1 rounded-3xl">
+                <i className="bi bi-skype"></i> <span className='text-blue-600'>Uni</span><span className='text-orange-500'>Home</span>
               </Link>
 
               {/* Social Icons */}
               <ul className="flex justify-center sm:justify-start gap-2 mt-4">
-                <li><button className="text-white bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-full p-2"><FaInstagram /></button></li>
-                <li><button className="bg-blue-600 text-white rounded-full p-2"><FaFacebook /></button></li>
-                <li><button className="text-white bg-blue-600 rounded-full p-2"><FaLinkedin /></button></li>
-                <li><button className="text-white bg-red-600 rounded-full p-2"><FaYoutube /></button></li>
+                <a href="https://www.instagram.com/unih0me1?igsh=ZmI4YXplYjYwaWNt&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-white bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-full p-2">
+                  <FaInstagram />
+                </a>
+                <a href="https://www.facebook.com/unih0me/" target="_blank" rel="noopener noreferrer" className="bg-blue-600 text-white rounded-full p-2">
+                  <FaFacebook />
+                </a>
+                <a href="https://www.youtube.com/@UniHome1" target="_blank" rel="noopener noreferrer" className="text-white bg-red-600 rounded-full p-2">
+                  <FaYoutube />
+                </a>
+                <a href="https://wa.me/201222515066" target="_blank" rel="noopener noreferrer" className="text-white bg-green-500 rounded-full p-2">
+                  <FaWhatsapp />
+                </a>
+                {/* <a href="#d" className="text-white bg-blue-600 rounded-full p-2"><FaLinkedin /></a> */}
               </ul>
             </div>
 
@@ -116,7 +125,7 @@ const Footer = () => {
         </div>
       </footer>
 
-        {/* Modal */}
+      {/* Modal */}
       <Modal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
