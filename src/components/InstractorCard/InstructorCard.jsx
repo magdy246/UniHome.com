@@ -47,7 +47,7 @@ const CardComponent = ({
         {/* Information Section */}
         <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2">
           <div className='text-start'>
-            <span className="block text-gray-500">{type}: {country}</span>
+            <span className="block text-gray-500">{t('teacher')}: {country}</span>
             <span className="block text-gray-500">{t('From')}: {country}</span>
           </div>
           <div className='text-start md:text-center'>

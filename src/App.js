@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
@@ -11,37 +10,46 @@ import { useTranslation } from "react-i18next";
 export const apiWallet = createContext(null);
 
 export default function App() {
-
   const { i18n } = useTranslation();
   const storedLanguage = JSON.parse(localStorage.getItem("lang")) || "en";
-  
   const currentLanguage = i18n.language;
+
   useEffect(() => {
     const direction = i18n.dir(currentLanguage);
     document.body.setAttribute("dir", direction);
   }, [currentLanguage, i18n]);
-  
+
   useEffect(() => {
     if (storedLanguage !== currentLanguage) {
       i18n.changeLanguage(storedLanguage);
     }
-  }, [storedLanguage, currentLanguage, i18n]);
+  }, [storedLanguage, currentLanguage, i18n]);
 
-  
   const [dataUse, setDataUse] = useState([]);
   const [refAPI, setRefAPI] = useState([]);
-
   const [userTable, setUserTable] = useState();
   const loc = useLocation();
 
-  let usersData = async () => {
-    let userTable = await axios.get("https://yousab-tech.com/unihome/public/api/teachers");
-    setUserTable(userTable);
+  const fetchDataWithDelay = async (fn, delay) => {
+    await new Promise(resolve => setTimeout(resolve, delay));
+    return fn();
   };
+
+  const usersData = async () => {
+    try {
+      let userTable = await axios.get("https://yousab-tech.com/unihome/public/api/teachers");
+      setUserTable(userTable.data);
+    } catch (error) {
+      console.error("Error fetching users data:", error);
+    }
+  };
+
   useEffect(() => {
-    usersData();
+    fetchDataWithDelay(usersData, 1000); // 1 second delay
   }, []);
+
   const token = Cookies.get("accessToken");
+
   setInterval(() => {
     const refreshToken = async () => {
       if (token) {
@@ -66,11 +74,10 @@ export default function App() {
     };
 
     refreshToken();
-  }, 660000);
+  }, 660000); // Refresh every 11 minutes
 
   useEffect(() => {
-    if(refAPI !== null)
-    {
+    if (refAPI !== null) {
       const getWalletData = async () => {
         try {
           const res = await axios.get("https://yousab-tech.com/unihome/public/api/auth/wallets", {
@@ -84,39 +91,29 @@ export default function App() {
           console.log("Error fetching wallet data:", error);
         }
       };
-  
-      getWalletData();
+
+      fetchDataWithDelay(getWalletData, 1000); // 1 second delay
     }
   }, [loc.pathname, refAPI]);
 
   return (
-    <>
-      <apiWallet.Provider
-        value={{ dataUse, setDataUse, userTable, setUserTable }}
-      >
-        <div>
-          {/* عرض الـ NavBar إذا كان show true */}
-          {/*   {show && (
-            <div className=" m-auto">
-              <NavBar showLink1={true} />
-            </div>
-          )} */}
-          {token ? (
-            <div className=" m-auto">
-              <NavBar showLink4={false} showLink1={true} />
-            </div>
-          ) : (
-            <div className=" m-auto">
-              <NavBar showLink4={true} showLink1={false} />
-            </div>
-          )}
-          <main className="min-h-screen w-full pt-24 bg-[#eee]">
-            <Outlet /> {/* لعرض المحتويات المخصصة حسب المسار */}
-          </main>
-          <SupportIcon />
-          <Footer /> {/* الفوتر الثابت */}
-        </div>
-      </apiWallet.Provider>
-    </>
+    <apiWallet.Provider value={{ dataUse, setDataUse, userTable, setUserTable }}>
+      <div>
+        {token ? (
+          <div className="m-auto">
+            <NavBar showLink4={false} showLink1={true} />
+          </div>
+        ) : (
+          <div className="m-auto">
+            <NavBar showLink4={true} showLink1={false} />
+          </div>
+        )}
+        <main className="min-h-screen w-full pt-24 bg-[#eee]">
+          <Outlet />
+        </main>
+        <SupportIcon />
+        <Footer />
+      </div>
+    </apiWallet.Provider>
   );
 }

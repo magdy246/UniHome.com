@@ -45,7 +45,7 @@
 
 
 .colorPAbout {
-  @apply text-[#FF911A] mr-3;
+  @apply text-[#FF911A];
 }
 
 .bgColorPAbout {

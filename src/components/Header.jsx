@@ -21,50 +21,41 @@ export default function Header() {
     }, [savedLang]);
 
     return (
-        <div className="relative h-screen">
-            {/* Background Image */}
-            <img src={header} alt="Header Background" className="w-full h-full object-cover" />
-
+        <div className="relative h-screen flex items-center justify-center text-center bg-cover bg-center" style={{ backgroundImage: `url(${header})` }}>
             {/* Black Opacity Layer */}
-            <div className="absolute inset-0 bg-black opacity-70"></div>
+            <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+
+            {/* Decorative Circle Overlays */}
+            <div className="absolute w-32 h-32 sm:w-48 sm:h-48 bg-orange-500 rounded-full top-1/4 left-[10%] sm:left-1/4 opacity-20 animate-pulse"></div>
+            <div className="absolute w-24 h-24 sm:w-32 sm:h-32 bg-blue-500 rounded-full bottom-1/3 sm:bottom-1/4 right-[10%] sm:right-1/3 opacity-20 animate-bounce"></div>
 
             {/* Text Overlay */}
-            <div className="absolute inset-0 flex flex-col justify-end gap-4 md:gap-8 pb-10 lg:gap-12 p-4 md:p-10 text-white">
-                <div>
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 md:mb-3 w-full lg:w-2/3 font-[Cairo-B] leading-tight">
-                        {/* Render header title with strong tags for styling */}
-                        <span className="font-extrabold">
-                            {t('headerTitle').includes('يوني') ? 'مع ' : 'With '}
-                        </span>
-                        <strong className="text-blue-600 font-extrabold">
-                            {t('headerTitle').includes('يوني') ? 'يوني' : 'Uni'}
-                        </strong>
-                        <strong className="text-orange-500 font-extrabold">
-                            {t('headerTitle').includes('يوني') ? 'هوم...' : 'Home...'}
-                        </strong>
-                    </h1>
-                    <p className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl w-full lg:w-1/2 font-[Cairo-B]">
-                        {t('subtitle')}
-                    </p>
-                </div>
+            <div className="relative z-10 p-4 sm:p-6 md:p-10 max-w-4xl">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight mb-4 lg:mb-6 font-[Cairo-B]">
+                    <span className="block">
+                        {t('headerTitle').includes('يوني') ? 'مع ' : 'With '}
+                        <strong className="text-blue-600">{t('headerTitle').includes('يوني') ? 'يوني' : 'Uni'}</strong>
+                        <strong className="text-orange-500">{t('headerTitle').includes('يوني') ? 'هوم...' : 'Home...'}</strong>
+                    </span>
+                </h1>
 
-                <p className="text-base sm:text-lg md:text-xl lg:text-2xl w-full lg:w-2/3 font-[Cairo-R]">
+                <p className="text-base sm:text-lg md:text-2xl lg:text-3xl xl:text-4xl text-gray-300 font-[Cairo-B] mb-4 lg:mb-6">
+                    {t('subtitle')}
+                </p>
+
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-400 font-[Cairo-R] mb-6 lg:mb-10">
                     {t('description')}
                 </p>
 
                 <Link
                     to="/TeacherS"
-                    className="font-[Cairo-B] text-lg sm:text-xl md:text-2xl w-fit border-2 border-orange-500 bg-orange-500 hover:bg-white hover:text-black duration-500 text-white font-bold py-3 px-4 md:py-4 md:px-5 rounded-full focus:outline-none focus:shadow-outline"
+                    className="inline-block px-6 py-3 sm:px-8 sm:py-3 md:px-10 md:py-4 text-base sm:text-lg md:text-xl lg:text-2xl text-white bg-gradient-to-r from-blue-500 to-orange-500 hover:from-orange-500 hover:to-blue-500 rounded-full font-[Cairo-B] shadow-lg transform hover:scale-105 transition-all duration-500"
                 >
                     {t('buttonText')}
-                    <span className="ms-3">
+                    <span className="ltr:ml-3 ltr:sm:ml-4 rtl:mr-3 rtl:sm:mr-4">
                         <FontAwesomeIcon
-                            className="fa-solid fa-poo-bolt fa-beat-fade"
-                            style={{
-                                "--fa-beat-fade-opacity": 0.5,
-                                "--fa-beat-fade-scale": 1.25,
-                            }}
                             icon={Lang === "en" ? faCircleArrowRight : faCircleArrowLeft}
+                            className="fa-solid fa-bounce"
                         />
                     </span>
                 </Link>

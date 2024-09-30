@@ -217,7 +217,7 @@ export default function NavBar({
                     <Link
                       onClick={() => {
                         logOut();
-                        window.location.reload();
+                        // window.location.reload();
                       }}
                       className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                     >

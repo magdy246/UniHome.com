@@ -26,7 +26,7 @@ export default function Login() {
 
       sessionStorage.setItem("user", JSON.stringify(response.data.user));
       navigate("/");
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       setError("The email or password you entered doesn't match");
     }

@@ -52,38 +52,38 @@ export default function About() {
           </h3>
           <div className="space-y-4">
             <div>
-              <h4 className="flex items-center text-gray-800 font-bold">
-                <FaCheckCircle className="mr-2 colorPAbout" />
+              <h4 className="flex items-start gap-3 text-gray-800 font-bold">
+                <FaCheckCircle className="colorPAbout text-start text-3xl" />
                 {t('UntraditionalInteractiveExplanation')}
               </h4>
-              <p className="bgColorPAbout">
+              <p className="bgColorPAbout ps-5">
                 {t('InteractiveLearningExperience')}
               </p>
             </div>
             <div>
-              <h4 className="flex items-center text-gray-800 font-bold">
-                <FaCheckCircle className="mr-2 colorPAbout" />
+              <h4 className="flex items-start gap-3 text-gray-800 font-bold">
+                <FaCheckCircle className="colorPAbout text-start text-3xl" />
                 {t('ExperiencedQualifiedProfessors')}
               </h4>
-              <p className="bgColorPAbout">
+              <p className="bgColorPAbout ps-5">
                 {t('HighQualityContent')}
               </p>
             </div>
             <div>
-              <h4 className="flex items-center text-gray-800 font-bold">
-                <FaCheckCircle className="mr-2 colorPAbout" />
+              <h4 className="flex items-start gap-3 text-gray-800 font-bold">
+                <FaCheckCircle className="colorPAbout text-start text-3xl" />
                 {t('InteractWithProfessors')}
               </h4>
-              <p className="bgColorPAbout">
+              <p className="bgColorPAbout ps-5">
                 {t('ProfessorsNeeds')}
               </p>
             </div>
             <div>
-              <h4 className="flex items-center text-gray-800 font-bold">
-                <FaCheckCircle className="mr-2 colorPAbout" />
+              <h4 className="flex items-start gap-3 text-gray-800 font-bold">
+                <FaCheckCircle className="colorPAbout text-start text-3xl" />
                 {t('QuestionsAnswersSection')}
               </h4>
-              <p className="bgColorPAbout">
+              <p className="bgColorPAbout ps-5">
                 {t('ParentsHelp')}
               </p>
             </div>
@@ -95,10 +95,10 @@ export default function About() {
         <div className="text-center mx-auto w-full max-w-4xl px-4">
           <h2 className="mb-4 text-4xl font-bold text-gray-800 dark:text-white">
             {t('title')}<span className="text-orange-500 font-bold">
-                {t('UniAbout')}
-                <span className="text-blue-600">{t('HomeAbout')}</span>
-              </span>
-            
+              {t('UniAbout')}
+              <span className="text-blue-600">{t('HomeAbout')}</span>
+            </span>
+
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-10">
             {t('descriptionAbout')}
