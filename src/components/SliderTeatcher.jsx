@@ -52,41 +52,43 @@ export default function SliderTeatcher() {
   };
 
   return (
-    <div className="p-6">
-      {loading ? (
-        <div className="w-full flex justify-center items-center mx-auto my-10">
-          <Suspense fallback={<div>Loading...</div>}>
-            <Test />
-            <Test />
-            <Test />
-            <Test />
-          </Suspense>
-        </div>
-      ) : (
-        <Slider {...settings}>
-          {dataApi?.map((e) => (
-            <Link
-              to={`/TeaCherS/${e.id}`}
-              key={e.id}
-              className="my-10 hover:scale-105 duration-500 transition-all"
-            >
-              <Suspense fallback={<div>Loading Card...</div>}>
-                <InstructorCard
-                  img={e.image}
-                  firstName={e.firstname}
-                  lastName={e.lastname}
-                  country={e.country}
-                  students={e.students?.length}
-                  Lessons={e.sessions?.length}
-                  type={e.type}
-                  className="bg-white rounded-lg shadow-md px-6 py-8 max-w-md mt-6 relative"
-                />
-              </Suspense>
-            </Link>
-          ))}
-        </Slider>
-      )}
-    </div>
+    <>
+      <div className="p-6">
+        {loading ? (
+          <div className="w-full flex justify-center items-center mx-auto my-10">
+            <Suspense fallback={<div>Loading...</div>}>
+              <Test />
+              <Test />
+              <Test />
+              <Test />
+            </Suspense>
+          </div>
+        ) : (
+          <Slider {...settings}>
+            {dataApi?.map((e) => (
+              <Link
+                to={`/TeaCherS/${e.id}`}
+                key={e.id}
+                className="my-10 hover:scale-105 duration-500 transition-all"
+              >
+                <Suspense fallback={<div>Loading Card...</div>}>
+                  <InstructorCard
+                    img={e.image}
+                    firstName={e.firstname}
+                    lastName={e.lastname}
+                    country={e.country}
+                    students={e.students?.length}
+                    Lessons={e.sessions?.length}
+                    type={e.type}
+                    className="bg-white rounded-lg shadow-md px-6 py-8 max-w-md mt-6 relative"
+                  />
+                </Suspense>
+              </Link>
+            ))}
+          </Slider>
 
+        )}
+      </div>
+    </>
   );
 }

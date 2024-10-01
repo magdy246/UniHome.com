@@ -36,10 +36,22 @@ export default function RoutingSting() {
 
   return (<>
     <Helmet>
-      <title>Settings</title>
-      <meta name="description" content="قم بإدارة إعدادات بروفايلك كطالب بسهولة. تحديث معلوماتك الشخصية، تغيير كلمة المرور، وضبط إشعارات الحساب لتناسب احتياجاتك." />
-
-    </Helmet>
+            <title>Settings - UniHome</title>
+            <meta name="description" content="Manage your account setting, preferences, and notifications on UniHome. Customize your learning experience today." />
+            <meta name="keywords" content="UniHome, setting, account management, preferences, notifications, user profile, customize learning" />
+            <meta name="author" content="UniHome" />
+            <meta property="og:title" content="Settings - UniHome" />
+            <meta property="og:description" content="Adjust your account setting and preferences on UniHome. Tailor your learning experience to fit your needs." />
+            <meta property="og:image" content="/src/components/Assets/images/UniHome.png" />
+            <meta property="og:url" content="https://unih0me.com/setting" />
+            <meta property="og:type" content="website" />
+            <meta property="og:locale" content="ar_EG" />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="Settings - UniHome" />
+            <meta name="twitter:description" content="Customize your account setting and preferences on UniHome." />
+            <meta name="twitter:image" content="/src/components/Assets/images/UniHome.png" />
+            <link rel="canonical" href="https://unih0me.com/setting" />
+        </Helmet>
     <section className="py-6">
       <div className="mb-3">
         {/* Centered Tabs */}
@@ -61,15 +73,6 @@ export default function RoutingSting() {
             >
               {t("password")}
             </TETabsItem>
-            {/* <TETabsItem
-            onClick={() => handleColorsClick({ ...colorsActive, tab8: "tab3" })}
-            active={colorsActive.tab8 === "tab3"}
-            className={`${tabButtonStyles} ${
-              colorsActive.tab8 === "tab3" ? "ActivetabsOfRoute" : ""
-            }`}
-          >
-            Profile
-          </TETabsItem> */}
           </TETabs>
         </div>
 
@@ -82,9 +85,6 @@ export default function RoutingSting() {
             <TETabsPane show={colorsActive.tab8 === "tab2"}>
               <EditPassword />
             </TETabsPane>
-            {/* <TETabsPane show={colorsActive.tab8 === "tab3"}>
-            <ProfileSettings />
-            </TETabsPane> */}
           </TETabsContent>
         </div>
       </div>

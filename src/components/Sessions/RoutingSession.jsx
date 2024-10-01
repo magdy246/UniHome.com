@@ -13,6 +13,7 @@ import Booked from "./Booked";
 import LottieHandler from "../Lottie/LottieHandler";
 import LoaderAnimation from "../Assets/loaderAnimate.json";
 import { t } from "i18next";
+import { Helmet } from "react-helmet";
 export default function RoutingSession({ Session, Student }) {
   const [colorsActive, setColorsActive] = useState({
     tab1: "tab1",
@@ -66,6 +67,24 @@ export default function RoutingSession({ Session, Student }) {
 
 
   return (
+    <>
+    <Helmet>
+            <title>Dashboard - UniHome</title>
+            <meta name="description" content="Welcome to your UniHome Dashboard. Manage your courses, track your progress, and access personalized learning resources." />
+            <meta name="keywords" content="UniHome, dashboard, course management, progress tracking, online learning, personalized resources, English courses" />
+            <meta name="author" content="UniHome" />
+            <meta property="og:title" content="Dashboard - UniHome" />
+            <meta property="og:description" content="Manage your learning journey with the UniHome Dashboard. Access courses, track your progress, and connect with your tutors." />
+            <meta property="og:image" content="./src/components/Assets/images/UniHome.png" />
+            <meta property="og:url" content="https://unih0me.com/dashboard" />
+            <meta property="og:type" content="website" />
+            <meta property="og:locale" content="ar_EG" />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="Dashboard - UniHome" />
+            <meta name="twitter:description" content="Your UniHome Dashboard is here! Manage your courses and track your progress easily." />
+            <meta name="twitter:image" content="./src/components/Assets/images/UniHome.png" />
+            <link rel="canonical" href="https://unih0me.com/dashboard" />
+        </Helmet>
     <div className="mb-3">
       {/* Centered Tabs */}
       <div className="flex justify-center" dir={Lang === "ar" ? "rtl" : "ltr"}>
@@ -145,5 +164,6 @@ export default function RoutingSession({ Session, Student }) {
         </TETabsContent>
       </div>
     </div>
+    </>
   );
 }

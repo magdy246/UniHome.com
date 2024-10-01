@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Sesssion.css";
 import liveStream from "../../images/liveStream.png";
-import Avatar from "../../images/profileImage.png";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet";
 
 const LiveStreamingPage = (Session) => {
   const [sessionId, setSessionId] = useState(null)
@@ -185,6 +185,22 @@ const LiveStreamingPage = (Session) => {
   const { t } = useTranslation();
 
   return (
+    <>
+     <Helmet>
+            <title>Live Session - UniHome</title>
+            <meta name="description" content="Join our live English sessions with professional tutors at UniHome. Enhance your speaking skills and gain confidence in real-time!" />
+            <meta name="keywords" content="UniHome, live session, English learning, online classes, interactive learning, professional tutors, speaking skills, language practice" />
+            <meta name="author" content="UniHome" />
+            <meta property="og:title" content="Live Session - UniHome" />
+            <meta property="og:description" content="Participate in live English sessions with experienced tutors at UniHome. Sign up today to boost your speaking skills!" />
+            <meta property="og:image" content="/src/components/Assets/images/UniHome.png" />
+            <meta property="og:type" content="website" />
+            <meta property="og:locale" content="ar_EG" />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="Live Session - UniHome" />
+            <meta name="twitter:description" content="Join live English sessions at UniHome to enhance your speaking skills with professional tutors." />
+            <meta name="twitter:image" content="/src/components/Assets/images/UniHome.png" />
+        </Helmet>
     <div className="liveStream">
       {/* Main Content Area */}
       <main className="mainContent">
@@ -325,6 +341,7 @@ const LiveStreamingPage = (Session) => {
         </ul>
       </aside>
     </div>
+    </>
   );
 };
 

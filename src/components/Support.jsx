@@ -3,6 +3,7 @@ import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import emailjs from 'emailjs-com';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet';
 
 const Support = () => {
     const [formData, setFormData] = useState({
@@ -62,7 +63,13 @@ const Support = () => {
     };
     const { t } = useTranslation();
 
-    return (
+    return (<>
+        <Helmet>
+            <title>Support - UniHome</title>
+            <meta name="description" content="Get assistance and support for all your UniHome learning needs. Contact us for help with courses, schedules, and more." />
+            <meta name="keywords" content="UniHome, support, help, assistance, customer service, courses, learning, English courses" />
+            <meta name="author" content="UniHome" />
+        </Helmet>
         <div className="support-page p-8 max-w-4xl mx-auto">
             {/* Page Title */}
             <h1 className="text-4xl font-bold mb-6 text-center">{t('support')}</h1>
@@ -170,6 +177,7 @@ const Support = () => {
                 </div>
             </section>
         </div>
+    </>
     );
 };
 

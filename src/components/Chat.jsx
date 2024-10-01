@@ -11,6 +11,7 @@ import { useLocation } from "react-router-dom";
 // import { apiWallet } from "../App";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet";
 
 export default function Chat() {
   const [verticalActive, setVerticalActive] = useState(); // غيرنا القيمة الافتراضية
@@ -141,6 +142,23 @@ export default function Chat() {
 
   return (
     <>
+    <Helmet>
+            <title>Chat with a Teacher - UniHome</title>
+            <meta name="description" content="Connect directly with a professional English tutor on UniHome. Get personalized guidance and improve your language skills through live chat sessions." />
+            <meta name="keywords" content="UniHome, chat with teacher, English tutor, live chat, personalized learning, English conversation, online English lessons, one-on-one tutoring" />
+            <meta name="author" content="UniHome" />
+            <meta property="og:title" content="Chat with a Teacher - UniHome" />
+            <meta property="og:description" content="Have a one-on-one chat with a professional English tutor. Get real-time guidance and improve your language skills today!" />
+            <meta property="og:image" content="/src/components/Assets/images/UniHome.png" />
+            <meta property="og:url" content="https://unih0me.com/chat" />
+            <meta property="og:type" content="website" />
+            <meta property="og:locale" content="ar_EG" />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="Chat with a Teacher - UniHome" />
+            <meta name="twitter:description" content="Chat live with a professional English tutor and improve your language skills in real time with UniHome." />
+            <meta name="twitter:image" content="/src/components/Assets/images/UniHome.png" />
+            <link rel="canonical" href="https://unih0me.com/chat" />
+        </Helmet>
     <section className="py-6">
       <div className="flex flex-col md:flex-row bg-gradient-to-r from-orange-100 via-purple-100 to-indigo-200 shadow-xl rounded-xl p-4 gap-4">
         {/* Sidebar Section */}

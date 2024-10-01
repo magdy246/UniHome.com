@@ -50,7 +50,21 @@ export default function Login() {
   return (
     <>
       <Helmet>
-        <title>Login</title>
+        <title>Login - UniHome</title>
+        <meta name="description" content="Access your UniHome account. Log in to continue learning English with our professional tutors and personalized courses." />
+        <meta name="keywords" content="UniHome, login, English courses, online learning, access account, education, learn English" />
+        <meta name="author" content="UniHome" />
+        <meta property="og:title" content="Login - UniHome" />
+        <meta property="og:description" content="Log in to your UniHome account and continue your journey to learn English with personalized support." />
+        <meta property="og:image" content="/src/components/Assets/images/UniHome.png" />
+        <meta property="og:url" content="https://unih0me.com/Login" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="ar_EG" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Login - UniHome" />
+        <meta name="twitter:description" content="Log in to your UniHome account to access personalized English courses and support." />
+        <meta name="twitter:image" content="/src/components/Assets/images/UniHome.png" />
+        <link rel="canonical" href="https://unih0me.com/Login" />
       </Helmet>
       <section className="h-full login flex flex-row  flex-wrap justify-around items-center py-6">
         <div className="uniHomeImg xl:basis-1/3 md:basis-3/5 basis-7/12 ">

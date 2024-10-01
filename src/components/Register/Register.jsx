@@ -94,7 +94,21 @@ export default function Register() {
   return (
     <>
       <Helmet>
-        <title>Register</title>
+        <title>Register - UniHome</title>
+        <meta name="description" content="Join UniHome today! Sign up for personalized English courses with professional tutors and flexible scheduling." />
+        <meta name="keywords" content="UniHome, register, sign up, English courses, personalized learning, online courses, professional tutors" />
+        <meta name="author" content="UniHome" />
+        <meta property="og:title" content="Register - UniHome" />
+        <meta property="og:description" content="Sign up for UniHome and start your journey to learn English in a fun and effective way!" />
+        <meta property="og:image" content="/src/components/Assets/images/UniHome.png" />
+        <meta property="og:url" content="https://unih0me.com/register" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="ar_EG" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Register - UniHome" />
+        <meta name="twitter:description" content="Join UniHome today and start learning English with our expert tutors!" />
+        <meta name="twitter:image" content="/src/components/Assets/images/UniHome.png" />
+        <link rel="canonical" href="https://unih0me.com/register" />
       </Helmet>
       <section className="h-full register flex flex-row flex-wrap justify-around items-start py-6">
         <div className="uniHomeImg xl:basis-1/3 md:basis-3/5 basis-7/12 ">

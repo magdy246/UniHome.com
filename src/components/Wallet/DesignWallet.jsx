@@ -23,15 +23,26 @@ const DesignWallet = () => {
   const { dataUse } = useContext(apiWallet);
   let nameUser = JSON.parse(sessionStorage.getItem("user"));
 
-  if (!dataUse || dataUse.length === 0) {
-    return <div>Ned Amount or Loading wallet data...</div>;
-  }
+  const walletData = dataUse && dataUse.length > 0 ? dataUse[0] : { totalAmount: 0 };
 
   return (
     <>
       <Helmet>
-        <title>Wallet</title>
-        <meta name="description" content="قم بإدارة أموالك بسهولة وأمان مع محفظتنا الإلكترونية. تتبع نفقاتك، قم بتحويل الأموال، وادفع الفواتير بكل سهولة عبر الإنترنت." />
+        <title>Wallet - UniHome</title>
+        <meta name="description" content="Manage your UniHome transactions effortlessly. View your balance, transaction history, and handle payments securely." />
+        <meta name="keywords" content="UniHome, wallet, transactions, balance, payment management, financial overview, secure payments" />
+        <meta name="author" content="UniHome" />
+        <meta property="og:title" content="Wallet - UniHome" />
+        <meta property="og:description" content="Easily manage your transactions and balance with UniHome's wallet. Secure, user-friendly, and efficient." />
+        <meta property="og:image" content="/src/components/Assets/images/UniHome.png" />
+        <meta property="og:url" content="https://unih0me.com/wallet" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="ar_EG" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Wallet - UniHome" />
+        <meta name="twitter:description" content="Manage your UniHome transactions and view your balance securely." />
+        <meta name="twitter:image" content="/src/components/Assets/images/UniHome.png" />
+        <link rel="canonical" href="https://unih0me.com/wallet" />
       </Helmet>
       <section className="py-6" dir={Lang === "ar" ? "rtl" : "ltr"} >
         <div className="w-full max-w-5xl mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
@@ -45,7 +56,7 @@ const DesignWallet = () => {
                 </h1>
               </div>
               <div className="text-xl font-bold text-gray-500 flex justify-center gap-2 items-center">
-                <span className="text-orange-500 text-2xl">Hi </span>
+                <span className="text-orange-500 text-2xl">{t("Hi")} </span>
                 {nameUser.firstname}
                 <span>
                   <MdWavingHand className="text-yellow-300" />
@@ -59,7 +70,7 @@ const DesignWallet = () => {
               </p>
               <div className="flex flex-col items-end w-full md:w-1/2">
                 <div className="text-4xl font-bold text-green-500">
-                  EGP {dataUse[0].totalAmount}{" "}
+                  {t("EGP")} {walletData.totalAmount}{" "}
                 </div>
                 <div className="text-sm font-semibold text-orange-500">
                   {t("Your Wallet Balance.")}

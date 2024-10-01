@@ -46,8 +46,21 @@ export default function RoutingQuiz({ Session, Student }) {
 
     return (<>
         <Helmet>
-            <title>Quizzes</title>
-            <meta name="description" content="استعد لاختباراتك من خلال مجموعة متنوعة من الاختبارات عبر الإنترنت. قم بتقييم مهاراتك وتحسين أدائك الأكاديمي بشكل تفاعلي وممتع." />
+            <title>Dashboard - UniHome</title>
+            <meta name="description" content="Welcome to your UniHome Dashboard. Manage your courses, track your progress, and access personalized learning resources." />
+            <meta name="keywords" content="UniHome, dashboard, course management, progress tracking, online learning, personalized resources, English courses" />
+            <meta name="author" content="UniHome" />
+            <meta property="og:title" content="Dashboard - UniHome" />
+            <meta property="og:description" content="Manage your learning journey with the UniHome Dashboard. Access courses, track your progress, and connect with your tutors." />
+            <meta property="og:image" content="./src/components/Assets/images/UniHome.png" />
+            <meta property="og:url" content="https://unih0me.com/dashboard" />
+            <meta property="og:type" content="website" />
+            <meta property="og:locale" content="ar_EG" />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="Dashboard - UniHome" />
+            <meta name="twitter:description" content="Your UniHome Dashboard is here! Manage your courses and track your progress easily." />
+            <meta name="twitter:image" content="./src/components/Assets/images/UniHome.png" />
+            <link rel="canonical" href="https://unih0me.com/dashboard" />
         </Helmet>
         <div className="mb-3">
             {/* Centered Tabs */}

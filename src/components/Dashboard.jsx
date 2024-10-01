@@ -128,10 +128,23 @@ export default function Dashboard() {
 
   return (
     <>
-      <Helmet>
-        <title>Dashboard</title>
-        <meta name="description" content="استعرض جميع الدروس والجلسات التعليمية المتاحة مع مدرسين محترفين. تابع تقدمك واختر الدرس المناسب لك." />
-      </Helmet>
+     <Helmet>
+            <title>Dashboard - UniHome</title>
+            <meta name="description" content="Welcome to your UniHome Dashboard. Manage your courses, track your progress, and access personalized learning resources." />
+            <meta name="keywords" content="UniHome, dashboard, course management, progress tracking, online learning, personalized resources, English courses" />
+            <meta name="author" content="UniHome" />
+            <meta property="og:title" content="Dashboard - UniHome" />
+            <meta property="og:description" content="Manage your learning journey with the UniHome Dashboard. Access courses, track your progress, and connect with your tutors." />
+            <meta property="og:image" content="./src/components/Assets/images/UniHome.png" />
+            <meta property="og:url" content="https://unih0me.com/dashboard" />
+            <meta property="og:type" content="website" />
+            <meta property="og:locale" content="ar_EG" />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="Dashboard - UniHome" />
+            <meta name="twitter:description" content="Your UniHome Dashboard is here! Manage your courses and track your progress easily." />
+            <meta name="twitter:image" content="./src/components/Assets/images/UniHome.png" />
+            <link rel="canonical" href="https://unih0me.com/dashboard" />
+        </Helmet>
       <div className="flex flex-col min-h-screen bg-[#eee] py-6" dir="ltr">
         <button
           onClick={toggleSidebar}
