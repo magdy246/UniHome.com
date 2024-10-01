@@ -171,7 +171,7 @@ export default function Dashboard() {
         <aside
           ref={sidebarRef}
           id="default-sidebar"
-          className={`fixed bottom-0 left-0 z-40 h-screen w-56 transition-transform ${sidebarHeight} ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
+          className={`fixed top-24 left-0 z-40 w-56 transition-transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}  // Removed dynamic pt-* and fixed top-24
           aria-label="Sidebar"
         >
           <div className="h-full py-3 bg-gray-50 dark:bg-gray-800 rounded-e-3xl">
