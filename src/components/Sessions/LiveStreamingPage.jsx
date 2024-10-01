@@ -24,7 +24,6 @@ const LiveStreamingPage = (Session) => {
   const [timeLeft, setTimeLeft] = useState(DateAll > 0 ? DateAll : 0);
   let dataUser = JSON.parse(sessionStorage.getItem("user"));
   const teacherId = dataSession?.teacher?.id
-  console.log(dataSession);
 
 
   let nav = useNavigate();

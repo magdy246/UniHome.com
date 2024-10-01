@@ -39,7 +39,6 @@ export default function ResultQuestionForStudent() {
         },
       });
       setResults(response?.data?.data?.testings);
-      console.log(response?.data?.data?.testings);
     } catch (error) {
       console.error("Error fetching results for quiz:", error);
     }

@@ -37,7 +37,6 @@ export default function Reviews(teacher) {
         `https://yousab-tech.com/unihome/public/api/reviews/${teach}`
       );
       setData(response.data.data.reviews);
-      console.log(response.data.data.reviews);
     } catch (error) {
       setError(error.message);
     }

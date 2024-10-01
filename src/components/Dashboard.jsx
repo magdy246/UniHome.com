@@ -14,9 +14,7 @@ import ResultQuestionForTeacher from "./Quiz/ResultQuestionForTeacher";
 import { GiWallet } from "react-icons/gi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
-
 import axios from "axios";
-
 import Cookies from "js-cookie";
 import RoutingSession from "./Sessions/RoutingSession";
 import DesignWallet from "./Wallet/DesignWallet";
@@ -128,23 +126,23 @@ export default function Dashboard() {
 
   return (
     <>
-     <Helmet>
-            <title>Dashboard - UniHome</title>
-            <meta name="description" content="Welcome to your UniHome Dashboard. Manage your courses, track your progress, and access personalized learning resources." />
-            <meta name="keywords" content="UniHome, dashboard, course management, progress tracking, online learning, personalized resources, English courses" />
-            <meta name="author" content="UniHome" />
-            <meta property="og:title" content="Dashboard - UniHome" />
-            <meta property="og:description" content="Manage your learning journey with the UniHome Dashboard. Access courses, track your progress, and connect with your tutors." />
-            <meta property="og:image" content="./src/components/Assets/images/UniHome.png" />
-            <meta property="og:url" content="https://unih0me.com/dashboard" />
-            <meta property="og:type" content="website" />
-            <meta property="og:locale" content="ar_EG" />
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content="Dashboard - UniHome" />
-            <meta name="twitter:description" content="Your UniHome Dashboard is here! Manage your courses and track your progress easily." />
-            <meta name="twitter:image" content="./src/components/Assets/images/UniHome.png" />
-            <link rel="canonical" href="https://unih0me.com/dashboard" />
-        </Helmet>
+      <Helmet>
+        <title>Dashboard - UniHome</title>
+        <meta name="description" content="Welcome to your UniHome Dashboard. Manage your courses, track your progress, and access personalized learning resources." />
+        <meta name="keywords" content="UniHome, dashboard, course management, progress tracking, online learning, personalized resources, English courses" />
+        <meta name="author" content="UniHome" />
+        <meta property="og:title" content="Dashboard - UniHome" />
+        <meta property="og:description" content="Manage your learning journey with the UniHome Dashboard. Access courses, track your progress, and connect with your tutors." />
+        <meta property="og:image" content="./src/components/Assets/images/UniHome.png" />
+        <meta property="og:url" content="https://unih0me.com/dashboard" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="ar_EG" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Dashboard - UniHome" />
+        <meta name="twitter:description" content="Your UniHome Dashboard is here! Manage your courses and track your progress easily." />
+        <meta name="twitter:image" content="./src/components/Assets/images/UniHome.png" />
+        <link rel="canonical" href="https://unih0me.com/dashboard" />
+      </Helmet>
       <div className="flex flex-col min-h-screen bg-[#eee] py-6" dir="ltr">
         <button
           onClick={toggleSidebar}
@@ -247,8 +245,8 @@ export default function Dashboard() {
             </TETabsPane>
 
             <TETabsPane show={basicActive === "tab2"}>
-              {dataSession.map((e) => (
-                <TeacherCard Student={student} Session={e} />
+              {dataSession.map((e, index) => (
+                <TeacherCard key={index} Student={student} Session={e} />
               ))}
             </TETabsPane>
 

@@ -36,7 +36,6 @@ export default function ResultQuestionForTeacher() {
   const handleQuizSelect = async (quiz) => {
     setSelectedQuiz(quiz);
     const id_Quiz = quiz.id;
-    console.log(id_Quiz);
 
     setLoading(true); // Start loading
     try {
@@ -50,7 +49,6 @@ export default function ResultQuestionForTeacher() {
         }
       );
       setResults(response?.data?.data?.testings);
-      console.log(response?.data?.data?.testings);
     } catch (error) {
       console.error("Error fetching results for quiz:", error);
     } finally {

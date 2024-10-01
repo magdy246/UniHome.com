@@ -8,7 +8,6 @@ const CardComponent = ({
   img,
   firstName,
   lastName,
-  type,
   country,
   lessons,
   students,

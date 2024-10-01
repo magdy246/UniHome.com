@@ -38,7 +38,6 @@ export default function Teacher() {
         `https://yousab-tech.com/unihome/public/api/reviews/${Teacher_id}`
       );
       setData(response.data.data.reviews);
-      console.log(response.data.data.reviews);
     } catch (error) {
       console.log(error);
 
@@ -195,23 +194,23 @@ export default function Teacher() {
   };
   return (
     <>
-    <Helmet>
-            <title>{`${dataApi?.firstname} - English Teacher at UniHome`}</title>
-            <meta name="description" content={`Learn English with ${dataApi?.firstname}, a professional English tutor at UniHome. ${dataApi?.intro}`} />
-            <meta name="keywords" content={`UniHome, ${dataApi?.firstname}, English teacher, professional tutor, learn English, English lessons, personalized learning`} />
-            <meta name="author" content={dataApi?.firstname} />
-            <meta property="og:title" content={`${dataApi?.firstname} - English Teacher at UniHome`} />
-            <meta property="og:description" content={`Meet ${dataApi?.firstname}, a professional tutor at UniHome. Learn English with personalized lessons and flexible scheduling.`} />
-            <meta property="og:image" content={dataApi?.image} />
-            <meta property="og:url" content="https://unih0me.com/teachers" />
-            <meta property="og:type" content="website" />
-            <meta property="og:locale" content="ar_EG" />
-            <meta name="twitter:card" content="./Assets/Favicon/apple-touch-icon.png" />
-            <meta name="twitter:title" content={`${dataApi?.firstname} - English Teacher at UniHome`} />
-            <meta name="twitter:description" content={`Learn English with ${dataApi?.firstname}. Book personalized lessons today!`} />
-            <meta name="twitter:image" content={dataApi?.image} />
-            <link rel="canonical" href={`https://unih0me.com/teachers/${dataApi?.firstname}`} />
-        </Helmet>
+      <Helmet>
+        <title>{`${dataApi?.firstname} - English Teacher at UniHome`}</title>
+        <meta name="description" content={`Learn English with ${dataApi?.firstname}, a professional English tutor at UniHome. ${dataApi?.intro}`} />
+        <meta name="keywords" content={`UniHome, ${dataApi?.firstname}, English teacher, professional tutor, learn English, English lessons, personalized learning`} />
+        <meta name="author" content={dataApi?.firstname} />
+        <meta property="og:title" content={`${dataApi?.firstname} - English Teacher at UniHome`} />
+        <meta property="og:description" content={`Meet ${dataApi?.firstname}, a professional tutor at UniHome. Learn English with personalized lessons and flexible scheduling.`} />
+        <meta property="og:image" content={dataApi?.image} />
+        <meta property="og:url" content="https://unih0me.com/teachers" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="ar_EG" />
+        <meta name="twitter:card" content="./Assets/Favicon/apple-touch-icon.png" />
+        <meta name="twitter:title" content={`${dataApi?.firstname} - English Teacher at UniHome`} />
+        <meta name="twitter:description" content={`Learn English with ${dataApi?.firstname}. Book personalized lessons today!`} />
+        <meta name="twitter:image" content={dataApi?.image} />
+        <link rel="canonical" href={`https://unih0me.com/teachers/${dataApi?.firstname}`} />
+      </Helmet>
       <section className="py-6">
         <div className="max-w-5xl mx-auto p-6 bg-gray-100 rounded-lg shadow-md">
           {/* Video Section */}
@@ -226,55 +225,53 @@ export default function Teacher() {
           </div>
 
           {/* Teacher Information */}
-          <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-            <div className="flex items-center mb-4">
+          <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
+            <div className="flex items-start mb-4">
               <img
                 src={dataApi?.image || Avatar}
                 alt="Teacher Avatar"
-                className="w-20 h-20 rounded-3xl mr-4"
+                className="w-24 h-24 rounded-full border-2 border-gray-300 shadow-sm mr-4"
               />
               <div>
-                <h2 className="text-2xl font-bold text-gray-800">
+                <h2 className="text-3xl font-bold text-gray-800 mb-1">
                   {dataApi?.firstname} {dataApi?.lastname}
                 </h2>
-                <p className="flex items-center text-gray-600">
-                  <span className="mr-1">{getCountryFlag(dataApi?.country)}</span>
+                <p className="flex items-center text-gray-600 text-md">
+                  <span className="mr-2">{getCountryFlag(dataApi?.country)}</span>
                   {dataApi?.country}
                 </p>
               </div>
             </div>
-            <div className="flex items-center text-yellow-300 text-lg mb-4">
+            <div className="flex items-center text-yellow-400 text-lg mb-4">
               <AiFillStar className="mr-1" />
-              <span className="text-yellow-500">{averageRate} ({data.length} {t("Reviews")})</span>
+              <span className="font-semibold text-yellow-500">{averageRate} ({data.length} {t("Reviews")})</span>
             </div>
 
             <div className="text-center mb-4">
-              <p className="text-xl font-semibold text-gray-700">
+              <p className="text-xl font-bold text-gray-700">
                 {t("Hourly Rate")}:{" "}
-                <span className="text-green-600">{t("EGP")} {dataApi?.balance}.00</span>
+                <span className="text-green-600 font-extrabold">{t("EGP")} {dataApi?.balance}.00</span>
               </p>
             </div>
 
-            <div className="flex justify-around">
+            <div className="flex justify-around mt-4">
               <div className="text-center">
-                <BsPeople className="text-3xl text-yellow-500 mb-2 mx-auto" />
+                <BsPeople className="text-4xl text-yellow-500 mb-2 mx-auto" />
                 <p className="text-gray-800 font-semibold">
-                  <span className="block text-2xl">{dataApi?.students}</span>{" "}
+                  <span className="block text-3xl">{dataApi?.students}</span>{" "}
                   {t("Students")}
                 </p>
               </div>
-              <Link
-                to={`/chat?id=${Teacher_id}`}
-              >
-                <button className="flex items-center justify-start px-3 py-2 text-sm font-medium text-white transition-transform duration-300 transform bg-blue-500 rounded-lg sm:px-4 sm:text-base hover:scale-105">
+              <Link to={`/chat?id=${Teacher_id}`}>
+                <button className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white transition-transform duration-300 transform bg-blue-600 rounded-lg shadow hover:scale-105">
                   <AiOutlineMessage className="mr-1" />
                   {t("message")}
                 </button>
               </Link>
               <div className="text-center">
-                <FaChalkboardTeacher className="text-3xl text-yellow-500 mb-2 mx-auto" />
+                <FaChalkboardTeacher className="text-4xl text-yellow-500 mb-2 mx-auto" />
                 <p className="text-gray-800 font-semibold">
-                  <span className="block text-2xl">{dataApi?.sessions?.length}</span>{" "}
+                  <span className="block text-3xl">{dataApi?.sessions?.length}</span>{" "}
                   {t("Sessions")}
                 </p>
               </div>
