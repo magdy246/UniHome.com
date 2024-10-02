@@ -15,7 +15,7 @@ export default function Reviews(teacher) {
   const [trueSendComment, setTrueSendComment] = useState(false);
   const [rating, setRating] = useState(0);
   let teach = teacher.teacher;
-  let user = JSON.parse(sessionStorage.getItem("user"));
+  let user = JSON.parse(Cookies.get("user"));
 
   const [inputComment, setInputComment] = useState({
     teacher_id: teach,

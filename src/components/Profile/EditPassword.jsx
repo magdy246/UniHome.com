@@ -11,7 +11,7 @@ export default function EditPassword() {
     const [loading, setLoading] = useState(false)
     const [errorResponse, setErrorResponse] = useState([])
     const token = Cookies.get("accessToken");
-    let dataUser = JSON.parse(sessionStorage.getItem("user"));
+    let dataUser = JSON.parse(Cookies.get("user"));
 
     let mySchema = Yup.object({
         current_password: Yup.string()

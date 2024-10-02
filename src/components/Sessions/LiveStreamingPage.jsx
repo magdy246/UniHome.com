@@ -22,7 +22,7 @@ const LiveStreamingPage = (Session) => {
   let dateNew = new Date().getTime();
   let DateAll = dateSection - dateNew;
   const [timeLeft, setTimeLeft] = useState(DateAll > 0 ? DateAll : 0);
-  let dataUser = JSON.parse(sessionStorage.getItem("user"));
+  let dataUser = JSON.parse(Cookies.get("user"));
   const teacherId = dataSession?.teacher?.id
 
 

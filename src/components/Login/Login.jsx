@@ -24,7 +24,7 @@ export default function Login() {
       );
       Cookies.set("accessToken", response.data.access_token);
 
-      sessionStorage.setItem("user", JSON.stringify(response.data.user));
+      Cookies.set("user", JSON.stringify(response.data.user));
       navigate("/");
       // window.location.reload();
     } catch (error) {

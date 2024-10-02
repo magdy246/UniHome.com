@@ -3,9 +3,10 @@ import Avatar from "../../images/profileImage.png";
 import { HiStar } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { Helmet } from 'react-helmet';
+import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
 const TeacherCard = ({ Session, Student, language }) => {
-  let dataUser = JSON.parse(sessionStorage.getItem("user"));
+  let dataUser = JSON.parse(Cookies.get("user"));
   let teacherId;
 
   if (dataUser.type === "student") {

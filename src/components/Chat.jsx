@@ -19,7 +19,7 @@ export default function Chat() {
   const [dataUserSHat, setDataUserSHat] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const token = Cookies.get("accessToken");
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  const user = JSON.parse(Cookies.get("user"));
   const location = useLocation();
   const newMs = useRef();
   // const { userTable } = useContext(apiWallet);

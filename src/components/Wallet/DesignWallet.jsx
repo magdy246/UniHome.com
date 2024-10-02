@@ -5,6 +5,7 @@ import { GiWallet } from "react-icons/gi";
 import { MdWavingHand } from "react-icons/md";
 import { apiWallet } from "../../App";
 import { Helmet } from 'react-helmet';
+import Cookies from "js-cookie";
 import { t } from "i18next";
 const DesignWallet = () => {
 
@@ -21,7 +22,7 @@ const DesignWallet = () => {
   }, [savedLang]);
 
   const { dataUse } = useContext(apiWallet);
-  let nameUser = JSON.parse(sessionStorage.getItem("user"));
+  let nameUser = JSON.parse(Cookies.get("user"));
 
   const walletData = dataUse && dataUse.length > 0 ? dataUse[0] : { totalAmount: 0 };
 

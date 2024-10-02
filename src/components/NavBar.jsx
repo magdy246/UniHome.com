@@ -19,7 +19,11 @@ export default function NavBar({
   showLink4 = true,
   showChat = true,
 }) {
-  const dataUser = JSON.parse(sessionStorage.getItem("user"));
+  const userCookie = Cookies.get("user");
+  const dataUser = userCookie ? JSON.parse(userCookie) : null;
+  console.log(dataUser);
+  
+  
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [showNavBar, setShowNavBar] = useState(true);
