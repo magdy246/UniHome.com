@@ -281,7 +281,7 @@ export default function NavBar({
                   <div className="rounded-full" id="animation-register">
                     <img
                       className="w-full h-full rounded-full"
-                      src={dataUser?.image}
+                      src={dataUser?.image || unknown}
                       alt="user"
                     />
                   </div>
