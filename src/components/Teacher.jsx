@@ -23,6 +23,8 @@ export default function Teacher() {
   const [singleSession, setSingleSession] = useState({});
   const { Teacher } = useParams();
   const [data, setData] = useState([]);
+  console.log(dataApi);
+  
 
   const getCountryFlag = (countryName) => {
     const country = countries.find((c) => c.country === countryName);
@@ -230,14 +232,14 @@ export default function Teacher() {
               <img
                 src={dataApi?.image || Avatar}
                 alt="Teacher Avatar"
-                className="w-24 h-24 rounded-full border-2 border-gray-300 shadow-sm mr-4"
+                className="w-24 h-24 rounded-3xl border-2 border-gray-300 shadow-sm mr-4"
               />
               <div>
                 <h2 className="text-3xl font-bold text-gray-800 mb-1">
                   {dataApi?.firstname} {dataApi?.lastname}
                 </h2>
                 <p className="flex items-center text-gray-600 text-md">
-                  <span className="mr-2">{getCountryFlag(dataApi?.country)}</span>
+                  <span className="mr-2"><img className="w-8" src={getCountryFlag(dataApi?.country)} alt="flag" /></span>
                   {dataApi?.country}
                 </p>
               </div>
