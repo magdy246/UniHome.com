@@ -85,7 +85,6 @@ export default function NavBar({
   }, [lastScrollY]);
 
 
-
   return (
     <>
       <nav

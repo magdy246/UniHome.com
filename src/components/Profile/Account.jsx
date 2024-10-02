@@ -34,8 +34,6 @@ export default function Account() {
       }
     );
     setDataUser(response.data);
-    console.log(response.data);
-    
     Cookies.set("user", JSON.stringify(response.data.user), { expires: 7 });
     ReToken()
   }
