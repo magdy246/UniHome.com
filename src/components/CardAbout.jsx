@@ -1,12 +1,12 @@
-import opinion from "./Assets/images/opinion.jpg";
+// import opinion from "./Assets/images/opinion.jpg";
 
-export default function CardAbout() {
-  return (
-    <div className="flex justify-center items-center">
-      <img src={opinion} alt="opinion" className="w-full rounded-md max-w-sm md:max-w-md lg:max-w-lg" />
-    </div>
-  );
-}
+// export default function CardAbout() {
+//   return (
+//     <div className="flex justify-center items-center">
+//       <img src={opinion} alt="opinion" className="w-full rounded-md max-w-sm md:max-w-md lg:max-w-lg" />
+//     </div>
+//   );
+// }
 
 
 // <h3 className="text-xl font-semibold text-gray-800 dark:text-white">

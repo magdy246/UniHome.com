@@ -1,15 +1,17 @@
-import { useMemo, useState, useRef } from "react";
+import { useMemo, useState, useRef, useContext } from "react";
 import userProfile from "../Assets/images/profile.jpg";
 import axios from "axios";
 import countryList from "react-select-country-list";
 import timezone from "../timezones.json";
+import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
+import { apiWallet } from "../../App";
 
 export default function Account() {
   const options = useMemo(() => countryList().getData(), []);
   const timezoneMap = useMemo(() => timezone, []);
-
   const [imgAvatar, setImgAvatar] = useState(null);
+  const { ReToken } = useContext(apiWallet)
   const [dataUser, setDataUser] = useState({});
   const [profileInput, setProfileInput] = useState({
     image: "",
@@ -19,18 +21,23 @@ export default function Account() {
 
   // Reference for file input
   const fileInputRef = useRef(null);
+  const token = Cookies.get("accessToken");
 
   async function profile() {
     let response = await axios.post(
-      "https://yousab-tech.com/unihome/public/api/auth/user-profile/teacher",
+      "https://yousab-tech.com/unihome/public/api/auth/user-profile/student",
       profileInput,
       {
         headers: {
-          Authorization: "Bearer YOUR_TOKEN",
+          Authorization: `Bearer ${token}`,
         },
       }
     );
     setDataUser(response.data);
+    console.log(response.data);
+    
+    Cookies.set("user", JSON.stringify(response.data.user), { expires: 7 });
+    ReToken()
   }
 
   function input(e) {

@@ -21,9 +21,7 @@ export default function NavBar({
 }) {
   const userCookie = Cookies.get("user");
   const dataUser = userCookie ? JSON.parse(userCookie) : null;
-  console.log(dataUser);
-  
-  
+
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [showNavBar, setShowNavBar] = useState(true);

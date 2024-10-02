@@ -22,9 +22,9 @@ export default function Login() {
         "https://yousab-tech.com/unihome/public/api/auth/login",
         loginInput
       );
-      Cookies.set("accessToken", response.data.access_token);
+      Cookies.set("accessToken", response.data.access_token, { expires: 7 });
 
-      Cookies.set("user", JSON.stringify(response.data.user));
+      Cookies.set("user", JSON.stringify(response.data.user), { expires: 7 });
       navigate("/");
       // window.location.reload();
     } catch (error) {

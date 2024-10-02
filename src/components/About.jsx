@@ -1,11 +1,30 @@
-import CardAbout from "./CardAbout";
+import opinion from "./Assets/images/opinion.jpg";
 import { FaCheckCircle } from "react-icons/fa";
 import Slider from "react-slick";
 import hero from "./Assets/images/hero.png"
 import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function About() {
+  const [testimonials, setTestimonials] = useState([]);
+
+  // Fetch testimonials from the API
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const response = await axios.get(
+          "https://yousab-tech.com/unihome/public/api/testimonials"
+        );
+        setTestimonials(response?.data?.data?.testimonials);
+      } catch (error) {
+        console.error("Error fetching testimonials", error);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
   const settings = {
     infinite: true,
     slidesToShow: 4,
@@ -124,18 +143,26 @@ export default function About() {
         </div>
         <div className="slider-container mx-auto max-w-6xl px-4">
           <Slider {...settings} className="flex justify-between items-center">
-            {Array(8)
-              .fill(null)
-              .map((_, index) => (
+            {testimonials?.length > 0 ? (
+              testimonials.map((testimonial) => (
                 <div
-                  key={index}
+                  key={testimonial.id}
                   className="p-4 transition-transform duration-300 hover:scale-105"
                 >
                   <div className="h-full bg-white dark:bg-gray-900 shadow-lg rounded-lg overflow-hidden p-5">
-                    <CardAbout />
+                    <div className="flex justify-center items-center">
+                      <img
+                        src={testimonial.image}
+                        alt={testimonial.title}
+                        className="w-full rounded-md max-w-sm md:max-w-md lg:max-w-lg"
+                      />
+                    </div>
                   </div>
                 </div>
-              ))}
+              ))
+            ) : (
+              <p>Loading testimonials...</p>
+            )}
           </Slider>
         </div>
       </section>
