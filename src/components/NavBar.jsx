@@ -57,27 +57,39 @@ export default function NavBar({
   };
 
   useEffect(() => {
+    let scrollTimeout;
+
     const handleScroll = () => {
-      if (window.scrollY > lastScrollY) {
-        setShowNavBar(false);
-      } else {
-        setShowNavBar(true);
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
       }
-      setLastScrollY(window.scrollY);
+
+      scrollTimeout = setTimeout(() => {
+        if (window.scrollY > lastScrollY) {
+          setShowNavBar(false);
+        } else {
+          setShowNavBar(true);
+        }
+        setLastScrollY(window.scrollY);
+      }, 400); // 1 second
     };
 
     window.addEventListener("scroll", handleScroll);
 
     return () => {
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
       window.removeEventListener("scroll", handleScroll);
     };
   }, [lastScrollY]);
 
 
+
   return (
     <>
       <nav
-        className={`bg-white border-gray-200 dark:bg-gray-900 fixed w-full z-50 transition-transform duration-300 ease-in-out ${showNavBar ? "translate-y-0" : "-translate-y-full"
+        className={`bg-white border-gray-200 dark:bg-gray-900 fixed w-full z-50 transition-transform duration-700 ease-in-out ${showNavBar ? "translate-y-0" : "-translate-y-full"
           }`}
       >
         <div className="max-w-screen-xl m-auto flex flex-row items-center justify-between mx-auto px-4 py-2">
