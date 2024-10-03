@@ -6,7 +6,7 @@ import {
   TETabsPane,
 } from "tw-elements-react";
 import { FaChalkboardTeacher } from "react-icons/fa";
-import { MdQuiz } from "react-icons/md";
+import { MdGetApp, MdQuiz } from "react-icons/md";
 import { IoSettingsSharp } from "react-icons/io5";
 import { PiMonitorPlayFill } from "react-icons/pi";
 import { Helmet } from 'react-helmet';
@@ -19,11 +19,13 @@ import Cookies from "js-cookie";
 import RoutingSession from "./Sessions/RoutingSession";
 import DesignWallet from "./Wallet/DesignWallet";
 import TeacherCard from "./Instructor/TeacherCard";
-import RoutingSting from "./Profile/RoutingSting";
 import RoutingQuiz from "./Quiz/RoutingQuiz";
 import { t } from 'i18next';
+import ApplicationTeacher from "./ApplicationTeacher";
+import RoutingSting from "./Profile/RoutingSting";
 export default function Dashboard() {
   const [basicActive, setBasicActive] = useState("tab1");
+  const [applicationTeacher, setApplicationTeacher] = useState(false);
   const [addQuestion, setAddQuestion] = useState(false);
   const [dataSession, setDataSession] = useState([]);
   const [student, setStudent] = useState([]);
@@ -76,6 +78,7 @@ export default function Dashboard() {
     } else {
       setResultQuestionForTeacher(true);
       setAddQuestion(true);
+      setApplicationTeacher(true);
     }
   }, [dataUser.type]);
 
@@ -233,6 +236,16 @@ export default function Dashboard() {
                 <IoSettingsSharp className="text-2xl inline text-orange-500" />
                 <span className="mt-1 text-base font-semibold">{t("Settings")}</span>
               </TETabsItem>
+
+              {applicationTeacher &&
+                <TETabsItem
+                  onClick={() => handleBasicClick("tab3")}
+                  className="bg-gray-200 flex justify-start items-center mx-auto rounded-3xl gap-1 w-5/6"
+                  active={basicActive === "tab3"}
+                >
+                  <MdGetApp className="text-2xl inline text-orange-500" />
+                  <span className="mt-1 text-base font-semibold">Application</span>
+                </TETabsItem>}
             </TETabs>
           </div>
         </aside>
@@ -250,14 +263,16 @@ export default function Dashboard() {
               ))}
             </TETabsPane>
 
-            {/* <TETabsPane show={basicActive === "tab3"}>Tab 3 content</TETabsPane> */}
-
             <TETabsPane show={basicActive === "tab4"}>
               <DesignWallet />
             </TETabsPane>
 
-            <TETabsPane show={basicActive === "tab5"} className="overflow-auto">
+            <TETabsPane show={basicActive === "tab5"}>
               <RoutingSting />
+            </TETabsPane>
+
+            <TETabsPane show={basicActive === "tab3"}>
+              {applicationTeacher && <ApplicationTeacher />}
             </TETabsPane>
 
             <TETabsPane show={basicActive === "tab6"}>
