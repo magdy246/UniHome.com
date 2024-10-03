@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import imgLogin from "../Assets/LogIN.png";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -8,15 +8,22 @@ import { useTranslation } from "react-i18next";
 
 export default function Login() {
   let navigate = useNavigate();
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [loginGoogleFacebook, setLoginGoogleFacebook] = useState(null);
-  const [urlGoogleFacebook, setUrlGoogleFacebook] = useState(null);
   const [loginInput, setLoginInput] = useState({
     email: "",
     password: "",
   });
+
+  // This will run once after redirection from Google
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token'); // Adjust this if your token is in a fragment
+    if (token) {
+      Cookies.set("accessToken", token, { expires: 7 }); // Save token in cookies
+      navigate("/"); // Redirect user to home page or any other page
+    }
+  }, [navigate]);
 
   async function login() {
     try {
@@ -25,7 +32,6 @@ export default function Login() {
         loginInput
       );
       Cookies.set("accessToken", response.data.access_token, { expires: 7 });
-
       Cookies.set("user", JSON.stringify(response.data.user), { expires: 7 });
       navigate("/");
     } catch (error) {
@@ -36,18 +42,12 @@ export default function Login() {
 
   async function loginWithGooFace(typeLogin) {
     try {
-      // Correctly use template literals with backticks
       let response = await axios.get(`https://yousab-tech.com/unihome/public/api/auth/${typeLogin}`);
-
-      console.log(response.data.url);
-      setUrlGoogleFacebook(response.data.url); // Assuming setUrlGoogleFacebook is defined elsewhere
-      window.location.href = response.data.url; // Redirects to the URL returned from the API
-
+      window.location.href = response.data.url; // Redirect to the Google or Facebook URL
     } catch (error) {
       console.log(error.message); // Logs any error that occurs
     }
   }
-
 
   function input(e) {
     let loginUser = { ...loginInput };
@@ -130,12 +130,12 @@ export default function Login() {
                     placeholder={t("passwordPlaceholder")}
                   />
 
-                  <Link
-                    // to={"forgetPassword"}
+                  {/* <Link
+                    to={"forgetPassword"}
                     className="text-sm text-gray-500 font-bold hover:text-gray-900 text-end w-full mt-2"
                   >
                     {t("forgetPassword")}
-                  </Link>
+                  </Link> */}
                 </div>
                 <div className="mt-8">
                   <button className="auth_button" type="submit">
@@ -147,8 +147,6 @@ export default function Login() {
                   </button>
                 </div>
               </form>
-
-
 
               <div className="loginWithGoogle">
                 <button className=" flex px-5 w-full py-3 items-center justify-center mt-4 text-white rounded-full shadow-md hover:bg-gray-100" onClick={() => { loginWithGooFace('google') }}>
@@ -180,12 +178,6 @@ export default function Login() {
                 </button>
               </div>
 
-
-
-
-
-
-
               <div className="loginWithFacebook">
                 <button className=" flex px-5 w-full py-3 items-center justify-center mt-4 text-white rounded-full shadow-md hover:bg-gray-100" onClick={() => { loginWithGooFace('facebook') }}>
                   <div className="min-w-[30px]">
@@ -203,12 +195,6 @@ export default function Login() {
                   </div>
                 </button>
               </div>
-
-
-
-
-
-
 
               <div className="mt-4 flex items-center w-full text-center">
                 <a
