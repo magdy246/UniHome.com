@@ -6,19 +6,37 @@ import Header from "./Header";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 // Lazy load the InstructorCard component
 
 export default function Home() {
   let navigate = useNavigate();
-  
+
+  async function userData(token) {
+    try {
+      let res = await axios.get("https://yousab-tech.com/unihome/public/api/auth/profile", {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        },
+      }
+      )
+      Cookies.set("user", JSON.stringify(res.data.user), { expires: 7 });
+      // console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
   // This will run once after redirection from Google
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('access_token'); // Adjust this if your token is in a fragment
     if (token) {
-      Cookies.set("accessToken", token, { expires: 7 }); // Save token in cookies
+      Cookies.set("accessToken", token, { expires: 7 });
+      userData(token)
       navigate("/"); // Redirect user to home page or any other page
     }
   }, [navigate]);
