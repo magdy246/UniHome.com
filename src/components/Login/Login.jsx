@@ -11,6 +11,8 @@ export default function Login() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [loginGoogleFacebook, setLoginGoogleFacebook] = useState(null);
+  const [urlGoogleFacebook, setUrlGoogleFacebook] = useState(null);
   const [loginInput, setLoginInput] = useState({
     email: "",
     password: "",
@@ -26,11 +28,22 @@ export default function Login() {
 
       Cookies.set("user", JSON.stringify(response.data.user), { expires: 7 });
       navigate("/");
-      // window.location.reload();
     } catch (error) {
       setError("The email or password you entered doesn't match");
     }
     setLoading(false);
+  }
+
+  async function loginWithGooFace(typeLogin) {
+    try {
+      let response = await axios.get(https://yousab-tech.com/unihome/public/api/auth/${typeLogin})
+        console.log(response.data.url);
+      setUrlGoogleFacebook(response.data.url)
+      window.location.href = response.data.url
+
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
   function input(e) {
@@ -131,13 +144,11 @@ export default function Login() {
                   </button>
                 </div>
               </form>
-              {/* /api/socialite/google */}
-              {/* /api/socialite/facebook */}
-              <a
-                href="#"
-                className=" flex items-center justify-center mt-4 text-white rounded-full shadow-md hover:bg-gray-100"
-              >
-                <div className="flex px-5 justify-center w-full py-3">
+
+
+
+              <div className="loginWithGoogle">
+                <button className=" flex px-5 w-full py-3 items-center justify-center mt-4 text-white rounded-full shadow-md hover:bg-gray-100" onClick={() => { loginWithGooFace('google') }}>
                   <div className="min-w-[30px]">
                     <svg className="h-6 w-6" viewBox="0 0 40 40">
                       <path
@@ -163,14 +174,17 @@ export default function Login() {
                       {t("signIn.google")}
                     </h1>
                   </div>
-                </div>
-              </a>
+                </button>
+              </div>
 
-              <a
-                href="#"
-                className="flex items-center justify-center my-6 text-white rounded-full shadow-md hover:bg-gray-100"
-              >
-                <div className="flex px-5 justify-center w-full py-3">
+
+
+
+
+
+
+              <div className="loginWithFacebook">
+                <button className=" flex px-5 w-full py-3 items-center justify-center mt-4 text-white rounded-full shadow-md hover:bg-gray-100" onClick={() => { loginWithGooFace('facebook') }}>
                   <div className="min-w-[30px]">
                     <svg className="h-6 w-6" viewBox="0 0 40 40">
                       <path
@@ -184,8 +198,14 @@ export default function Login() {
                       {t("signIn.facebook")}
                     </h1>
                   </div>
-                </div>
-              </a>
+                </button>
+              </div>
+
+
+
+
+
+
 
               <div className="mt-4 flex items-center w-full text-center">
                 <a
