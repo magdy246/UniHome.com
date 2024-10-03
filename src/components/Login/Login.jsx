@@ -36,15 +36,18 @@ export default function Login() {
 
   async function loginWithGooFace(typeLogin) {
     try {
-      let response = await axios.get(https://yousab-tech.com/unihome/public/api/auth/${typeLogin})
-        console.log(response.data.url);
-      setUrlGoogleFacebook(response.data.url)
-      window.location.href = response.data.url
-
+      // Correctly use template literals with backticks
+      let response = await axios.get(`https://yousab-tech.com/unihome/public/api/auth/${typeLogin}`);
+      
+      console.log(response.data.url);
+      setUrlGoogleFacebook(response.data.url); // Assuming setUrlGoogleFacebook is defined elsewhere
+      window.location.href = response.data.url; // Redirects to the URL returned from the API
+  
     } catch (error) {
-      console.log(error.message);
+      console.log(error.message); // Logs any error that occurs
     }
   }
+  
 
   function input(e) {
     let loginUser = { ...loginInput };
@@ -224,6 +227,6 @@ export default function Login() {
           </div>
         </div>
       </section>
-    </>
-  );
+    </>
+  );
 }
