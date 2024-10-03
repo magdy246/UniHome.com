@@ -53,6 +53,7 @@ export default function NavBar({
 
   const logOut = () => {
     Cookies.remove("accessToken");
+    Cookies.remove("user");
     navigate("/login");
   };
 
