@@ -18,7 +18,7 @@ export default function Login() {
   // This will run once after redirection from Google
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token'); // Adjust this if your token is in a fragment
+    const token = urlParams.get('access_token'); // Adjust this if your token is in a fragment
     if (token) {
       Cookies.set("accessToken", token, { expires: 7 }); // Save token in cookies
       navigate("/"); // Redirect user to home page or any other page
