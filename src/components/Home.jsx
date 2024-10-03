@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   let navigate = useNavigate();
+  
   // This will run once after redirection from Google
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);

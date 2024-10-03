@@ -5,6 +5,8 @@ import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 export default function Login() {
   let navigate = useNavigate();
@@ -14,6 +16,11 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   async function login() {
     try {
@@ -111,14 +118,24 @@ export default function Login() {
                       {t("password")}
                     </label>
                   </div>
-                  <input
-                    onChange={input}
-                    name="password"
-                    className="text-gray-700 border-2 border-gray-300 rounded-2xl py-2 px-4 block w-full focus:border-blue-700"
-                    id="grid-password"
-                    type="password"
-                    placeholder={t("passwordPlaceholder")}
-                  />
+
+                  <div className="relative">
+                    <input
+                      onChange={input}
+                      name="password"
+                      className="text-gray-700 border-2 border-gray-300 rounded-2xl py-2 px-4 block w-full focus:border-blue-700"
+                      id="grid-password"
+                      type={showPassword ? "text" : "password"}
+                      placeholder={t("passwordPlaceholder")}
+                    />
+                    <button
+                      type="button"
+                      className="absolute inset-y-0 right-3 flex items-center text-gray-700 focus:outline-none"
+                      onClick={togglePasswordVisibility}
+                    >
+                      <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                    </button>
+                  </div>
 
                   {/* <Link
                     to={"forgetPassword"}

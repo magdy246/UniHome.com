@@ -6,6 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 import countryList from "react-select-country-list";
 import timezone from "../timezones.json";
 import { useTranslation } from "react-i18next";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+
 export default function Register() {
   const options = useMemo(() => countryList().getData(), []);
   const timezoneMap = useMemo(() => timezone, []);
@@ -28,6 +31,16 @@ export default function Register() {
     source: "",
     type: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
 
   async function register(e) {
 
@@ -199,6 +212,7 @@ export default function Register() {
                     />
                   </div>
 
+                  {/* Password Input */}
                   <div className="px-3">
                     <label
                       className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
@@ -206,16 +220,26 @@ export default function Register() {
                     >
                       {t('form.password')}
                     </label>
-                    <input
-                      name="password"
-                      onChange={input}
-                      className="text-gray-700 border-2 border-gray-300 rounded-2xl py-2 px-4 w-full focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                      id="grid-password"
-                      type="password"
-                      placeholder={t('form.password')}
-                    />
+                    <div className="relative">
+                      <input
+                        name="password"
+                        onChange={input}
+                        className="text-gray-700 border-2 border-gray-300 rounded-2xl py-2 px-4 w-full focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                        id="grid-password"
+                        type={showPassword ? "text" : "password"}
+                        placeholder={t('form.password')}
+                      />
+                      <button
+                        type="button"
+                        className="absolute inset-y-0 right-3 flex items-center text-gray-700 focus:outline-none"
+                        onClick={togglePasswordVisibility}
+                      >
+                        <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                      </button>
+                    </div>
                   </div>
 
+                  {/* Confirm Password Input */}
                   <div className="px-3">
                     <label
                       className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
@@ -223,14 +247,23 @@ export default function Register() {
                     >
                       {t('form.confirmPassword')}
                     </label>
-                    <input
-                      name="confirm_password"
-                      onChange={input}
-                      className="text-gray-700 border-2 border-gray-300 rounded-2xl py-2 px-4 w-full focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                      id="confirm_password"
-                      type="password"
-                      placeholder={t('form.confirmPassword')}
-                    />
+                    <div className="relative">
+                      <input
+                        name="confirm_password"
+                        onChange={input}
+                        className="text-gray-700 border-2 border-gray-300 rounded-2xl py-2 px-4 w-full focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                        id="confirm_password"
+                        type={showConfirmPassword ? "text" : "password"}
+                        placeholder={t('form.confirmPassword')}
+                      />
+                      <button
+                        type="button"
+                        className="absolute inset-y-0 right-3 flex items-center text-gray-700 focus:outline-none"
+                        onClick={toggleConfirmPasswordVisibility}
+                      >
+                        <FontAwesomeIcon icon={showConfirmPassword ? faEyeSlash : faEye} />
+                      </button>
+                    </div>
                   </div>
 
                   <div className="px-3">

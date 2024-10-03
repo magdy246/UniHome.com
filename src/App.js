@@ -11,36 +11,36 @@ export const apiWallet = createContext(null);
 
 export default function App() {
 // ****************disabeled inspect****************
-  // useEffect(() => {
-  //   // Disable right-click context menu
-  //   const handleContextMenu = (event) => {
-  //     event.preventDefault();
-  //   };
+  useEffect(() => {
+    // Disable right-click context menu
+    const handleContextMenu = (event) => {
+      event.preventDefault();
+    };
 
-  //   // Disable certain key combinations
-  //   const handleKeyDown = (event) => {
-  //     const key = event.key || event.keyCode;
+    // Disable certain key combinations
+    const handleKeyDown = (event) => {
+      const key = event.key || event.keyCode;
 
-  //     if (key === "F12" || key === 123) {
-  //       // Disable F12 for Developer Tools
-  //       event.preventDefault();
-  //     } else if ((event.ctrlKey && event.shiftKey && key === "I") ||
-  //       (event.ctrlKey && event.shiftKey && key === "J")) {
-  //       // Disable Ctrl+Shift+I and Ctrl+Shift+J
-  //       event.preventDefault();
-  //     }
-  //   };
+      if (key === "F12" || key === 123) {
+        // Disable F12 for Developer Tools
+        event.preventDefault();
+      } else if ((event.ctrlKey && event.shiftKey && key === "I") ||
+        (event.ctrlKey && event.shiftKey && key === "J")) {
+        // Disable Ctrl+Shift+I and Ctrl+Shift+J
+        event.preventDefault();
+      }
+    };
 
-  //   // Add event listeners
-  //   window.addEventListener("contextmenu", handleContextMenu);
-  //   document.addEventListener("keydown", handleKeyDown);
+    // Add event listeners
+    window.addEventListener("contextmenu", handleContextMenu);
+    document.addEventListener("keydown", handleKeyDown);
 
-  //   // Clean up the event listeners on component unmount
-  //   return () => {
-  //     window.removeEventListener("contextmenu", handleContextMenu);
-  //     document.removeEventListener("keydown", handleKeyDown);
-  //   };
-  // }, []);
+    // Clean up the event listeners on component unmount
+    return () => {
+      window.removeEventListener("contextmenu", handleContextMenu);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
   // ****************End Code****************
 
   const { i18n } = useTranslation();
