@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import imgApplication from './Assets/Teacher-application.jpg'
 import axios from 'axios';
 // import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 // import moment from 'moment-timezone';
 import Cookies from 'js-cookie';
+import { useTranslation } from "react-i18next";
 
 export default function ApplicationTeacher() {
+    const { t } = useTranslation();
 
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
@@ -50,153 +52,137 @@ export default function ApplicationTeacher() {
         setLoading(true)
         applicationTeacher()
     }
-
+    const savedLang = localStorage.getItem("lang") || 'en';
+    const [Lang, setLang] = useState(savedLang);
+  
+    useEffect(() => {
+      try {
+        const parsedLang = JSON.parse(savedLang);
+        setLang(parsedLang);
+      } catch (error) {
+        console.error('Failed to parse language from localStorage', error);
+      }
+    }, [savedLang]);
 
     return <>
         <Helmet>
             <title>Teacher Application</title>
         </Helmet>
-        <section className="h-full applicationTeacher flex flex-wrap justify-around items-start my-10">
-            <div className="uniHomeImg xl:basis-2/5 md:basis-3/5 basis-7/12">
-                <img src={imgApplication} alt="img Login" className='w-4/5 m-auto rounded-2xl' />
-            </div>
-            <div class="formLogin xl:basis-3/5 lg:basis-2/5 basis-full">
-                <div className=" flex bg-white rounded-lg shadow-lg border overflow-hidden w-full">
-                    <div className="w-full p-8 ">
-                        <p className="text-2xl font-bold pb-5 text-gray-600 text-center">Teacher Application</p>
-                        <div className='flex justify-center items-center'>
-                            <span className='text-orange-400 text-xl font-bold me-3'>Resume<span></span></span>
-                            <button className="btn text-white border-2 border-orange-600 hover:border-orange-500 bg-orange-500 hover:bg-orange-200 hover:text-black duration-500 rounded-3xl" onClick={() => document.getElementById('my_modal_3').showModal()}>Press here</button>
-                        </div>
-                        <form onSubmit={submitApplication} className='flex flex-wrap '>
-                            {error && (
-                                <div className="bg-red-100 border w-full mt-5 mb-10 border-red-400 text-red-700 px-4 py-3 rounded-2xl relative" role="alert">
-                                    <strong className="font-bold">{error}</strong>
-                                </div>
-                            )}
+        <section className="h-full flex flex-wrap justify-center items-center my-10">
 
-                            <div class="w-full flex flex-wrap justify-center gap-7 items-baseline mt-5 px-3 mb-6 md:mb-0">
-                                <div className="modelResume">
-                                    <dialog id="my_modal_3" className="modal">
-                                        <div className="modal-box  h-5/6">
-                                            <form method="dialog">
-                                                {/* if there is a button in form, it will close the modal */}
-                                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                                            </form>
-                                            <div className="flex flex-col justify-between w-full h-full ">
-                                                <div className="mt-4 ">
-                                                    <label className="block mb-2 text-orange-500 text-lg font-bold">
-                                                        Send your CV
-                                                    </label>
-                                                    {/* <span className='text-sm mb-4 text-red-600'>Send your CV *</span> */}
-                                                    <input
-                                                        name='cv'
-                                                        onChange={input}
-                                                        type="file"
-                                                        className="file-input file-input-bordered file-input-primary w-full " />
-                                                </div>
-                                                <div className="mt-7 mb-3 ">
-                                                    <label className="block text-orange-500 text-lg font-bold mb-2">
-                                                        Passport or National ID Photo.
-                                                    </label>
-                                                    <input
-                                                        name='nationalid'
-                                                        onChange={input}
-                                                        type="file"
-                                                        className="file-input file-input-bordered file-input-primary w-full " />
-                                                </div>
-                                                <div className="mt-4 ">
-                                                    <label className="block text-orange-500 text-lg font-bold mb-2">
-                                                        Profile Picture
-                                                    </label>
-                                                    <input
-                                                        name='image'
-                                                        onChange={input}
-                                                        type="file"
-                                                        className="file-input file-input-bordered file-input-primary w-full " />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </dialog>
-                                </div>
-                            </div>
-                            <div class="w-full px-3 my-6 md:mb-0">
-                                <label class="block uppercase tracking-wide text-orange-400 text-base font-bold mb-3 mt-8" for="grid-first-name">
-                                    Video Youtube Link
-                                </label>
-                                <input onChange={input} name='youtube_link' class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded-2xl py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" />
-                            </div>
-                            <div class="w-full px-3 mb-6 md:mb-0">
-                                <label class="block uppercase tracking-wide text-orange-400 text-base font-bold mb-3 mt-8" >
-                                    Biography
-                                </label>
-                                <textarea onChange={input} name='intro' class="appearance-none block w-full h-48 bg-gray-200 text-gray-700 border border-red-500 rounded-2xl py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" placeholder='Write About Yourself And Your Qualifications ( Note: write ONLY 500 Letters )' />
-                            </div>
-                            <div class="w-full pt-3 pb-5 px-3 mb-6 md:mb-0">
-                                <label class="block uppercase tracking-wide text-orange-400 text-base font-bold mb-3 mt-5">
-                                    What Language Do You Want To Teach?
-                                </label>
-                                <div class="relative">
-                                    <select onChange={input} class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded-2xl leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name='course_id'>
-                                        <option hidden >Select</option>
-                                        <option value={"0"}>English</option>
-                                        <option value={"1"}>German</option>
-                                        <option value={"2"}>French</option>
-                                        <option value={"3"}>Arabic</option>
-                                    </select>
-                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            {/* Form Section */}
+            <div className="xl:basis-3/5 lg:basis-3/5 md:basis-full sm:basis-full basis-full p-6">
+                <div className="bg-white rounded-3xl shadow-2xl border border-gray-200 overflow-hidden w-full p-10">
 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                <div className="selectLanguage">
-                                    <label class="block uppercase tracking-wide text-orange-400 text-base font-bold mb-3 mt-8" >
-                                        Languages You Speak
-                                    </label>
-                                    <div class="relative">
-                                        <select onChange={input} class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded-2xl leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name='language_id'>
-                                            <option hidden >Select</option>
-                                            <option value={"English"}>English</option>
-                                            <option value={"Arabic"}>Arabic</option>
-                                        </select>
-                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* <div className="btnAddSelectLanguage">
-                                    <button className="btn px-10 py-4 bg-green-500 text-white text-xl ">+</button>
-                                </div> */}
-                            </div>
-                            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                <label class="block uppercase tracking-wide text-orange-400 text-base font-bold mb-3 mt-8" >
-                                    Language Proficiency
-                                </label>
-                                <div class="relative">
-                                    <select onChange={input} class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded-2xl leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name='proficiency_id'>
-                                        <option hidden >Select</option>
-                                        <option value={"Beginner"}>Beginner</option>
-                                        <option value={"Intermediate"}>Intermediate</option>
-                                        <option value={"Advanced"}>Advanced</option>
-                                        <option value={"Native"}>Native</option>
-                                    </select>
-                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-
-                                    </div>
-                                </div>
-                            </div>
-                            {/* You can open the modal using document.getElementById('ID').showModal() method */}
-                            <div className="mt-16 w-full flex flex-wrap justify-center">
-                                <button class="text-white bg-[#ff5a1f] duration-500 hover:bg-orange-400 font-bold py-4 text-lg px-8 rounded-3xl focus:outline-none focus:shadow-outline" type="submit" >
-                                    {loading ? <span className="loading loading-infinity loading-lg h-4"></span>
-                                        : "Save Change"}
-                                </button>
-                            </div>
-                        </form>
+                    {/* Image Section */}
+                    <div className="xl:basis-2/5 lg:basis-2/5 md:basis-3/5 sm:basis-7/12 basis-full mb-8 md:mb-4 flex justify-center items-center">
+                        <img src={imgApplication} alt={t('applicationImage')} className="w-1/2 sm:rounded-3xl rounded-xl shadow-lg hover:scale-105 transition-transform duration-300" />
                     </div>
+
+                    <p className="text-3xl font-bold text-gray-700 text-center pb-8">{t('teacherApplication')}</p>
+
+                    {/* Resume Upload */}
+                    <div className='flex justify-center items-center mb-8'>
+                        <span className='text-orange-500 text-xl font-semibold mr-3'>{t('resume')}</span>
+                        <button className="btn border-2 border-orange-500 text-white bg-orange-500 hover:bg-white hover:text-orange-500 hover:scale-105 duration-300 rounded-full px-5 py-2" onClick={() => document.getElementById('my_modal_3').showModal()}>
+                            {t('pressHere')}
+                        </button>
+                    </div>
+
+                    {/* Form */}
+                    <form onSubmit={submitApplication} className="space-y-6">
+                        {error && (
+                            <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-xl" role="alert">
+                                <strong className="font-bold">{error}</strong>
+                            </div>
+                        )}
+
+                        {/* Modal for Resume Upload */}
+                        <dialog id="my_modal_3" className="modal">
+                            <div className="modal-box p-10 h-5/6 rounded-2xl">
+                                <form method="dialog">
+                                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                </form>
+                                <div className="space-y-6">
+
+                                    {/* CV Upload */}
+                                    <div>
+                                        <label className="text-lg font-bold text-orange-500">{t('uploadCV')}</label>
+                                        <input type="file" name="cv" onChange={input} className="file-input file-input-primary w-full" />
+                                    </div>
+
+                                    {/* National ID Upload */}
+                                    <div>
+                                        <label className="text-lg font-bold text-orange-500">{t('uploadID')}</label>
+                                        <input type="file" name="nationalid" onChange={input} className="file-input file-input-primary w-full" />
+                                    </div>
+
+                                    {/* Profile Picture Upload */}
+                                    <div>
+                                        <label className="text-lg font-bold text-orange-500">{t('uploadProfilePicture')}</label>
+                                        <input type="file" name="image" onChange={input} className="file-input file-input-primary w-full" />
+                                    </div>
+                                </div>
+                            </div>
+                        </dialog>
+
+                        {/* Video YouTube Link */}
+                        <div>
+                            <label className="block text-base font-bold text-orange-500">{t('youtubeLink')}</label>
+                            <input type="text" name="youtube_link" onChange={input} className="w-full p-3 rounded-2xl border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-orange-500" />
+                        </div>
+
+                        {/* Biography */}
+                        <div>
+                            <label className="block text-base font-bold text-orange-500">{t('biography')}</label>
+                            <textarea name="intro" onChange={input} className="w-full p-4 rounded-2xl border-gray-300 bg-gray-50 h-40 resize-none focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder={t('biographyPlaceholder')}></textarea>
+                        </div>
+
+                        {/* Language Teaching */}
+                        <div className="space-y-4">
+                            <label className="block text-base font-bold text-orange-500">{t('languageTeach')}</label>
+                            <select dir={Lang === "ar" ? "rtl" : "ltr"} name="course_id" onChange={input} className="w-full p-3 rounded-2xl bg-gray-50 border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                <option hidden>{t('select')}</option>
+                                <option value="0">{t('english')}</option>
+                                <option value="1">{t('german')}</option>
+                                <option value="2">{t('french')}</option>
+                                <option value="3">{t('arabic')}</option>
+                            </select>
+                        </div>
+
+                        {/* Languages You Speak */}
+                        <div className="flex flex-wrap space-y-4 md:space-y-0 md:space-x-4">
+                            <div className="w-full md:w-1/2">
+                                <label className="block text-base font-bold text-orange-500">{t('languagesSpeak')}</label>
+                                <select dir={Lang === "ar" ? "rtl" : "ltr"} name="language_id" onChange={input} className="w-full p-3 rounded-2xl bg-gray-50 border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                    <option hidden>{t('select')}</option>
+                                    <option value="English">{t('english')}</option>
+                                    <option value="Arabic">{t('arabic')}</option>
+                                </select>
+                            </div>
+                        </div>
+                            {/* Proficiency */}
+                            <div className="w-full md:w-1/2">
+                                <label className="block text-base font-bold text-orange-500">{t('proficiency')}</label>
+                                <select dir={Lang === "ar" ? "rtl" : "ltr"} name="proficiency_id" onChange={input} className="w-full p-3 rounded-2xl bg-gray-50 border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                    <option hidden>{t('select')}</option>
+                                    <option value="Beginner">{t('beginner')}</option>
+                                    <option value="Intermediate">{t('intermediate')}</option>
+                                    <option value="Advanced">{t('advanced')}</option>
+                                    <option value="Native">{t('native')}</option>
+                                </select>
+                            </div>
+
+                        {/* Submit Button */}
+                        <div className="mt-10 text-center">
+                            <button type="submit" className="text-white orange duration-300 transition-all px-6 py-3 rounded-full font-bold text-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                {loading ? <span className="loading loading-infinity loading-lg h-4"></span> : t('submitApplication')}
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </section>
+
     </>
 }

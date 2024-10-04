@@ -50,13 +50,13 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="#" onClick={() => handleOpenModal('Get in Touch', `We're here to help! If you have any inquiries or need assistance, please don't hesitate to contact us. You can reach us through our social media channels, email, or by filling out the contact form on our website. We look forward to hearing from you!`)} className="hover:underline">
-                    Get in Touch
+                  <Link to="#" onClick={() => handleOpenModal('Contact', 'For more specific inquiries, please contact us directly at info@unihome.com. Our dedicated support team is ready to assist you with any questions or concerns you may have regarding our services or your account.')} className="hover:underline">
+                    Contact
                   </Link>
                 </li>
                 <li>
-                  <Link to="#" onClick={() => handleOpenModal('Contact', 'For more specific inquiries, please contact us directly at info@unihome.com. Our dedicated support team is ready to assist you with any questions or concerns you may have regarding our services or your account.')} className="hover:underline">
-                    Contact
+                  <Link to="/Privacy-Policy" className="hover:underline">
+                  Privacy Policy
                   </Link>
                 </li>
               </ul>

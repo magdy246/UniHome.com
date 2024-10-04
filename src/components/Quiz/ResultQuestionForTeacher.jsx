@@ -79,7 +79,7 @@ export default function ResultQuestionForTeacher() {
   });
 
   return (
-    <div className="mx-auto max-w-lg sm:max-w-xl lg:max-w-4xl p-6">
+    <div className="mx-auto max-w-lg sm:max-w-xl lg:max-w-4xl p-6 bg-gray-100 rounded-3xl">
       <h2 className="text-6xl font-light font-[Jomhuria-R]">
         Result :
       </h2>

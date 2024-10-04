@@ -244,7 +244,7 @@ export default function Dashboard() {
                   active={basicActive === "tab3"}
                 >
                   <MdGetApp className="text-2xl inline text-orange-500" />
-                  <span className="mt-1 text-base font-semibold">Application</span>
+                  <span className="mt-1 text-base font-semibold">{t("Application")}</span>
                 </TETabsItem>
                 {/* } */}
             </TETabs>

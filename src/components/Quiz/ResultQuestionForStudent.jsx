@@ -45,7 +45,10 @@ export default function ResultQuestionForStudent() {
   };
 
   return (
-    <div className="mx-auto max-w-lg sm:max-w-xl lg:max-w-4xl p-6">
+    <div className="mx-auto max-w-lg sm:max-w-xl lg:max-w-4xl p-6 bg-gray-100 rounded-3xl">
+      <h2 className="text-6xl font-light font-[Jomhuria-R]">
+        Result :
+      </h2>
       {!selectedQuiz ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {quizzes?.map((quiz, index) => (

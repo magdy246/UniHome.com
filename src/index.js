@@ -20,6 +20,7 @@ import LottieHandler from "./components/Lottie/LottieHandler";
 import Loader from "./components/Assets/loader.json";
 import App from "./App";
 import NotFound from "./components/NotFound";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 const Home = lazy(() => import("./components/Home"));
 const About = lazy(() => import("./components/About"));
 const Dashboard = lazy(() => import("./components/Dashboard"));
@@ -80,6 +81,14 @@ const routes = [
         element: (
           <Suspense fallback={<LottieHandler animationData={Loader} />}>
             <About />
+          </Suspense>
+        ),
+      },
+      {
+        path: "Privacy-Policy",
+        element: (
+          <Suspense fallback={<LottieHandler animationData={Loader} />}>
+            <PrivacyPolicy />
           </Suspense>
         ),
       },

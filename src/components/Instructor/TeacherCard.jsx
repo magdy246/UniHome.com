@@ -26,7 +26,7 @@ const TeacherCard = ({ Session, Student, language }) => {
           content={t('description')}
         />
       </Helmet>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-auto max-w-lg sm:max-w-xl lg:max-w-4xl mb-5">
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-auto max-w-lg sm:max-w-xl lg:max-w-4xl mb-5 bg-gray-100 rounded-3xl">
         <table className="w-full text-sm rtl:text-right text-gray-500 dark:text-gray-400 text-center">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
