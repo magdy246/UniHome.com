@@ -81,8 +81,8 @@ export default function ResultQuestionForTeacher() {
   return (
     <div className="mx-auto max-w-lg sm:max-w-xl lg:max-w-4xl p-6">
       <h2 className="text-6xl font-light font-[Jomhuria-R]">
-            Result :
-          </h2>
+        Result :
+      </h2>
       {loading ? ( // Loading indicator
         <div className="flex items-center justify-center h-64">
           <span className="text-lg">Loading...</span>
@@ -124,22 +124,31 @@ export default function ResultQuestionForTeacher() {
           {/* Display the list of students who solved the quiz in a table */}
           {uniqueResults.length > 0 ? (
             <div className="overflow-x-auto">
-              <table className="min-w-full bg-white border border-gray-300">
+              <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden text-center">
                 <thead>
-                  <tr className="bg-gray-200 text-gray-700">
-                    <th className="py-2 px-4 border">Student Name</th>
-                    <th className="py-2 px-4 border">Student ID</th>
-                    <th className="py-2 px-4 border">Correct Answers</th>
+                  <tr className="bg-gradient-to-r from-orange-500 to-blue-500 text-white">
+                    <th className="py-3 px-5 text-lg font-semibold">Student Name</th>
+                    <th className="py-3 px-5 text-lg font-semibold">Student ID</th>
+                    <th className="py-3 px-5 text-lg font-semibold">Correct Answers</th>
+                    <th className="py-3 px-5 text-lg font-semibold">Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {uniqueResults?.map((result, index) => (
-                    <tr key={index} className="text-gray-600">
-                      <td className="py-2 px-4 border">{result.student.firstname}</td>
-                      <td className="py-2 px-4 border">{result.student.id}</td>
-                      <td className="py-2 px-4 border">{sum}/{results.length}</td>
-                    </tr>
-                  ))}
+                  {uniqueResults?.map((result, index) => {
+                    const isPass = sum > 0; // Assuming `sum` holds the score for the student.
+                    return (
+                      <tr key={index} className="bg-white even:bg-gray-50 hover:bg-gray-100 transition-colors duration-300 font-bold">
+                        <td className="py-3 px-5 border-t border-gray-200 text-gray-700">{result.student.firstname}</td>
+                        <td className="py-3 px-5 border-t border-gray-200 text-gray-700">{result.student.id}</td>
+                        <td className="py-3 px-5 border-t border-gray-200 text-gray-700">
+                          {sum}/{results.length}
+                        </td>
+                        <td className={`py-3 px-5 border-t border-gray-200 ${isPass ? 'text-green-500' : 'text-red-500'}`}>
+                          {isPass ? 'Pass' : 'Fail'}
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>

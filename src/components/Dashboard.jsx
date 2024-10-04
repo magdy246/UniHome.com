@@ -237,7 +237,7 @@ export default function Dashboard() {
                 <span className="mt-1 text-base font-semibold">{t("Settings")}</span>
               </TETabsItem>
 
-              {applicationTeacher &&
+              {/* {applicationTeacher && */}
                 <TETabsItem
                   onClick={() => handleBasicClick("tab3")}
                   className="bg-gray-200 flex justify-start items-center mx-auto rounded-3xl gap-1 w-5/6"
@@ -245,7 +245,8 @@ export default function Dashboard() {
                 >
                   <MdGetApp className="text-2xl inline text-orange-500" />
                   <span className="mt-1 text-base font-semibold">Application</span>
-                </TETabsItem>}
+                </TETabsItem>
+                {/* } */}
             </TETabs>
           </div>
         </aside>
@@ -272,7 +273,8 @@ export default function Dashboard() {
             </TETabsPane>
 
             <TETabsPane show={basicActive === "tab3"}>
-              {applicationTeacher && <ApplicationTeacher />}
+              {/* {applicationTeacher && <ApplicationTeacher />} */}
+              <ApplicationTeacher />
             </TETabsPane>
 
             <TETabsPane show={basicActive === "tab6"}>
