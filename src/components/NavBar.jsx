@@ -163,7 +163,7 @@ export default function NavBar({
               )} */}
               <div className="text-xl font-bold text-gray-500 flex justify-center gap-2 items-center capitalize">
                 <span className="text-orange-500 text-2xl">Hi </span>
-                {dataUser?.firstname}
+                {dataUser?.firstname.split(' ')[0]}
               </div>
               {/* User Profile */}
               <div className="dropdown dropdown-end">
