@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import imgLogin from "../Assets/LogIN.png";
 import axios from "axios";
 import Cookies from "js-cookie";

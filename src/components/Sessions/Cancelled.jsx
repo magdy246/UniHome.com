@@ -25,8 +25,6 @@ const addOneHour = (time24) => {
 
 const Cancelled = (Session) => {
 
-
-
   const savedLang = localStorage.getItem("lang") || 'en';
   const [Lang, setLang] = useState(savedLang);
 

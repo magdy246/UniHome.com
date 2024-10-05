@@ -12,40 +12,33 @@ import axios from "axios";
 // Lazy load the InstructorCard component
 
 export default function Home() {
-  const navigate = useNavigate();
+  let navigate = useNavigate();
 
-  // Function to get user data and set cookie
-  async function userData(token) {
+  async function userData() {
     try {
-      const res = await axios.get("https://yousab-tech.com/unihome/public/api/auth/profile", {
+      const token = Cookies.get("accessToken");
+      let res = await axios.get("https://yousab-tech.com/unihome/public/api/auth/profile", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`
         },
-      });
-      // Save user data in cookies
+      }
+      )
       Cookies.set("user", JSON.stringify(res.data.user), { expires: 7 });
     } catch (error) {
-      console.error("Error fetching user data:", error);
+      console.log(error);
     }
   }
 
   // This will run once after redirection from Google
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get("access_token"); // Get the token from URL params
-
+    const token = urlParams.get('access_token'); // Adjust this if your token is in a fragment
     if (token) {
-      // Set the access token in cookies
       Cookies.set("accessToken", token, { expires: 7 });
-
-      // Fetch user data and then redirect
-      userData(token).then(() => {
-        navigate("/"); // Redirect user to home page
-      });
-    } else {
-      console.warn("No access token found in URL parameters.");
+      userData()
+      navigate("/"); // Redirect user to home page or any other page
     }
-  }, []); // Empty dependency array to ensure it runs only once on component mount
+  }, [navigate]);
 
   return (
     <>

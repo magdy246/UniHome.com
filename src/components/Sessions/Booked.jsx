@@ -41,9 +41,6 @@ const Booked = (Session) => {
 
   Session.Session.status = Session.Session.status !== 1 ? null : "Booked";
 
-
-
-
   const savedLang = localStorage.getItem("lang") || 'en';
   const [Lang, setLang] = useState(savedLang);
 
