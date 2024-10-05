@@ -185,7 +185,7 @@ export default function Login() {
                 </button>
               </div>
 
-              <div className="loginWithFacebook">
+              {/* <div className="loginWithFacebook">
                 <button className=" flex px-5 w-full py-3 items-center justify-center mt-4 text-white rounded-full shadow-md hover:bg-gray-100" onClick={() => { loginWithGooFace('facebook') }}>
                   <div className="min-w-[30px]">
                     <svg className="h-6 w-6" viewBox="0 0 40 40">
@@ -201,7 +201,7 @@ export default function Login() {
                     </h1>
                   </div>
                 </button>
-              </div>
+              </div> */}
 
               <div className="mt-4 flex items-center w-full text-center">
                 <a

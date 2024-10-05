@@ -23,7 +23,7 @@ export default function Home() {
         },
       }
       )
-      Cookies.set("user", JSON.stringify(res.data.user), { expires: 7 });
+      Cookies.set("user", JSON.stringify(res?.data), { expires: 7 });
     } catch (error) {
       console.log(error);
     }
