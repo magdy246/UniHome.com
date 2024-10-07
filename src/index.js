@@ -21,6 +21,7 @@ import Loader from "./components/Assets/loader.json";
 import App from "./App";
 import NotFound from "./components/NotFound";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import Developers from "./components/Developers";
 const Home = lazy(() => import("./components/Home"));
 const About = lazy(() => import("./components/About"));
 const Dashboard = lazy(() => import("./components/Dashboard"));
@@ -89,6 +90,14 @@ const routes = [
         element: (
           <Suspense fallback={<LottieHandler animationData={Loader} />}>
             <PrivacyPolicy />
+          </Suspense>
+        ),
+      },
+      {
+        path: "Developers",
+        element: (
+          <Suspense fallback={<LottieHandler animationData={Loader} />}>
+            <Developers />
           </Suspense>
         ),
       },

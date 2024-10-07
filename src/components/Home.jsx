@@ -5,8 +5,8 @@ import SliderTeatcher from "./SliderTeatcher";
 import Header from "./Header";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 // Lazy load the InstructorCard component

@@ -83,41 +83,41 @@ export default function App() {
 
   const token = Cookies.get("accessToken");
 
-  async function ReToken() {
-    setInterval(() => {
-      const refreshToken = async () => {
-        if (token) {
-          try {
-            const res = await axios.post(
-              "https://yousab-tech.com/unihome/public/api/auth/refresh",
-              {},
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${token}`,
-                },
-              }
-            );
+  // async function ReToken() {
+  //   setInterval(() => {
+  //     const refreshToken = async () => {
+  //       if (token) {
+  //         try {
+  //           const res = await axios.post(
+  //             "https://yousab-tech.com/unihome/public/api/auth/refresh",
+  //             {},
+  //             {
+  //               headers: {
+  //                 "Content-Type": "application/json",
+  //                 Authorization: `Bearer ${token}`,
+  //               },
+  //             }
+  //           );
 
-            Cookies.set("accessToken", res.data.access_token);
-            setRefAPI(res.data.access_token);
-          } catch (error) {
-            console.log("Error refreshing token:", error);
-          }
-        }
-      };
+  //           Cookies.set("accessToken", res.data.access_token);
+  //           setRefAPI(res.data.access_token);
+  //         } catch (error) {
+  //           console.log("Error refreshing token:", error);
+  //         }
+  //       }
+  //     };
 
-      refreshToken();
-    }, 660000); // Refresh every 11 minutes
-  }
+  //     refreshToken();
+  //   }, 660000); // Refresh every 11 minutes
+  // }
 
-  useEffect(() => {
-    if (token) {
-      ReToken()
-    } else {
-      clearInterval()
-    }
-  }, [token])
+  // useEffect(() => {
+  //   if (token) {
+  //     ReToken()
+  //   } else {
+  //     clearInterval()
+  //   }
+  // }, [token])
 
   useEffect(() => {
     if (refAPI !== null) {
@@ -140,7 +140,7 @@ export default function App() {
   }, [loc.pathname, refAPI]);
 
   return (
-    <apiWallet.Provider value={{ dataUse, setDataUse, userTable, setUserTable, ReToken }}>
+    <apiWallet.Provider value={{ dataUse, setDataUse, userTable, setUserTable }}>
       <div>
         {token ? (
           <div className="m-auto">

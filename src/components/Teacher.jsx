@@ -23,8 +23,7 @@ export default function Teacher() {
   const [singleSession, setSingleSession] = useState({});
   const { Teacher } = useParams();
   const [data, setData] = useState([]);
-  console.log(dataApi);
-  
+  const [date, setDate] = useState([]);
 
   const getCountryFlag = (countryName) => {
     const country = countries.find((c) => c.country === countryName);
@@ -42,7 +41,6 @@ export default function Teacher() {
       setData(response.data.data.reviews);
     } catch (error) {
       console.log(error);
-
     }
   }
 
@@ -76,15 +74,16 @@ export default function Teacher() {
         // Sessions data for FullCalendar
         if (userData?.sessions.length > 0) {
           const sessionEvents = userData.sessions.map((session) => {
+            setDate(session.date)
             const startDate = new Date(
-              `${session.startdate}T${session.starttime}`
+              `${session.date}T${session.time}`
             );
-            const endDate = new Date(`${session.enddate}T${session.endtime}`);
+            const endDate = new Date(`${session.date}T${session.time}`);
             return {
               id: session.id,
               start: startDate,
               end: endDate,
-              title: "Available Session",
+              title: session.title,
               status: session.status,
             };
           });
@@ -101,7 +100,11 @@ export default function Teacher() {
   // Customize event display
   const eventContent = (eventInfo) => {
     const { status } = eventInfo.event.extendedProps;
-    const backgroundColor = status === 0 ? "green" : "red";
+    const currentDate = new Date();
+    const sessionDateObj = new Date(date);
+
+    let counter = currentDate <= sessionDateObj ? 0 : 1
+    const backgroundColor = status === counter ? "green" : "red";
     return (
       <div className="relative select-none">
         <div
@@ -109,7 +112,7 @@ export default function Teacher() {
           style={{
             backgroundColor,
             color: "white",
-            borderRadius: "100",
+            borderRadius: "5px",
             padding: "11px",
           }}
         >
@@ -135,6 +138,7 @@ export default function Teacher() {
 
   // Confirm booking
   const handleBookingConfirm = async () => {
+    console.log(singleSession);
     try {
       await axios.post(
         "https://yousab-tech.com/unihome/public/api/auth/session/store",
@@ -147,15 +151,15 @@ export default function Teacher() {
         }
       );
       setPopupEvent(null);
-
       setEvents((prevEvents) =>
         prevEvents.map((event) =>
           event.id === singleSession.id ? { ...event, status: 1 } : event
         )
       );
+      
     } catch (error) {
       console.error("Error during booking confirmation:", error);
-    }
+    }    
   };
 
   const embedLink =
@@ -166,7 +170,7 @@ export default function Teacher() {
   const Popup = ({ event, onClose }) => {
     if (!event) return null;
     return (
-      <div className="popup-overlay profile-tether" onClick={onClose}>
+      <div className="popup-overlay profile-tether z-50" onClick={onClose}>
         <div className="popup-content" onClick={(e) => e.stopPropagation()}>
           <h3>{event.title}</h3>
           <p>
@@ -252,7 +256,7 @@ export default function Teacher() {
             <div className="text-center mb-4">
               <p className="text-xl font-bold text-gray-700">
                 {t("Hourly Rate")}:{" "}
-                <span className="text-green-600 font-extrabold">{t("EGP")} {dataApi?.balance}.00</span>
+                <span className="text-green-600 font-extrabold">{t("EGP")} {dataApi?.start_from}.00</span>
               </p>
             </div>
 

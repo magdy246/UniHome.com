@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import UniHomeLogo from "./Assets/images/UniHome.png"
 import Modal from './Modal';
@@ -56,7 +55,12 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link to="/Privacy-Policy" className="hover:underline">
-                  Privacy Policy
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/Developers" className="hover:underline">
+                    Developers
                   </Link>
                 </li>
               </ul>
