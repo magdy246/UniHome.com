@@ -273,8 +273,8 @@ export default function Dashboard() {
             </TETabsPane>
 
             <TETabsPane show={basicActive === "tab3"}>
-              {/* {applicationTeacher && <ApplicationTeacher />} */}
-              <ApplicationTeacher />
+              {applicationTeacher && <ApplicationTeacher />}
+              {/* <ApplicationTeacher /> */}
             </TETabsPane>
 
             <TETabsPane show={basicActive === "tab6"}>

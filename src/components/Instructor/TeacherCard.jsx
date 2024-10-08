@@ -2,7 +2,6 @@ import React from "react";
 import { HiStar } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { Helmet } from 'react-helmet';
-import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
 const TeacherCard = ({ Session }) => {
   let teacherId = Session.teacher.id;

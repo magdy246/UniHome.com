@@ -86,6 +86,10 @@ export default function RoutingSession({ Session, Student }) {
             <link rel="canonical" href="https://unih0me.com/dashboard" />
         </Helmet>
     <div className="mb-3">
+    <h1 className="text-center text-6xl font-bold text-white mb-6 relative">
+        <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">Sessions</span>
+        <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
+      </h1>
       {/* Centered Tabs */}
       <div className="flex justify-center" dir={Lang === "ar" ? "rtl" : "ltr"}>
         <TETabs>

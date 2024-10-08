@@ -11,6 +11,7 @@ const CardComponent = ({
   country,
   lessons,
   students,
+  about
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -58,7 +59,7 @@ const CardComponent = ({
         {/* Description Section */}
         <div className="mt-4">
           <p className={`${isExpanded ? '' : 'line-clamp-3'} text-gray-600`}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit error totam, assumenda, soluta beatae, aperiam facere voluptatem qui reiciendis nulla laudantium quia sint sapiente eos officia exercitationem impedit optio illo?
+            {about ? about.split(' ').slice(0, 10).join(' ') + '...' : "Lorem ipsum dolor sit, amet consectetur adipisicing elit."}
           </p>
           <button
             className="text-blue-600 pt-4 focus:outline-none hover:underline"

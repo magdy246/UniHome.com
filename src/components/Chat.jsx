@@ -24,7 +24,7 @@ export default function Chat() {
   const newMs = useRef();
   // const { userTable } = useContext(apiWallet);
   const idParm = new URLSearchParams(location.search);
-  
+
   const idT = Number(idParm.get("id"));
 
   useEffect(() => {
@@ -142,139 +142,143 @@ export default function Chat() {
 
   return (
     <>
-    <Helmet>
-            <title>Chat with a Teacher - UniHome</title>
-            <meta name="description" content="Connect directly with a professional English tutor on UniHome. Get personalized guidance and improve your language skills through live chat sessions." />
-            <meta name="keywords" content="UniHome, chat with teacher, English tutor, live chat, personalized learning, English conversation, online English lessons, one-on-one tutoring" />
-            <meta name="author" content="UniHome" />
-            <meta property="og:title" content="Chat with a Teacher - UniHome" />
-            <meta property="og:description" content="Have a one-on-one chat with a professional English tutor. Get real-time guidance and improve your language skills today!" />
-            <meta property="og:image" content="/src/components/Assets/images/UniHome.png" />
-            <meta property="og:url" content="https://unih0me.com/chat" />
-            <meta property="og:type" content="website" />
-            <meta property="og:locale" content="ar_EG" />
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content="Chat with a Teacher - UniHome" />
-            <meta name="twitter:description" content="Chat live with a professional English tutor and improve your language skills in real time with UniHome." />
-            <meta name="twitter:image" content="/src/components/Assets/images/UniHome.png" />
-            <link rel="canonical" href="https://unih0me.com/chat" />
-        </Helmet>
-    <section className="py-6">
-      <div className="flex flex-col md:flex-row bg-gradient-to-r from-orange-100 via-purple-100 to-indigo-200 shadow-xl rounded-xl p-4 gap-4">
-        {/* Sidebar Section */}
-        <div className="min-w-60 shadow-lg border-r border-gray-300 bg-white p-4 rounded-xl overflow-hidden">
-          <h1 className="ps-2 text-6xl font-light font-[Jomhuria-R]">{t('Chat')}:</h1>
-          <input
-            type="search"
-            placeholder={t("placeholerChatSearch")}
-            className="input input-ghost focus:outline-none h-10 border border-gray-300 w-full mb-4 rounded-lg px-3 text-sm"
-          />
-          <div className="flex flex-col space-y-3">
-            <TETabs ref={newMs} vertical className="w-full">
-              {dataUserSHat.map((e) => (
-                <TETabsItem
-                  key={e.id}
-                  onClick={() => handleVerticalClick(e.id)}
-                  active={verticalActive === e.id}
-                  className={`p-3 flex items-center rounded-lg cursor-pointer transition-all duration-200 transform ${verticalActive === e.id
-                    ? "bg-orange-500 text-white shadow-md scale-105"
-                    : "hover:bg-orange-100 hover:shadow-sm text-gray-700"
-                    }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="chat-image avatar">
-                      <div className="w-12 rounded-full border-2 border-orange-500">
-                        <img alt="User Avatar" src={e.image} />
-                      </div>
-                    </div>
-                    <div>
-                      <h2 className="font-semibold text-lg">{e.firstname}</h2>
-                      <p className="text-sm text-gray-500 truncate">{e.messageSnippet}</p>
-                    </div>
-                  </div>
-                </TETabsItem>
-              ))}
-            </TETabs>
-          </div>
-        </div>
-
-        {/* Main Chat Section */}
-        <div className="w-full md:w-4/5 bg-white p-4 rounded-xl shadow-lg">
-          <TETabsContent>
-            {dataUserSHat.map((response) => (
-              <TETabsPane
-                key={response.id}
-                show={verticalActive === response.id}
-                className="h-full"
-              >
-                <div className="flex flex-col justify-between h-full">
-                  {/* Chat Header */}
-                  <div className="border-b p-4 bg-orange-500 text-white flex items-center gap-4 rounded-t-lg shadow-sm">
-                    <div className="chat-image avatar">
-                      <div className="w-12 rounded-full border-2 border-white">
-                        <img alt="User Avatar" src={response.image} />
-                      </div>
-                    </div>
-                    <div>
-                      <h2 className="font-bold text-xl">{response.firstname}</h2>
-                      <span className="text-sm opacity-80">{t("Online")}</span>
-                    </div>
-                  </div>
-
-                  {/* Messages Section */}
-                  <div className="p-5 flex-1 overflow-y-auto bg-gray-50 space-y-4">
-                    {messages.map((msg, index) => (
-                      <div
-                        key={index}
-                        className={`flex ${msg.sender_id === user.id ? "justify-end" : "justify-start"
-                          }`}
-                      >
-                        <div className="chat-image avatar">
-                          <div className="w-10 rounded-full">
-                            <img
-                              alt="Chat Avatar"
-                              src={msg.sender_id === user.id ? user.image : response.image}
-                            />
-                          </div>
+      <Helmet>
+        <title>Chat with a Teacher - UniHome</title>
+        <meta name="description" content="Connect directly with a professional English tutor on UniHome. Get personalized guidance and improve your language skills through live chat sessions." />
+        <meta name="keywords" content="UniHome, chat with teacher, English tutor, live chat, personalized learning, English conversation, online English lessons, one-on-one tutoring" />
+        <meta name="author" content="UniHome" />
+        <meta property="og:title" content="Chat with a Teacher - UniHome" />
+        <meta property="og:description" content="Have a one-on-one chat with a professional English tutor. Get real-time guidance and improve your language skills today!" />
+        <meta property="og:image" content="/src/components/Assets/images/UniHome.png" />
+        <meta property="og:url" content="https://unih0me.com/chat" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="ar_EG" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Chat with a Teacher - UniHome" />
+        <meta name="twitter:description" content="Chat live with a professional English tutor and improve your language skills in real time with UniHome." />
+        <meta name="twitter:image" content="/src/components/Assets/images/UniHome.png" />
+        <link rel="canonical" href="https://unih0me.com/chat" />
+      </Helmet>
+      <h1 className="text-center text-6xl font-bold text-white mb-6 relative">
+        <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">Chat</span>
+        <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
+      </h1>
+      <section className="py-6">
+        <div className="flex flex-col md:flex-row bg-gradient-to-r from-orange-100 via-purple-100 to-indigo-200 shadow-xl rounded-xl p-4 gap-4">
+          {/* Sidebar Section */}
+          <div className="min-w-60 shadow-lg border-r border-gray-300 bg-white p-4 rounded-xl overflow-hidden">
+            <h1 className="ps-2 text-6xl font-light font-[Jomhuria-R]">{t('Chat')}:</h1>
+            <input
+              type="search"
+              placeholder={t("placeholerChatSearch")}
+              className="input input-ghost focus:outline-none h-10 border border-gray-300 w-full mb-4 rounded-lg px-3 text-sm"
+            />
+            <div className="flex flex-col space-y-3">
+              <TETabs ref={newMs} vertical className="w-full">
+                {dataUserSHat.map((e) => (
+                  <TETabsItem
+                    key={e.id}
+                    onClick={() => handleVerticalClick(e.id)}
+                    active={verticalActive === e.id}
+                    className={`p-3 flex items-center rounded-lg cursor-pointer transition-all duration-200 transform ${verticalActive === e.id
+                      ? "bg-orange-500 text-white shadow-md scale-105"
+                      : "hover:bg-orange-100 hover:shadow-sm text-gray-700"
+                      }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="chat-image avatar">
+                        <div className="w-12 rounded-full border-2 border-orange-500">
+                          <img alt="User Avatar" src={e.image} />
                         </div>
+                      </div>
+                      <div>
+                        <h2 className="font-semibold text-lg">{e.firstname}</h2>
+                        <p className="text-sm text-gray-500 truncate">{e.messageSnippet}</p>
+                      </div>
+                    </div>
+                  </TETabsItem>
+                ))}
+              </TETabs>
+            </div>
+          </div>
+
+          {/* Main Chat Section */}
+          <div className="w-full md:w-4/5 bg-white p-4 rounded-xl shadow-lg">
+            <TETabsContent>
+              {dataUserSHat.map((response) => (
+                <TETabsPane
+                  key={response.id}
+                  show={verticalActive === response.id}
+                  className="h-full"
+                >
+                  <div className="flex flex-col justify-between h-full">
+                    {/* Chat Header */}
+                    <div className="border-b p-4 bg-orange-500 text-white flex items-center gap-4 rounded-t-lg shadow-sm">
+                      <div className="chat-image avatar">
+                        <div className="w-12 rounded-full border-2 border-white">
+                          <img alt="User Avatar" src={response.image} />
+                        </div>
+                      </div>
+                      <div>
+                        <h2 className="font-bold text-xl">{response.firstname}</h2>
+                        <span className="text-sm opacity-80">{t("Online")}</span>
+                      </div>
+                    </div>
+
+                    {/* Messages Section */}
+                    <div className="p-5 flex-1 overflow-y-auto bg-gray-50 space-y-4">
+                      {messages.map((msg, index) => (
                         <div
-                          className={`chat-bubble px-4 py-2 rounded-lg shadow-sm ${msg.sender_id === user.id
-                            ? "bg-orange-500 text-white shadow-md"
-                            : "bg-gray-200 text-gray-800"
+                          key={index}
+                          className={`flex ${msg.sender_id === user.id ? "justify-end" : "justify-start"
                             }`}
                         >
-                          {msg.message}
+                          <div className="chat-image avatar">
+                            <div className="w-10 rounded-full">
+                              <img
+                                alt="Chat Avatar"
+                                src={msg.sender_id === user.id ? user.image : response.image}
+                              />
+                            </div>
+                          </div>
+                          <div
+                            className={`chat-bubble px-4 py-2 rounded-lg shadow-sm ${msg.sender_id === user.id
+                              ? "bg-orange-500 text-white shadow-md"
+                              : "bg-gray-200 text-gray-800"
+                              }`}
+                          >
+                            {msg.message}
+                          </div>
+                          <div className="chat-footer opacity-50 text-xs ml-2">
+                            {msg.sender_id === user.id ? t("You") : response.firstname}
+                            <time className="block">{msg.timestamp}</time>
+                          </div>
                         </div>
-                        <div className="chat-footer opacity-50 text-xs ml-2">
-                          {msg.sender_id === user.id ? t("You") : response.firstname}
-                          <time className="block">{msg.timestamp}</time>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
 
-                  {/* Message Input */}
-                  <div className="p-3 w-full flex items-center gap-3 bg-gray-100 rounded-b-lg">
-                    <input
-                      type="text"
-                      placeholder={t("placeholerChat")}
-                      value={newMessage}
-                      onChange={(e) => setNewMessage(e.target.value)}
-                      className="input input-ghost focus:outline-none h-12 border w-full border-gray-300 text-gray-800 bg-white rounded-lg px-3 text-sm"
-                    />
-                    <button
-                      onClick={sendMessage}
-                      className="px-5 py-2 bg-orange-500 text-white font-bold hover:bg-orange-600 rounded-lg shadow-md transform transition-transform duration-150 active:scale-95"
-                    >
-                      {t("Send")}
-                    </button>
+                    {/* Message Input */}
+                    <div className="p-3 w-full flex items-center gap-3 bg-gray-100 rounded-b-lg">
+                      <input
+                        type="text"
+                        placeholder={t("placeholerChat")}
+                        value={newMessage}
+                        onChange={(e) => setNewMessage(e.target.value)}
+                        className="input input-ghost focus:outline-none h-12 border w-full border-gray-300 text-gray-800 bg-white rounded-lg px-3 text-sm"
+                      />
+                      <button
+                        onClick={sendMessage}
+                        className="px-5 py-2 bg-orange-500 text-white font-bold hover:bg-orange-600 rounded-lg shadow-md transform transition-transform duration-150 active:scale-95"
+                      >
+                        {t("Send")}
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </TETabsPane>
-            ))}
-          </TETabsContent>
+                </TETabsPane>
+              ))}
+            </TETabsContent>
+          </div>
         </div>
-      </div>
       </section>
     </>
   );

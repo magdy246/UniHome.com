@@ -79,6 +79,11 @@ export default function ResultQuestionForTeacher() {
   });
 
   return (
+    <>
+          <h1 className="text-center text-6xl font-bold text-white mb-6 relative">
+        <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">Result</span>
+        <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
+      </h1>
     <div className="mx-auto max-w-lg sm:max-w-xl lg:max-w-4xl p-6 bg-gray-100 rounded-3xl">
       <h2 className="text-6xl font-light font-[Jomhuria-R]">
         Result :
@@ -158,5 +163,6 @@ export default function ResultQuestionForTeacher() {
         </div>
       )}
     </div>
+    </>
   );
 }

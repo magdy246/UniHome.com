@@ -26,6 +26,9 @@ const DesignWallet = () => {
 
   const walletData = dataUse && dataUse.length > 0 ? dataUse[0] : { totalAmount: 0 };
 
+  console.log(dataUse);
+  
+
   return (
     <>
       <Helmet>
@@ -45,6 +48,10 @@ const DesignWallet = () => {
         <meta name="twitter:image" content="/src/components/Assets/images/UniHome.png" />
         <link rel="canonical" href="https://unih0me.com/wallet" />
       </Helmet>
+      <h1 className="text-center text-6xl font-bold text-white mb-6 relative">
+        <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">Wallet</span>
+        <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
+      </h1>
       <section className="py-6" dir={Lang === "ar" ? "rtl" : "ltr"} >
         <div className="w-full max-w-5xl mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
           {/* Wallet Info Section */}

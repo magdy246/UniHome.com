@@ -3,7 +3,10 @@ import React from 'react';
 const PrivacyPolicy = () => {
     return (
         <div className="privacy-policy p-6 text-gray-800">
-            <h1 className="text-4xl font-bold mb-4">Privacy Policy</h1>
+            <h1 className="text-center text-6xl font-bold text-white mb-6 relative">
+                <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">Privacy Policy</span>
+                <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
+            </h1>
 
             <h2 className="text-2xl font-semibold mb-2">Terms & Conditions</h2>
             <p className="mb-4">
