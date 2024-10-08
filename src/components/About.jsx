@@ -1,4 +1,3 @@
-import opinion from "./Assets/images/opinion.jpg";
 import { FaCheckCircle } from "react-icons/fa";
 import Slider from "react-slick";
 import hero from "./Assets/images/hero.png"
