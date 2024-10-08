@@ -10,7 +10,6 @@ const convertTo12HourFormat = (time24) => {
   let [hour, minute] = time24.split(":").map(Number);
   const ampm = hour >= 12 ? "PM" : "AM";
   hour = hour % 12 || 12; // Convert '0' hour to '12' for AM
-  // Pad single-digit hour with leading zero
   const hour12 = hour.toString().padStart(2, "0");
   return `${hour12}:${minute.toString().padStart(2, "0")} ${ampm}`;
 };
@@ -19,28 +18,27 @@ const convertTo12HourFormat = (time24) => {
 const addOneHour = (time24) => {
   let [hour, minute] = time24.split(":").map(Number);
   hour = (hour + 1) % 24; // Ensure the hour wraps around if it exceeds 23
-  // Pad single-digit hour with leading zero
   return `${hour.toString().padStart(2, "0")}:${minute.toString().padStart(2, "0")}`;
 };
 
-const Booked = (Session) => {
-  const teacherId = Session?.Session?.teacher_id?.id
+const Booked = ({ Session }) => {
+  const teacherId = Session?.teacher?.id;
   const getCountryFlag = (countryName) => {
     const country = countries.find((c) => c.country === countryName);
     return country ? country.flag : ""; // Return the flag or an empty string if not found
   };
 
-  const dateSession = new Date(Session.Session.session_table.created_at);
+  const dateSession = new Date(Session?.session_table?.date);
   const date = dateSession.toLocaleDateString();
 
   // Format time in 12-hour format for both start and end times
-  const startTime = Session.Session.session_table.time;
+  const startTime = Session?.session_table?.time;
   const endTime = addOneHour(startTime);
   const formattedStartTime = convertTo12HourFormat(startTime);
   const formattedEndTime = convertTo12HourFormat(endTime);
 
-  Session.Session.status = Session.Session.status !== 1 ? null : "Booked";
-
+  const sessionStatus = Session?.status === "booked" ? "Booked" : "Not Booked";
+  
   const savedLang = localStorage.getItem("lang") || 'en';
   const [Lang, setLang] = useState(savedLang);
 
@@ -53,6 +51,7 @@ const Booked = (Session) => {
     }
   }, [savedLang]);
 
+  
   return (
     <div className="p-4" dir={Lang === "ar" ? "rtl" : "ltr"}>
       <div className="bg-white rounded-lg shadow-md px-6 py-10 mx-auto max-w-lg sm:max-w-xl lg:max-w-4xl mt-6 relative">
@@ -60,6 +59,7 @@ const Booked = (Session) => {
         <div className={`absolute top-0 ${Lang === "ar" ? "right-0" : "left-0"}  p-2 bg-gray-200 text-gray-600 rounded-br-lg shadow-md`}>
           <p className="text-sm font-semibold">{t("Date")}: {date}</p>
         </div>
+
         {/* User Info & Countdown Timer */}
         <div className="for_book">
           {/* User Info */}
@@ -68,18 +68,18 @@ const Booked = (Session) => {
               {/* Profile Avatar */}
               <img
                 className="w-16 h-16 sm:w-24 sm:h-24 rounded-3xl"
-                src={Avatar} // Placeholder for Avatar
+                src={Session?.teacher?.image} // Placeholder for Avatar
                 alt="User Avatar"
               />
             </div>
             <div className="capitalize">
               {/* User Name & Country */}
               <h2 className="text-gray-800 font-bold text-sm sm:text-md lg:text-2xl">
-                {Session.Session?.teacher_id?.firstname} {Session.Session?.teacher_id?.lastname}
+                {Session?.teacher?.firstname} {Session?.teacher?.lastname}
               </h2>
               <p className="text-gray-500 text-sm lg:text-base">
-                <span className="mr-1">{getCountryFlag(Session.Session?.teacher_id?.country)}</span>
-                {Session.Session?.teacher_id?.country}
+                <span className="mr-1">{getCountryFlag(Session?.teacher?.country)}</span>
+                {Session?.teacher?.country}
               </p>
             </div>
           </div>
@@ -97,7 +97,7 @@ const Booked = (Session) => {
                   </span>
                 </p>
                 <p className="text-gray-800 font-medium">
-                  {t("Date")}: {Session.Session.session_table.date}
+                  {t("Date")}: {Session?.session_table?.date}
                 </p>
               </div>
             </div>
@@ -108,7 +108,7 @@ const Booked = (Session) => {
         <div className="text-center mb-6 bg-gray-100 p-3 rounded-lg flex flex-col sm:flex-row justify-around items-center space-y-4 sm:space-y-0">
           <div className="text-center capitalize">
             <h3 className="text-gray-500 text-sm lg:text-base">{t("Status")}</h3>
-            <p className=" text-green-500 font-bold">{Session.Session.status = 1 ? Session.Session.status = "Booked" : null}</p>
+            <p className=" text-green-500 font-bold">{sessionStatus}</p>
           </div>
           <div>
             <h3 className="text-gray-500 text-sm lg:text-base mb-3">{t("Actions")}</h3>

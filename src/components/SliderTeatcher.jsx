@@ -32,7 +32,7 @@ export default function SliderTeatcher() {
     autoplay: true,
     speed: 500,
     autoplaySpeed: 1500,
-    arrows: false,
+    arrows: true,
     adaptiveHeight: true,
     focusOnSelect: true,
     responsive: [
@@ -53,7 +53,8 @@ export default function SliderTeatcher() {
 
   return (
     <>
-      <div className="p-6">
+        <h1 className="text-center text-6xl font-bold text-gray-800 mt-3">Teachers</h1>
+      <div className="py-6 px-11">
         {loading ? (
           <div className="w-full flex justify-center items-center mx-auto my-10">
             <Suspense fallback={<div>Loading...</div>}>
@@ -69,7 +70,7 @@ export default function SliderTeatcher() {
               <Link
                 to={`/TeaCherS/${e.id}`}
                 key={e.id}
-                className="my-10 hover:scale-105 duration-500 transition-all"
+                className="my-5 hover:scale-105 duration-500 transition-all"
               >
                 <Suspense fallback={<div>Loading Card...</div>}>
                   <InstructorCard

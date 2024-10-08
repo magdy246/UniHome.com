@@ -73,29 +73,30 @@ const LessonCard = (Session) => {
           },
         }
       );
-      toast.success("Cancelled");
+      toast.success("the session cancelled");
     } catch (error) {
-      toast.error(error.response.data.message);
-    }
-  }
-
-  async function reschdeuleSession() {
-    try {
-      const response = await axios.post(
-        "https://yousab-tech.com/unihome/public/api/reschdeule/session",
-        { session_id: sessionId },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      toast.success("Rebooking");
-    } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error("the session is already cancelled");
 
     }
   }
+
+  // async function reschdeuleSession() {
+  //   try {
+  //     const response = await axios.post(
+  //       "https://yousab-tech.com/unihome/public/api/reschdeule/session",
+  //       { session_id: sessionId },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     toast.success("Rebooking");
+  //   } catch (error) {
+  //     toast.error(error.response.data.message);
+
+  //   }
+  // }
 
   useEffect(() => {
     if (Session.Session.id) {
@@ -121,14 +122,12 @@ const LessonCard = (Session) => {
     }
   }, [timeLeft]);
 
-  // Convert time left in seconds to days, hours, minutes, and seconds
 
-  const days = Math.floor(timeLeft / (1000 * 24 * 60 * 60));
-  const hours = Math.floor(
-    (timeLeft % (1000 * 24 * 60 * 60)) / (1000 * 60 * 60)
-  );
-  const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+  // Convert time left in seconds to days, hours, minutes, and seconds
+  const days = Math.floor(timeLeft / (1000 * 24 * 60 * 60)).toString().padStart(2, '0');
+  const hours = Math.floor((timeLeft % (1000 * 24 * 60 * 60)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+  const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+  const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000).toString().padStart(2, '0');
   return (<>
     <div id={Session?.Session?.id} className="p-4" dir={Lang === "ar" ? "rtl" : "ltr"}>
       <div className="bg-white rounded-lg shadow-md px-6 py-10 mx-auto max-w-lg sm:max-w-xl lg:max-w-4xl mt-6 relative">
@@ -145,18 +144,18 @@ const LessonCard = (Session) => {
               {/* Profile Avatar */}
               <img
                 className="w-16 h-16 sm:w-24 sm:h-24 rounded-3xl"
-                src={Avatar} // Placeholder for Avatar
+                src={Session?.teacher?.image} // Placeholder for Avatar
                 alt="User Avatar"
               />
             </div>
             <div className="capitalize">
               {/* User Name & Country */}
               <h2 className="text-gray-800 font-bold text-sm sm:text-md lg:text-2xl">
-                {Session.Session?.teacher_id?.firstname} {Session.Session?.teacher_id?.lastname}
+              {Session?.teacher?.firstname} {Session?.teacher?.lastname}
               </h2>
               <p className="text-gray-500 text-sm lg:text-base">
-                <span className="mr-1">{getCountryFlag(Session.Session?.teacher_id?.country)}</span>
-                {Session.Session?.teacher_id?.country}
+                <span className="mr-1">{getCountryFlag(Session?.teacher?.country)}</span>
+                {Session?.teacher?.country}
               </p>
             </div>
           </div>
@@ -214,11 +213,11 @@ const LessonCard = (Session) => {
                 <RiCloseLargeFill className="text-white" />
               </button>
 
-              <button
+              {/* <button
                 onClick={() => reschdeuleSession()}
                 className="p-2 sm:p-3 bg-yellow-300 rounded-full hover:scale-110 transition-all duration-500">
                 <ImLoop2 className="text-white" />
-              </button>
+              </button> */}
 
             </div>
           </div>

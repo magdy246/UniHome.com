@@ -1,19 +1,17 @@
 import React from "react";
-import Avatar from "../../images/profileImage.png";
 import { HiStar } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { Helmet } from 'react-helmet';
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
-const TeacherCard = ({ Session, Student, language }) => {
-  let dataUser = JSON.parse(Cookies.get("user"));
-  let teacherId;
+const TeacherCard = ({ Session }) => {
+  let teacherId = Session.teacher.id;
+  let dataTeacher = Session.teacher;
 
-  if (dataUser.type === "student") {
-    teacherId = Session?.teacher_id?.id;
-  } else {
-    teacherId = Session?.student_id;
-  }
+  let dataSession = Session.status;
+  console.log(dataSession);
+
+
 
   const { t } = useTranslation();
 
@@ -31,7 +29,7 @@ const TeacherCard = ({ Session, Student, language }) => {
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-3 sm:px-6 py-3">
-                {dataUser.type === "student" ? t('teacher') : t('student')}
+                {t('teacher')}
               </th>
               <th scope="col" className="px-3 sm:px-6 py-3">
                 {t('rating')}
@@ -40,10 +38,7 @@ const TeacherCard = ({ Session, Student, language }) => {
                 {t('booked')}
               </th>
               <th scope="col" className="px-3 sm:px-6 py-3">
-                {t('reBooked')}
-              </th>
-              <th scope="col" className="px-3 sm:px-6 py-3">
-                {t('done')}
+                {t('Cancelled')}
               </th>
               <th scope="col" className="px-3 sm:px-6 py-3">
                 {t('action')}
@@ -58,15 +53,15 @@ const TeacherCard = ({ Session, Student, language }) => {
               >
                 <img
                   className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl mb-2 sm:mb-0"
-                  src={Avatar}
+                  src={dataTeacher.image}
                   alt="Profile"
                 />
                 <div className="text-center sm:text-left sm:ps-3">
                   <div className="text-base font-semibold">
-                    {dataUser.type === "student" ? Student.name : dataUser.name}
+                    {dataTeacher.firstname}
                   </div>
                   <div className="font-normal text-gray-500">
-                    {Student.country}
+                    {dataTeacher.country}
                   </div>
                 </div>
               </th>
@@ -79,13 +74,10 @@ const TeacherCard = ({ Session, Student, language }) => {
                 </div>
               </td>
               <td className="px-3 sm:px-6 py-4">
-                <h3>{Student?.sessions?.length}</h3>
+                <h3>{dataSession === "canceled" ? dataSession === 0 : 1}</h3>
               </td>
               <td className="px-3 sm:px-6 py-4">
-                <h3>1</h3>
-              </td>
-              <td className="px-3 sm:px-6 py-4">
-                <h3>0</h3>
+                <h3>{dataSession === "booked" ? dataSession === 0 : 1}</h3>
               </td>
               <td className="px-3 sm:px-6 py-4">
                 <Link

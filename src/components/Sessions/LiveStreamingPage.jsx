@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet";
+import toast from "react-hot-toast";
 
 const LiveStreamingPage = (Session) => {
   const [sessionId, setSessionId] = useState(null)
@@ -52,8 +53,9 @@ const LiveStreamingPage = (Session) => {
           },
         }
       );
+       toast.success("the session compeleted");
     } catch (error) {
-      console.error("Error canceling session:", error);
+      toast.error("the session is not Start");
     }
   }
 
@@ -68,8 +70,9 @@ const LiveStreamingPage = (Session) => {
           },
         }
       );
+      toast.success("the session incompeleted");
     } catch (error) {
-      console.error("Error canceling session:", error);
+      toast.error("the session is not Start");
     }
   }
 

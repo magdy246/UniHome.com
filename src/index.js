@@ -140,16 +140,6 @@ const routes = [
         ),
       },
       {
-        path: "register",
-        element: (
-          <ProtectedRouterLog>
-            <Suspense fallback={<LottieHandler animationData={Loader} />}>
-              <Register />
-            </Suspense>
-          </ProtectedRouterLog>
-        ),
-      },
-      {
         path: "/Session/:SingleSession",
         element: (
           <ProtectedRoute>
@@ -157,6 +147,16 @@ const routes = [
               <LiveStreamingPage />
             </Suspense>
           </ProtectedRoute>
+        ),
+      },
+      {
+        path: "register",
+        element: (
+          <ProtectedRouterLog>
+            <Suspense fallback={<LottieHandler animationData={Loader} />}>
+              <Register />
+            </Suspense>
+          </ProtectedRouterLog>
         ),
       },
       {

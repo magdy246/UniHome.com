@@ -72,7 +72,7 @@ const Completed = (Session) => {
               {/* Profile Avatar */}
               <img
                 className="w-16 h-16 sm:w-24 sm:h-24 rounded-3xl"
-                src={Avatar} // Placeholder for Avatar
+                src={Session?.teacher?.image} // Placeholder for Avatar
                 alt="User Avatar"
               />
             </div>

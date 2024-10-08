@@ -71,18 +71,18 @@ const Cancelled = (Session) => {
               {/* Profile Avatar */}
               <img
                 className="w-16 h-16 sm:w-24 sm:h-24 rounded-3xl"
-                src={Avatar} // Placeholder for Avatar
+                src={Session?.teacher?.image} // Placeholder for Avatar
                 alt="User Avatar"
               />
             </div>
             <div className="capitalize">
               {/* User Name & Country */}
               <h2 className="text-gray-800 font-bold text-sm sm:text-md lg:text-2xl">
-                {Session.Session?.teacher_id?.firstname} {Session.Session?.teacher_id?.lastname}
+              {Session?.teacher?.firstname} {Session?.teacher?.lastname}
               </h2>
               <p className="text-gray-500 text-sm lg:text-base">
-                <span className="mr-1">{getCountryFlag(Session.Session?.teacher_id?.country)}</span>
-                {Session.Session?.teacher_id?.country}
+                <span className="mr-1">{getCountryFlag(Session?.teacher?.country)}</span>
+                {Session?.teacher?.country}
               </p>
             </div>
           </div>
