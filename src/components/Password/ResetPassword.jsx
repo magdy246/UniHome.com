@@ -143,7 +143,7 @@ export default function ResetPassword() {
                                             className="text-gray-700 border-2 border-gray-300 rounded-2xl py-2 px-4 block w-full focus:border-blue-700"
                                             type={showPassword ? "text" : "password"}
                                             name="password_confirmation"
-                                            placeholder={t("confirmPasswordPlaceholder")}
+                                            placeholder={t("Confirm Password")}
                                             required
                                             onChange={handleInputChange}
                                         />
