@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import comment from "../../images/comment-icon.png";
 import { FaMinus } from "react-icons/fa6";
+import { useTranslation } from "react-i18next";
 
 export default function AddQuestions() {
   const [quizTitle, setQuizTitle] = useState("");
@@ -97,7 +98,14 @@ export default function AddQuestions() {
     }
   }
 
-  return (
+  const { t } = useTranslation();
+
+
+  return (<>
+    <h1 className="text-center text-6xl font-bold text-white mb-6 relative" dir="ltr">
+      <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">Create Quiz</span>
+      <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
+    </h1>
     <div className="container mx-auto max-w-lg sm:max-w-xl lg:max-w-4xl p-6">
       <div className="w-full md:w-[550px] lg:w-[750px] xl:w-[900px]">
         <div className="mb-6">
@@ -215,5 +223,6 @@ export default function AddQuestions() {
         </div>
       </div>
     </div>
+  </>
   );
 }

@@ -54,22 +54,25 @@ export default function ApplicationTeacher() {
     }
     const savedLang = localStorage.getItem("lang") || 'en';
     const [Lang, setLang] = useState(savedLang);
-  
+
     useEffect(() => {
-      try {
-        const parsedLang = JSON.parse(savedLang);
-        setLang(parsedLang);
-      } catch (error) {
-        console.error('Failed to parse language from localStorage', error);
-      }
+        try {
+            const parsedLang = JSON.parse(savedLang);
+            setLang(parsedLang);
+        } catch (error) {
+            console.error('Failed to parse language from localStorage', error);
+        }
     }, [savedLang]);
 
     return <>
         <Helmet>
             <title>Teacher Application</title>
         </Helmet>
+        <h1 className="text-center text-6xl font-bold text-white mb-6 relative" dir="ltr">
+            <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">Teacher Application</span>
+            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
+        </h1>
         <section className="h-full flex flex-wrap justify-center items-center my-10">
-
             {/* Form Section */}
             <div className="xl:basis-3/5 lg:basis-3/5 md:basis-full sm:basis-full basis-full p-6">
                 <div className="bg-white rounded-3xl shadow-2xl border border-gray-200 overflow-hidden w-full p-10">
@@ -161,17 +164,17 @@ export default function ApplicationTeacher() {
                                 </select>
                             </div>
                         </div>
-                            {/* Proficiency */}
-                            <div className="w-full md:w-1/2">
-                                <label className="block text-base font-bold text-orange-500">{t('proficiency')}</label>
-                                <select dir={Lang === "ar" ? "rtl" : "ltr"} name="proficiency_id" onChange={input} className="w-full p-3 rounded-2xl bg-gray-50 border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                                    <option hidden>{t('select')}</option>
-                                    <option value="Beginner">{t('beginner')}</option>
-                                    <option value="Intermediate">{t('intermediate')}</option>
-                                    <option value="Advanced">{t('advanced')}</option>
-                                    <option value="Native">{t('native')}</option>
-                                </select>
-                            </div>
+                        {/* Proficiency */}
+                        <div className="w-full md:w-1/2">
+                            <label className="block text-base font-bold text-orange-500">{t('proficiency')}</label>
+                            <select dir={Lang === "ar" ? "rtl" : "ltr"} name="proficiency_id" onChange={input} className="w-full p-3 rounded-2xl bg-gray-50 border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                <option hidden>{t('select')}</option>
+                                <option value="Beginner">{t('beginner')}</option>
+                                <option value="Intermediate">{t('intermediate')}</option>
+                                <option value="Advanced">{t('advanced')}</option>
+                                <option value="Native">{t('native')}</option>
+                            </select>
+                        </div>
 
                         {/* Submit Button */}
                         <div className="mt-10 text-center">

@@ -3,13 +3,14 @@ import Test from "./Test";
 import axios from "axios";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 
 export default function SliderTeatcher() {
   const InstructorCard = lazy(() => import("./InstractorCard/InstructorCard"));
   const [dataApi, setDataApi] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const { t } = useTranslation();
   const apiData = async () => {
     try {
       const res = await axios.get("https://yousab-tech.com/unihome/public/api/teachers");
@@ -57,7 +58,7 @@ export default function SliderTeatcher() {
   return (
     <>
       <h1 className="text-center text-6xl font-bold text-white mt-3 relative">
-        <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">Teachers</span>
+        <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">{t("Teachers")}</span>
         <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
       </h1>
       <div className="py-6 px-11">

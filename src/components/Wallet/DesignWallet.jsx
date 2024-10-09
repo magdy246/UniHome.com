@@ -49,7 +49,7 @@ const DesignWallet = () => {
         <link rel="canonical" href="https://unih0me.com/wallet" />
       </Helmet>
       <h1 className="text-center text-6xl font-bold text-white mb-6 relative">
-        <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">Wallet</span>
+        <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">{t("Wallet")}</span>
         <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
       </h1>
       <section className="py-6" dir={Lang === "ar" ? "rtl" : "ltr"} >
@@ -78,7 +78,7 @@ const DesignWallet = () => {
               </p>
               <div className="flex flex-col items-end w-full md:w-1/2">
                 <div className="text-4xl font-bold text-green-500">
-                  {t("EGP")} {walletData.totalAmount}{" "}
+                  {t("EGP")} {walletData.balance}{" "}
                 </div>
                 <div className="text-sm font-semibold text-orange-500">
                   {t("Your Wallet Balance.")}
@@ -121,13 +121,13 @@ const DesignWallet = () => {
                   <tr key={index} className="bg-white border-b">
                     <td className="px-6 py-4">{e.id}</td>
                     <td className="px-1 py-4">{e.date}</td>
-                    {e.type === "Credit" ? (
+                    {e.type === "credit" ? (
                       <td className="px-2 py-4 font-bold">EGP {e?.amount}</td>
                     ) : (
                       <td></td>
                     )}
 
-                    {e.type === "Debit" ? (
+                    {e.type === "debit" ? (
                       <td className="px-2 py-4 font-bold text-red-500">
                         {e?.amount}
                       </td>
@@ -136,7 +136,7 @@ const DesignWallet = () => {
                     )}
 
                     <td className="px-2 py-4 font-bold text-blue-500">
-                      EGP {e.totalAmount}
+                      EGP {e.balance}
                     </td>
                     <td className="px-6 py-4">{e.description}</td>
                     <td className="px-6 py-4 flex justify-center items-center">

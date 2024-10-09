@@ -8,6 +8,7 @@ import timezone from "../timezones.json";
 import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import Cookies from "js-cookie";
 
 export default function Register() {
   const options = useMemo(() => countryList().getData(), []);
@@ -43,13 +44,16 @@ export default function Register() {
   };
 
   async function register(e) {
-
     try {
       let response = await axios.post(
         `https://yousab-tech.com/unihome/public/api/auth/register/${teacherOrStudent}`,
         registerInput
       );
 
+      Cookies.set("accessToken", response.data.access_token, {
+        expires: 7,
+      });
+      Cookies.set("user", JSON.stringify(response.data.user), { expires: 7 });
       navigate("/");
     } catch (error) {
       setError(error.response.data);
@@ -228,6 +232,7 @@ export default function Register() {
                         id="grid-password"
                         type={showPassword ? "text" : "password"}
                         placeholder={t('form.password')}
+                        dir='ltr'
                       />
                       <button
                         type="button"
@@ -255,6 +260,7 @@ export default function Register() {
                         id="confirm_password"
                         type={showConfirmPassword ? "text" : "password"}
                         placeholder={t('form.confirmPassword')}
+                        dir='ltr'
                       />
                       <button
                         type="button"

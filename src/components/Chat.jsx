@@ -159,8 +159,8 @@ export default function Chat() {
         <meta name="twitter:image" content="/src/components/Assets/images/UniHome.png" />
         <link rel="canonical" href="https://unih0me.com/chat" />
       </Helmet>
-      <h1 className="text-center text-6xl font-bold text-white mb-6 relative">
-        <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">Chat</span>
+      <h1 className="text-center text-6xl font-bold text-white my-6 relative">
+        <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">{t('Chat')}</span>
         <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
       </h1>
       <section className="py-6">
@@ -171,7 +171,7 @@ export default function Chat() {
             <input
               type="search"
               placeholder={t("placeholerChatSearch")}
-              className="input input-ghost focus:outline-none h-10 border border-gray-300 w-full mb-4 rounded-lg px-3 text-sm"
+              className="input input-ghost focus:bg-gray-200 text-gray-800 focus:outline-none h-10 border border-gray-300 w-full mb-4 rounded-lg px-3 text-sm"
             />
             <div className="flex flex-col space-y-3">
               <TETabs ref={newMs} vertical className="w-full">

@@ -127,6 +127,7 @@ export default function Login() {
                       id="grid-password"
                       type={showPassword ? "text" : "password"}
                       placeholder={t("passwordPlaceholder")}
+                      dir='ltr'
                     />
                     <button
                       type="button"
@@ -137,12 +138,12 @@ export default function Login() {
                     </button>
                   </div>
 
-                  {/* <Link
-                    to={"forgetPassword"}
+                  <Link
+                    to={"/forgetPassword"}
                     className="text-sm text-gray-500 font-bold hover:text-gray-900 text-end w-full mt-2"
                   >
                     {t("forgetPassword")}
-                  </Link> */}
+                  </Link>
                 </div>
                 <div className="mt-8">
                   <button className="auth_button" type="submit">

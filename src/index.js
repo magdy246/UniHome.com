@@ -22,6 +22,8 @@ import App from "./App";
 import NotFound from "./components/NotFound";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import Developers from "./components/Developers";
+import ForgetPassword from "./components/Password/ForgetPassword";
+import ResetPassword from "./components/Password/ResetPassword";
 const Home = lazy(() => import("./components/Home"));
 const About = lazy(() => import("./components/About"));
 const Dashboard = lazy(() => import("./components/Dashboard"));
@@ -50,6 +52,16 @@ const routes = [
     children: [
       {
         path: "Login",
+        element: (
+          <ProtectedRouterLog>
+            <Suspense fallback={<LottieHandler animationData={Loader} />}>
+              <Login />
+            </Suspense>
+          </ProtectedRouterLog>
+        ),
+      },
+      {
+        path: "Login/:forgetpassword",
         element: (
           <ProtectedRouterLog>
             <Suspense fallback={<LottieHandler animationData={Loader} />}>
@@ -90,6 +102,22 @@ const routes = [
         element: (
           <Suspense fallback={<LottieHandler animationData={Loader} />}>
             <PrivacyPolicy />
+          </Suspense>
+        ),
+      },
+      {
+        path: "forgetPassword",
+        element: (
+          <Suspense fallback={<LottieHandler animationData={Loader} />}>
+            <ForgetPassword />
+          </Suspense>
+        ),
+      },
+      {
+        path: "resetPassord",
+        element: (
+          <Suspense fallback={<LottieHandler animationData={Loader} />}>
+            <ResetPassword />
           </Suspense>
         ),
       },

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import commentIcon from "../../images/comment-icon.png";
+import { useTranslation } from "react-i18next";
 
 export default function ResultQuestionForTeacher() {
   const [quizzes, setQuizzes] = useState([]);
@@ -77,11 +78,13 @@ export default function ResultQuestionForTeacher() {
       seenIds.add(result.student.id);
     }
   });
+  const { t } = useTranslation();
+
 
   return (
     <>
           <h1 className="text-center text-6xl font-bold text-white mb-6 relative">
-        <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">Result</span>
+        <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">{t("Result")}</span>
         <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
       </h1>
     <div className="mx-auto max-w-lg sm:max-w-xl lg:max-w-4xl p-6 bg-gray-100 rounded-3xl">
