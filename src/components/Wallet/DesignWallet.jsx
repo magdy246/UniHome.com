@@ -48,7 +48,7 @@ const DesignWallet = () => {
         <meta name="twitter:image" content="/src/components/Assets/images/UniHome.png" />
         <link rel="canonical" href="https://unih0me.com/wallet" />
       </Helmet>
-      <h1 className="text-center text-6xl font-bold text-white mb-6 relative">
+      <h1 className="text-center text-6xl font-bold text-white my-6 relative">
         <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">{t("Wallet")}</span>
         <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
       </h1>
@@ -129,7 +129,7 @@ const DesignWallet = () => {
 
                     {e.type === "debit" ? (
                       <td className="px-2 py-4 font-bold text-red-500">
-                        {e?.amount}
+                        EGP {e?.amount}
                       </td>
                     ) : (
                       <td></td>
@@ -140,7 +140,7 @@ const DesignWallet = () => {
                     </td>
                     <td className="px-6 py-4">{e.description}</td>
                     <td className="px-6 py-4 flex justify-center items-center">
-                      {e.status === 1 ? (
+                      {e.status === 0 ? (
                         <div className="bg-green-500 flex justify-center items-center gap-2 py-1 px-3 rounded-3xl w-fit">
                           <span className="text-white">
                             <FaCheckCircle />

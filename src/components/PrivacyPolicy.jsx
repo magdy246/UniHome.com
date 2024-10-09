@@ -5,7 +5,7 @@ const PrivacyPolicy = () => {
     const { t } = useTranslation();
     return (
         <div className="privacy-policy p-6 text-gray-800">
-            <h1 className="text-center text-6xl font-bold text-white mb-6 relative">
+            <h1 className="text-center text-6xl font-bold text-white my-6 relative">
                 <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">
                     {t('privacyPolicy.title')}
                 </span>

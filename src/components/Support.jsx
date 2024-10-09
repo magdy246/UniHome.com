@@ -72,8 +72,10 @@ const Support = () => {
         </Helmet>
         <div className="support-page p-8 max-w-4xl mx-auto">
             {/* Page Title */}
-            <h1 className="text-4xl font-bold mb-6 text-center">{t('support')}</h1>
-
+            <h1 className="text-center text-6xl font-bold text-white my-6 relative">
+                <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">{t('support')}</span>
+                <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
+            </h1>
             {/* Contact Form */}
             <section className="contact-form bg-gray-100 p-6 rounded-3xl shadow-md mb-8">
                 <h2 className="text-2xl font-semibold mb-4">{t('getInTouch')}</h2>

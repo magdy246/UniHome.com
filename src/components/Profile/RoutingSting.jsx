@@ -54,7 +54,7 @@ export default function RoutingSting() {
         </Helmet>
     <section className="py-6">
       <div className="mb-3">
-      <h1 className="text-center text-6xl font-bold text-white mb-6 relative">
+      <h1 className="text-center text-6xl font-bold text-white my-6 relative">
         <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">{t("Settings")}</span>
         <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
       </h1>

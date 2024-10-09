@@ -63,7 +63,7 @@ export default function RoutingQuiz({ Session, Student }) {
             <link rel="canonical" href="https://unih0me.com/dashboard" />
         </Helmet>
         <div className="mb-3">
-        <h1 className="text-center text-6xl font-bold text-white mb-6 relative">
+        <h1 className="text-center text-6xl font-bold text-white my-6 relative">
         <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">{t("Quizzes")}</span>
         <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
       </h1>

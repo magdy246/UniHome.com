@@ -57,7 +57,7 @@ export default function SliderTeatcher() {
 
   return (
     <>
-      <h1 className="text-center text-6xl font-bold text-white mt-3 relative">
+      <h1 className="text-center text-6xl font-bold text-white mt-6 relative">
         <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">{t("Teachers")}</span>
         <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
       </h1>

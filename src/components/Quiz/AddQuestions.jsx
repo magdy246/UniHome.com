@@ -102,7 +102,7 @@ export default function AddQuestions() {
 
 
   return (<>
-    <h1 className="text-center text-6xl font-bold text-white mb-6 relative" dir="ltr">
+    <h1 className="text-center text-6xl font-bold text-white my-6 relative" dir="ltr">
       <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">Create Quiz</span>
       <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
     </h1>
