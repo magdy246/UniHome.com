@@ -8,24 +8,24 @@ import {
 import Cookies from "js-cookie";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-// import { apiWallet } from "../App";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet";
 
 export default function Chat() {
-  const [verticalActive, setVerticalActive] = useState(); // غيرنا القيمة الافتراضية
+  const [verticalActive, setVerticalActive] = useState();
   const [messages, setMessages] = useState([]);
   const [dataUserSHat, setDataUserSHat] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [searchQuery, setSearchQuery] = useState(""); // State for search query
   const token = Cookies.get("accessToken");
   const user = JSON.parse(Cookies.get("user"));
   const location = useLocation();
   const newMs = useRef();
-  // const { userTable } = useContext(apiWallet);
   const idParm = new URLSearchParams(location.search);
-
   const idT = Number(idParm.get("id"));
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -41,21 +41,15 @@ export default function Chat() {
         );
         setDataUserSHat(request.data.data);
         if (request.data.data.length > 0) {
-          // عند الحصول على المستخدمين، نقوم بتعيين أول مستخدم كـ active
           setVerticalActive(request.data.data[0].id);
         }
-      } catch (error) {
-      }
+      } catch (error) { }
     };
     fetchUsers();
   }, [token]);
 
-  // إحضار الرسائل للمستخدم المحدد
-
-  // إرسال الرسالة
   function sendMessage() {
     if (newMessage.trim()) {
-      // setMessages((prevMessages) => [...prevMessages, newMsg]);
       setNewMessage("");
 
       const sendMsgToAPI = async () => {
@@ -63,7 +57,7 @@ export default function Chat() {
           await axios.post(
             "https://yousab-tech.com/unihome/public/api/auth/chat/store",
             {
-              receiver_id: verticalActive, // يجب إرسال الرسالة إلى المستخدم الحالي
+              receiver_id: verticalActive,
               message: newMessage,
             },
             {
@@ -84,10 +78,10 @@ export default function Chat() {
 
   const handleVerticalClick = (value) => {
     if (value !== verticalActive) {
-
-      setVerticalActive(value); // تحديث المستخدم الحالي لجلب الرسائل الجديدة
+      setVerticalActive(value);
     }
   };
+
   useEffect(() => {
     if (verticalActive) {
       const fetchMessages = async () => {
@@ -101,63 +95,48 @@ export default function Chat() {
               },
             }
           );
-          setMessages(res.data.data.chats); // تحديث الرسائل بناءً على المستخدم المحدد
-          // setMessages(idT); // تحديث الرسائل بناءً على المستخدم المحدد
-        } catch (error) {
-        }
+          setMessages(res.data.data.chats);
+        } catch (error) { }
       };
       fetchMessages();
     }
   }, [verticalActive, newMessage, token]);
 
   useEffect(() => {
-    if (messages.length === 0) {
-      if (idT) {
-        const sendNewMsgToAPI = async () => {
-          try {
-            let res = await axios.post(
-              "https://yousab-tech.com/unihome/public/api/auth/chat/store",
-              {
-                receiver_id: idT, // يجب إرسال الرسالة إلى المستخدم الحالي
-                message: "Hello",
+    if (messages.length === 0 && idT) {
+      const sendNewMsgToAPI = async () => {
+        try {
+          await axios.post(
+            "https://yousab-tech.com/unihome/public/api/auth/chat/store",
+            {
+              receiver_id: idT,
+              message: "Hello",
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
               },
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${token}`,
-                },
-              }
-            );
-          } catch (error) {
-            console.error(error);
-          }
-        };
-
-        sendNewMsgToAPI();
-      }
+            }
+          );
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      sendNewMsgToAPI();
     }
-  }, []);
+  }, [idT, messages.length, token]);
 
-  const { t } = useTranslation();
+  // Filter users based on search query
+  const filteredUsers = dataUserSHat.filter((user) =>
+    user.firstname.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <>
       <Helmet>
         <title>Chat with a Teacher - UniHome</title>
-        <meta name="description" content="Connect directly with a professional English tutor on UniHome. Get personalized guidance and improve your language skills through live chat sessions." />
-        <meta name="keywords" content="UniHome, chat with teacher, English tutor, live chat, personalized learning, English conversation, online English lessons, one-on-one tutoring" />
-        <meta name="author" content="UniHome" />
-        <meta property="og:title" content="Chat with a Teacher - UniHome" />
-        <meta property="og:description" content="Have a one-on-one chat with a professional English tutor. Get real-time guidance and improve your language skills today!" />
-        <meta property="og:image" content="/src/components/Assets/images/UniHome.png" />
-        <meta property="og:url" content="https://unih0me.com/chat" />
-        <meta property="og:type" content="website" />
-        <meta property="og:locale" content="ar_EG" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Chat with a Teacher - UniHome" />
-        <meta name="twitter:description" content="Chat live with a professional English tutor and improve your language skills in real time with UniHome." />
-        <meta name="twitter:image" content="/src/components/Assets/images/UniHome.png" />
-        <link rel="canonical" href="https://unih0me.com/chat" />
+        {/* Meta tags go here */}
       </Helmet>
       <h1 className="text-center text-6xl font-bold text-white my-6 relative">
         <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">{t('Chat')}</span>
@@ -171,18 +150,20 @@ export default function Chat() {
             <input
               type="search"
               placeholder={t("placeholerChatSearch")}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="input input-ghost focus:bg-gray-200 text-gray-800 focus:outline-none h-10 border border-gray-300 w-full mb-4 rounded-lg px-3 text-sm"
             />
             <div className="flex flex-col space-y-3">
               <TETabs ref={newMs} vertical className="w-full">
-                {dataUserSHat.map((e) => (
+                {filteredUsers.map((e) => (
                   <TETabsItem
                     key={e.id}
                     onClick={() => handleVerticalClick(e.id)}
                     active={verticalActive === e.id}
                     className={`p-3 flex items-center rounded-lg cursor-pointer transition-all duration-200 transform ${verticalActive === e.id
-                      ? "bg-orange-500 text-white shadow-md scale-105"
-                      : "hover:bg-orange-100 hover:shadow-sm text-gray-700"
+                        ? "bg-orange-500 text-white shadow-md scale-105"
+                        : "hover:bg-orange-100 hover:shadow-sm text-gray-700"
                       }`}
                   >
                     <div className="flex items-center gap-3">
@@ -205,7 +186,7 @@ export default function Chat() {
           {/* Main Chat Section */}
           <div className="w-full md:w-4/5 bg-white p-4 rounded-xl shadow-lg">
             <TETabsContent>
-              {dataUserSHat.map((response) => (
+              {filteredUsers.map((response) => (
                 <TETabsPane
                   key={response.id}
                   show={verticalActive === response.id}
@@ -243,8 +224,8 @@ export default function Chat() {
                           </div>
                           <div
                             className={`chat-bubble px-4 py-2 rounded-lg shadow-sm ${msg.sender_id === user.id
-                              ? "bg-orange-500 text-white shadow-md"
-                              : "bg-gray-200 text-gray-800"
+                                ? "bg-orange-500 text-white shadow-md"
+                                : "bg-gray-200 text-gray-800"
                               }`}
                           >
                             {msg.message}
@@ -258,17 +239,17 @@ export default function Chat() {
                     </div>
 
                     {/* Message Input */}
-                    <div className="p-3 w-full flex items-center gap-3 bg-gray-100 rounded-b-lg">
+                    <div className="p-3 flex items-center gap-3">
                       <input
                         type="text"
-                        placeholder={t("placeholerChat")}
                         value={newMessage}
                         onChange={(e) => setNewMessage(e.target.value)}
-                        className="input input-ghost focus:outline-none h-12 border w-full border-gray-300 text-gray-800 bg-white rounded-lg px-3 text-sm"
+                        className="input input-bordered w-full focus:outline-none px-4 py-2 bg-gray-200 rounded-lg"
+                        placeholder={t("type_message")}
                       />
                       <button
                         onClick={sendMessage}
-                        className="px-5 py-2 bg-orange-500 text-white font-bold hover:bg-orange-600 rounded-lg shadow-md transform transition-transform duration-150 active:scale-95"
+                        className="btn btn-primary bg-gradient-to-r from-orange-500 to-purple-500 hover:from-purple-500 hover:to-orange-500 text-white rounded-2xl p-2"
                       >
                         {t("Send")}
                       </button>

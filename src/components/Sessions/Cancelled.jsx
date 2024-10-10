@@ -38,7 +38,7 @@ const Cancelled = (Session) => {
   }, [savedLang]);
 
 
-  const teacherId = Session?.Session?.teacher_id?.id
+  const teacherId = Session?.Session?.teacher?.id
   const getCountryFlag = (countryName) => {
     const country = countries.find((c) => c.country === countryName);
     return country ? country.flag : ""; // Return the flag or an empty string if not found

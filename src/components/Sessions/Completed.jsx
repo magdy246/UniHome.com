@@ -36,7 +36,7 @@ const Completed = (Session) => {
       console.error('Failed to parse language from localStorage', error);
     }
   }, [savedLang]);
-  const teacherId = Session?.Session?.teacher_id?.id
+  const teacherId = Session?.Session?.teacher?.id
   const getCountryFlag = (countryName) => {
     const country = countries.find((c) => c.country === countryName);
     return country ? country.flag : ""; // Return the flag or an empty string if not found
@@ -79,11 +79,11 @@ const Completed = (Session) => {
             <div className="capitalize">
               {/* User Name & Country */}
               <h2 className="text-gray-800 font-bold text-sm sm:text-md lg:text-2xl">
-                {Session.Session?.teacher_id?.firstname} {Session.Session?.teacher_id?.lastname}
+                {Session.Session?.teacher?.firstname} {Session.Session?.teacher?.lastname}
               </h2>
               <p className="text-gray-500 text-sm lg:text-base">
-                <span className="mr-1">{getCountryFlag(Session.Session?.teacher_id?.country)}</span>
-                {Session.Session?.teacher_id?.country}
+                <span className="mr-1">{getCountryFlag(Session.Session?.teacher?.country)}</span>
+                {Session.Session?.teacher?.country}
               </p>
             </div>
           </div>

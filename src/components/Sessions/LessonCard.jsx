@@ -26,7 +26,7 @@ const addOneHour = (time24) => {
 };
 
 const LessonCard = (Session) => {
-  const teacherId = Session?.Session?.teacher_id?.id
+  const teacherId = Session?.Session?.teacher?.id
 
   let dateSection = new Date(`${Session.Session.session_table.date} ${Session.Session.session_table.time}`);
   let dateNew = new Date().getTime();
@@ -60,6 +60,8 @@ const LessonCard = (Session) => {
     return country ? country.flag : "";
   };
 
+  console.log(Session);
+  
   const token = Cookies.get("accessToken");
 
   async function cancelSession() {
@@ -144,18 +146,18 @@ const LessonCard = (Session) => {
               {/* Profile Avatar */}
               <img
                 className="w-16 h-16 sm:w-24 sm:h-24 rounded-3xl"
-                src={Session?.teacher?.image} // Placeholder for Avatar
+                src={Session?.Session?.teacher?.image} // Placeholder for Avatar
                 alt="User Avatar"
               />
             </div>
             <div className="capitalize">
               {/* User Name & Country */}
               <h2 className="text-gray-800 font-bold text-sm sm:text-md lg:text-2xl">
-              {Session?.teacher?.firstname} {Session?.teacher?.lastname}
+              {Session?.Session?.teacher?.firstname} {Session?.Session?.teacher?.lastname}
               </h2>
               <p className="text-gray-500 text-sm lg:text-base">
-                <span className="mr-1">{getCountryFlag(Session?.teacher?.country)}</span>
-                {Session?.teacher?.country}
+                <span className="mr-1">{getCountryFlag(Session?.Session?.teacher?.country)}</span>
+                {Session?.Session?.teacher?.country}
               </p>
             </div>
           </div>
