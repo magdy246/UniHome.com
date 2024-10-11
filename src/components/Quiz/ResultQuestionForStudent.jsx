@@ -12,7 +12,7 @@ export default function ResultQuestionForStudent() {
   useEffect(() => {
     const fetchQuizzes = async () => {
       try {
-        const token = Cookies.get("accessToken");
+        const token = localStorage.getItem("accessToken");
         const response = await axios.get("https://yousab-tech.com/unihome/public/api/quizs", {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -32,7 +32,7 @@ export default function ResultQuestionForStudent() {
     const id_Quiz = quiz.id;
 
     try {
-      const token = Cookies.get("accessToken");
+      const token = localStorage.getItem("accessToken");
       const response = await axios.get(`https://yousab-tech.com/unihome/public/api/testings/${id_Quiz}`, {
         headers: {
           Authorization: `Bearer ${token}`,

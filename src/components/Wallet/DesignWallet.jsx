@@ -22,7 +22,9 @@ const DesignWallet = () => {
   }, [savedLang]);
 
   const { dataUse } = useContext(apiWallet);
-  let nameUser = JSON.parse(Cookies.get("user"));
+  let nameUser = JSON.parse(localStorage.getItem("user"));
+  console.log(dataUse);
+  
 
   const walletData = dataUse && dataUse.length > 0 ? dataUse[0] : { totalAmount: 0 };
 

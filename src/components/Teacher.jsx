@@ -32,7 +32,7 @@ export default function Teacher() {
   };
 
   const Teacher_id = Number(Teacher);
-  const token = Cookies.get("accessToken");
+  const token = localStorage.getItem("accessToken");
 
   async function getData() {
     try {

@@ -10,8 +10,8 @@ import { useTranslation } from 'react-i18next';
 export default function EditPassword() {
     const [loading, setLoading] = useState(false)
     const [errorResponse, setErrorResponse] = useState([])
-    const token = Cookies.get("accessToken");
-    let dataUser = JSON.parse(Cookies.get("user"));
+    const token = localStorage.getItem("accessToken");
+    let dataUser = JSON.parse(localStorage.getItem("user"));
 
     let mySchema = Yup.object({
         current_password: Yup.string()

@@ -60,7 +60,7 @@ const LessonCard = (Session) => {
     return country ? country.flag : "";
   };
 
-  const token = Cookies.get("accessToken");
+  const token = localStorage.getItem("accessToken");
 
   async function cancelSession() {
     try {

@@ -9,13 +9,13 @@ import { useTranslation } from "react-i18next";
 export default function Reviews(teacher) {
   const { t } = useTranslation();
 
-  const token = Cookies.get("accessToken");
+  const token = localStorage.getItem("accessToken");
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [trueSendComment, setTrueSendComment] = useState(false);
   const [rating, setRating] = useState(0);
   let teach = teacher.teacher;
-  let user = JSON.parse(Cookies.get("user"));
+  let user = JSON.parse(localStorage.getItem("user"));
 
   const [inputComment, setInputComment] = useState({
     teacher_id: teach,

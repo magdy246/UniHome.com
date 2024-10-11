@@ -81,7 +81,7 @@ export default function App() {
     fetchDataWithDelay(usersData, 1000); // 1 second delay
   }, []);
 
-  const token = Cookies.get("accessToken");
+  const token = localStorage.getItem("accessToken");
 
   async function ReToken() {
     setInterval(() => {
@@ -99,7 +99,7 @@ export default function App() {
               }
             );
 
-            Cookies.set("accessToken", res.data.access_token);
+            localStorage.setItem("accessToken", res.data.access_token);
             setRefAPI(res.data.access_token);
           } catch (error) {
             console.log("Error refreshing token:", error);

@@ -36,8 +36,8 @@ export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarHeight, setSidebarHeight] = useState("md:pt-28 pt-24");
   const sidebarRef = useRef(null);
-  let dataUser = JSON.parse(Cookies.get("user"));
-  const token = Cookies.get("accessToken");
+  let dataUser = JSON.parse(localStorage.getItem("user"));
+  const token = localStorage.getItem("accessToken");
 
 
   useEffect(() => {

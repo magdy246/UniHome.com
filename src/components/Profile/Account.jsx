@@ -21,7 +21,7 @@ export default function Account() {
 
   // Reference for file input
   const fileInputRef = useRef(null);
-  const token = Cookies.get("accessToken");
+  const token = localStorage.getItem("accessToken");
 
   async function profile() {
     let response = await axios.post(

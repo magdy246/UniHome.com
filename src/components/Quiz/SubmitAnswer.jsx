@@ -39,7 +39,7 @@ export default function SubmitAnswer() {
 
   const handleSubmit = async () => {
     try {
-      const token = Cookies.get("accessToken");
+      const token = localStorage.getitem("accessToken");
 
       if (!token) {
         console.error("No token found");

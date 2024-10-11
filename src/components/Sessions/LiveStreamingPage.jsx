@@ -17,13 +17,13 @@ const LiveStreamingPage = (Session) => {
   const [dataSession, setDataSession] = useState(86400 * 2);
   const [dis, setDis] = useState(false);
   const SingleSession = useParams();
-  const token = Cookies.get("accessToken");
+  const token = localStorage.getItem("accessToken");
   let Session_id = Number(SingleSession?.SingleSession);
   let dateSection = new Date(`${dataSession?.date} ${dataSession?.time}`);
   let dateNew = new Date().getTime();
   let DateAll = dateSection - dateNew;
   const [timeLeft, setTimeLeft] = useState(DateAll > 0 ? DateAll : 0);
-  let dataUser = JSON.parse(Cookies.get("user"));
+  let dataUser = JSON.parse(localStorage.getItem("user"));
   const teacherId = dataSession?.teacher?.id
 
 

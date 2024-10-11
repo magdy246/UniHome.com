@@ -8,7 +8,7 @@ export function AccessToken() {
   const [tokenValid, setTokenValid] = useState(null);
 
   useEffect(() => {
-    const token = Cookies.get("accessToken"); // استخراج التوكن من الكوكيز
+    const token = localStorage.getItem("accessToken"); // استخراج التوكن من الكوكيز
 
     if (!token) {
       // إذا لم يكن هناك توكن، توجيه المستخدم إلى صفحة تسجيل الدخول

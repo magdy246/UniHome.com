@@ -50,10 +50,10 @@ export default function Register() {
         registerInput
       );
 
-      Cookies.set("accessToken", response.data.access_token, {
+      localStorage.setItem("accessToken", response.data.access_token, {
         expires: 7,
       });
-      Cookies.set("user", JSON.stringify(response.data.user));
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       navigate("/");
     } catch (error) {
       setError(error.response.data);

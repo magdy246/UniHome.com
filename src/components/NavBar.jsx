@@ -19,7 +19,7 @@ export default function NavBar({
   showLink4 = true,
   showChat = true,
 }) {
-  const userCookie = Cookies.get("user");
+  const userCookie = localStorage.getItem("user");
   const dataUser = userCookie ? JSON.parse(userCookie) : null;
 
   const navigate = useNavigate();
@@ -52,8 +52,8 @@ export default function NavBar({
   const isEnglish = currentLanguage === 'en';
 
   const logOut = () => {
-    Cookies.remove("accessToken");
-    Cookies.remove("user");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("user");
     navigate("/login");
   };
 

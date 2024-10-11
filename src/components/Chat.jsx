@@ -18,8 +18,8 @@ export default function Chat() {
   const [dataUserSHat, setDataUserSHat] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [searchQuery, setSearchQuery] = useState(""); // State for search query
-  const token = Cookies.get("accessToken");
-  const user = JSON.parse(Cookies.get("user"));
+  const token = localStorage.getItem("accessToken");
+  const user = JSON.parse(localStorage.getItem("user"));
   const location = useLocation();
   const newMs = useRef();
   const idParm = new URLSearchParams(location.search);

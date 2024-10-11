@@ -8,9 +8,6 @@ const TeacherCard = ({ Session }) => {
   let dataTeacher = Session.teacher;
 
   let dataSession = Session.status;
-  console.log(dataSession);
-
-
 
   const { t } = useTranslation();
 

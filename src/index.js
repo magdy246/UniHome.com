@@ -41,7 +41,7 @@ const RoutingSting = lazy(() => import("./components/Profile/RoutingSting"));
 const DesignWallet = lazy(() => import("./components/Wallet/DesignWallet"));
 
 function ProtectedRoute({ children }) {
-  const token = Cookies.get("accessToken");
+  const token = localStorage.getItem("accessToken");
   return token ? children : <Navigate to="/LogIn" />;
 }
 

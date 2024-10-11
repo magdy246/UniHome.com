@@ -16,14 +16,14 @@ export default function Home() {
 
   async function userData() {
     try {
-      const token = Cookies.get("accessToken");
+      const token = localStorage.getItem("accessToken");
       let res = await axios.get("https://yousab-tech.com/unihome/public/api/auth/profile", {
         headers: {
           "Authorization": `Bearer ${token}`
         },
       }
       )
-      Cookies.set("user", JSON.stringify(res?.data?.data), { expires: 7 });
+      localStorage.setItem("user", JSON.stringify(res?.data?.data));
     } catch (error) {
       console.log(error);
     }

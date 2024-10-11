@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import imgLogin from "../Assets/LogIN.png";
 import axios from "axios";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
@@ -28,8 +28,10 @@ export default function Login() {
         "https://yousab-tech.com/unihome/public/api/auth/login",
         loginInput
       );
-      Cookies.set("accessToken", response.data.access_token);
-      Cookies.set("user", JSON.stringify(response.data.user));
+      localStorage.setItem("accessToken", response.data.access_token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      console.log(response);
+      
       navigate("/");
     } catch (error) {
       setError("The email or password you entered doesn't match");

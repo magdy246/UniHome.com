@@ -25,7 +25,7 @@ export default function ApplicationTeacher() {
 
     async function applicationTeacher() {
         try {
-            const token = Cookies.get("accessToken");
+            const token = localStorage.getItem("accessToken");
             let response = await axios.post("https://yousab-tech.com/unihome/public/api/auth/user-profile/teacher", {
                 headers: {
                     "Authorization": `Bearer ${token}`
