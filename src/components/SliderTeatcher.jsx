@@ -22,9 +22,6 @@ export default function SliderTeatcher() {
     }
   };
 
-  console.log(dataApi);
-
-
   useEffect(() => {
     apiData();
   }, []);

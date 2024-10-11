@@ -26,9 +26,6 @@ const DesignWallet = () => {
 
   const walletData = dataUse && dataUse.length > 0 ? dataUse[0] : { totalAmount: 0 };
 
-  console.log(dataUse);
-  
-
   return (
     <>
       <Helmet>
