@@ -151,7 +151,7 @@ export default function Teacher() {
         }
       );
       setPopupEvent(null);
-      // toast.success("Transaction successful!");
+      toast.success("Transaction successful!");
       setEvents((prevEvents) =>
         prevEvents.map((event) =>
           event.id === singleSession.id ? { ...event, status: 1 } : event
