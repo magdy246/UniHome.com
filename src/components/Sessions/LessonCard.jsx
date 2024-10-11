@@ -60,8 +60,6 @@ const LessonCard = (Session) => {
     return country ? country.flag : "";
   };
 
-  console.log(Session);
-  
   const token = Cookies.get("accessToken");
 
   async function cancelSession() {

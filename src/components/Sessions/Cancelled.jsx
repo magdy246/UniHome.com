@@ -38,7 +38,7 @@ const Cancelled = (Session) => {
   }, [savedLang]);
 
 
-  const teacherId = Session?.Session?.teacher?.id
+  const teacherId = Session?.Session?.Session?.teacher?.id
   const getCountryFlag = (countryName) => {
     const country = countries.find((c) => c.country === countryName);
     return country ? country.flag : ""; // Return the flag or an empty string if not found
@@ -71,18 +71,18 @@ const Cancelled = (Session) => {
               {/* Profile Avatar */}
               <img
                 className="w-16 h-16 sm:w-24 sm:h-24 rounded-3xl"
-                src={Session?.teacher?.image} // Placeholder for Avatar
+                src={Session?.Session?.teacher?.image} // Placeholder for Avatar
                 alt="User Avatar"
               />
             </div>
             <div className="capitalize">
               {/* User Name & Country */}
               <h2 className="text-gray-800 font-bold text-sm sm:text-md lg:text-2xl">
-              {Session?.teacher?.firstname} {Session?.teacher?.lastname}
+              {Session?.Session?.teacher?.firstname} {Session?.Session?.teacher?.lastname}
               </h2>
               <p className="text-gray-500 text-sm lg:text-base">
-                <span className="mr-1">{getCountryFlag(Session?.teacher?.country)}</span>
-                {Session?.teacher?.country}
+                <span className="mr-1">{getCountryFlag(Session?.Session?.teacher?.country)}</span>
+                {Session?.Session?.teacher?.country}
               </p>
             </div>
           </div>

@@ -53,7 +53,7 @@ export default function Register() {
       Cookies.set("accessToken", response.data.access_token, {
         expires: 7,
       });
-      Cookies.set("user", JSON.stringify(response.data.user), { expires: 7 });
+      Cookies.set("user", JSON.stringify(response.data.user));
       navigate("/");
     } catch (error) {
       setError(error.response.data);

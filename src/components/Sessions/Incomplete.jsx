@@ -71,7 +71,7 @@ const InCompeleted = (Session) => {
               {/* Profile Avatar */}
               <img
                 className="w-16 h-16 sm:w-24 sm:h-24 rounded-3xl"
-                src={Session?.teacher?.image} // Placeholder for Avatar
+                src={Session.Session?.teacher?.image} // Placeholder for Avatar
                 alt="User Avatar"
               />
             </div>

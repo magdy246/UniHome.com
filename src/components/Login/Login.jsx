@@ -28,8 +28,8 @@ export default function Login() {
         "https://yousab-tech.com/unihome/public/api/auth/login",
         loginInput
       );
-      Cookies.set("accessToken", response.data.access_token, { expires: 7 });
-      Cookies.set("user", JSON.stringify(response.data.user), { expires: 7 });
+      Cookies.set("accessToken", response.data.access_token);
+      Cookies.set("user", JSON.stringify(response.data.user));
       navigate("/");
     } catch (error) {
       setError("The email or password you entered doesn't match");

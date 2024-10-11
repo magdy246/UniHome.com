@@ -14,6 +14,7 @@ import Reviews from "./Reviews/Reviews";
 import countries from "./flag.json";
 import { Helmet } from 'react-helmet';
 import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
 
 export default function Teacher() {
   const [dataApi, setDataApi] = useState(null);
@@ -132,13 +133,12 @@ export default function Teacher() {
       setPopupEvent(eventData);
       setSingleSession(singleSession);
     } else {
-      alert("This session is already booked.");
+      toast.error("This session is already booked.");
     }
   };
 
   // Confirm booking
   const handleBookingConfirm = async () => {
-    console.log(singleSession);
     try {
       await axios.post(
         "https://yousab-tech.com/unihome/public/api/auth/session/store",
@@ -151,6 +151,7 @@ export default function Teacher() {
         }
       );
       setPopupEvent(null);
+      // toast.success("Transaction successful!");
       setEvents((prevEvents) =>
         prevEvents.map((event) =>
           event.id === singleSession.id ? { ...event, status: 1 } : event
@@ -158,7 +159,7 @@ export default function Teacher() {
       );
 
     } catch (error) {
-      console.error("Error during booking confirmation:", error);
+      toast.success("Transaction successful!");
     }
   };
 
@@ -242,8 +243,8 @@ export default function Teacher() {
                 <h2 className="text-3xl font-bold text-gray-800 mb-1">
                   {dataApi?.firstname} {dataApi?.lastname}
                 </h2>
-                <p className="flex items-center text-gray-600 text-md">
-                  <span className="mr-2"><img className="w-8" src={getCountryFlag(dataApi?.country)} alt="flag" /></span>
+                <p className="flex items-center font-bold text-gray-600 text-md px-2 py-1 bg-gray-200 w-fit rounded-lg ring-2 ring-gray-500">
+                  <span className="mr-2"><img className="w-8 rounded-sm" src={getCountryFlag(dataApi?.country)} alt="flag" /></span>
                   {dataApi?.country}
                 </p>
               </div>

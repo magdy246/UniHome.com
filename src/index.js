@@ -35,7 +35,7 @@ const Register = lazy(() => import("./components/Register/Register"));
 const Teacher = lazy(() => import("./components/Teacher"));
 const Support = lazy(() => import("./components/Support"));
 const LiveStreamingPage = lazy(() => import("./components/Sessions/LiveStreamingPage"));
-const VideoConference = lazy(() => import("./components/Sessions/VideoConference "));
+const VideoConference = lazy(() => import("./components/Sessions/VideoConference"));
 const AddQuestions = lazy(() => import("./components/Quiz/AddQuestions"));
 const RoutingSting = lazy(() => import("./components/Profile/RoutingSting"));
 const DesignWallet = lazy(() => import("./components/Wallet/DesignWallet"));
