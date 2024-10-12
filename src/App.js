@@ -6,11 +6,12 @@ import { Outlet, useLocation } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
+import NetworkStatus from "./components/NetworkStatus/NetworkStatus";
 
 export const apiWallet = createContext(null);
 
 export default function App() {
-// ****************disabeled inspect****************
+  // ****************disabeled inspect****************
   useEffect(() => {
     // Disable right-click context menu
     const handleContextMenu = (event) => {
@@ -155,6 +156,7 @@ export default function App() {
           <Outlet />
         </main>
         <SupportIcon />
+        <NetworkStatus />
         <Footer />
       </div>
     </apiWallet.Provider>

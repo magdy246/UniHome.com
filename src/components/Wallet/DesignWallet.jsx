@@ -7,6 +7,7 @@ import { apiWallet } from "../../App";
 import { Helmet } from 'react-helmet';
 import Cookies from "js-cookie";
 import { t } from "i18next";
+import { Navigate } from "react-router-dom";
 const DesignWallet = () => {
 
   const savedLang = localStorage.getItem("lang") || 'en';
@@ -23,8 +24,12 @@ const DesignWallet = () => {
 
   const { dataUse } = useContext(apiWallet);
   let nameUser = JSON.parse(localStorage.getItem("user"));
-  console.log(dataUse);
-  
+
+  if (!dataUse) {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("user");
+    Navigate("/login");
+  }
 
   const walletData = dataUse && dataUse.length > 0 ? dataUse[0] : { totalAmount: 0 };
 
