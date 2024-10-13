@@ -4,7 +4,6 @@ import NavBar from "./components/NavBar";
 import SupportIcon from "./components/SupportIcon";
 import { Outlet, useLocation } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
-import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
 import NetworkStatus from "./components/NetworkStatus/NetworkStatus";
 
@@ -85,40 +84,46 @@ export default function App() {
   const token = localStorage.getItem("accessToken");
 
   async function ReToken() {
-    setInterval(() => {
-      const refreshToken = async () => {
-        if (token) {
-          try {
-            const res = await axios.post(
-              "https://yousab-tech.com/unihome/public/api/auth/refresh",
-              {},
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${token}`,
-                },
-              }
-            );
+    const intervalId = setInterval(async () => {
+      if (token) {
+        try {
+          const res = await axios.post(
+            "https://yousab-tech.com/unihome/public/api/auth/refresh",
+            {},
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
 
-            localStorage.setItem("accessToken", res.data.access_token);
-            setRefAPI(res.data.access_token);
-          } catch (error) {
-            console.log("Error refreshing token:", error);
-          }
+          // Save new access token in localStorage
+          localStorage.setItem("accessToken", res.data.access_token);
+          setRefAPI(res.data.access_token);
+        } catch (error) {
+          console.log("Error refreshing token:", error);
         }
-      };
-
-      refreshToken();
+      }
     }, 660000); // Refresh every 11 minutes
+
+    return intervalId; // Return the interval ID to clear it later if needed
   }
 
   useEffect(() => {
+
+    let intervalId;
+
     if (token) {
-      ReToken()
-    } else {
-      clearInterval()
+      intervalId = ReToken(); // Start the interval if there's a token
     }
-  }, [loc.pathname])
+
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId); // Clear the interval on component unmount or if token changes
+      }
+    };
+  }, [token, loc.pathname]);
 
   useEffect(() => {
     if (refAPI !== null) {

@@ -7,7 +7,6 @@ import { apiWallet } from "../../App";
 import { Helmet } from 'react-helmet';
 import Cookies from "js-cookie";
 import { t } from "i18next";
-import { Navigate } from "react-router-dom";
 const DesignWallet = () => {
 
   const savedLang = localStorage.getItem("lang") || 'en';
@@ -24,12 +23,6 @@ const DesignWallet = () => {
 
   const { dataUse } = useContext(apiWallet);
   let nameUser = JSON.parse(localStorage.getItem("user"));
-
-  if (!dataUse) {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("user");
-    Navigate("/login");
-  }
 
   const walletData = dataUse && dataUse.length > 0 ? dataUse[0] : { totalAmount: 0 };
 
@@ -108,9 +101,9 @@ const DesignWallet = () => {
                   <th scope="col" className="px-6 py-3">
                     {t("Debit")}
                   </th>
-                  <th scope="col" className="px-6 py-3">
+                  {/* <th scope="col" className="px-6 py-3">
                     {t("Balance")}
-                  </th>
+                  </th> */}
                   <th scope="col" className="px-6 py-3">
                     {t("Comments")}
                   </th>
@@ -139,9 +132,9 @@ const DesignWallet = () => {
                       <td></td>
                     )}
 
-                    <td className="px-2 py-4 font-bold text-blue-500">
+                    {/* <td className="px-2 py-4 font-bold text-blue-500">
                       EGP {e.balance}
-                    </td>
+                    </td> */}
                     <td className="px-6 py-4">{e.description}</td>
                     <td className="px-6 py-4 flex justify-center items-center">
                       {e.status === 0 ? (
