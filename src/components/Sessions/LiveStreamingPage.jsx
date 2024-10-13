@@ -210,25 +210,27 @@ const LiveStreamingPage = (Session) => {
           <div className="w-full h-full">
             {/* Session Start Background */}
             <div className="live_screen">
+              {/* 
               <div className="my-3 flex justify-center">
                 <div className="py-4 text-white rounded-lg text-md w-fit">
                   <span className="shadow_in">
-                    {formatMainTime(mainTimer).split(":")[0]} {/* Days */}
+                    {formatMainTime(mainTimer).split(":")[0]} //Days
                   </span>
                   <span className="mx-1 sm:mx-2">:</span>
                   <span className="shadow_in">
-                    {formatMainTime(mainTimer).split(":")[1]} {/* Hours */}
+                    {formatMainTime(mainTimer).split(":")[1]} //Hours
                   </span>
                   <span className="mx-1 sm:mx-2">:</span>
                   <span className="shadow_in">
-                    {formatMainTime(mainTimer).split(":")[2]} {/* Minutes */}
+                    {formatMainTime(mainTimer).split(":")[2]} //Minutes
                   </span>
                   <span className="mx-1 sm:mx-2">:</span>
                   <span className="shadow_in">
-                    {formatMainTime(mainTimer).split(":")[3]} {/* Seconds */}
+                    {formatMainTime(mainTimer).split(":")[3]} //Seconds
                   </span>
                 </div>
               </div>
+              */}
               <Link
                 to="/Session/:SingleSession/VideoConference"
                 disabled={dis}
