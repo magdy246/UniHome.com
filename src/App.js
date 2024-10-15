@@ -60,6 +60,7 @@ export default function App() {
   const [refAPI, setRefAPI] = useState([]);
   const [userTable, setUserTable] = useState();
   const loc = useLocation();
+  const { t } = useTranslation();
 
   const [showAlert, setShowAlert] = useState(false); // State to control slow network alert
 
@@ -86,7 +87,7 @@ export default function App() {
       (response) => {
         const endTime = new Date();
         const duration = endTime - response.config.metadata.startTime;
-        if (duration > 4000) { // 3 seconds threshold
+        if (duration > 4000) { // threshold
           setShowAlert(true);
         }
         return response;
@@ -181,13 +182,13 @@ export default function App() {
 
         {showAlert && (
           <Alert
-            message="Network is slow. Please be patient."
+            message={t("Network is slow. Please be patient.")}
             onClose={closeAlert}
           />
         )}
 
         <main className="min-h-screen w-full pt-24 bg-[#eee]">
-        <Outlet />
+          <Outlet />
         </main>
         <SupportIcon />
         <NetworkStatus />

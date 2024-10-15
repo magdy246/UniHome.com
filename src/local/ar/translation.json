@@ -291,5 +291,6 @@
   "Login again": "أعد تسجيل الدخول",
   "Close": "إغلاق",
   "For your security, please press (Login again) to access your Sessions if you booked Sessions before, if you don't book before press (Close).": "من أجل أمانك، يُرجى الضغط على (أعد تسجيل الدخول) لوصول إلى جلساتك إذا قمت بالحجز من قبل، إذا لم تقم بالحجز من قبل اضغط على (إغلاق).",
-  "No Session Data Available": "لا توجد بيانات جلسات متاحة"
+  "No Session Data Available": "لا توجد بيانات جلسات متاحة",
+  "Network is slow. Please be patient.": "الشبكة بطيئة. يُرجى التحلي بالصبر."
 }

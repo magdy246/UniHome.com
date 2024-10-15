@@ -293,5 +293,6 @@
     "Login again": "Login again",
     "Close": "Close",
     "For your security, please press (Login again) to access your Sessions if you booked Sessions before, if you don't book before press (Close).": "For your security, please press (Login again) to access your Sessions if you booked Sessions before, if you don't book before press (Close).",
-    "No Session Data Available": "No Session Data Available"
+    "No Session Data Available": "No Session Data Available",
+    "Network is slow. Please be patient.": "Network is slow. Please be patient."
 }
