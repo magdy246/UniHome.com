@@ -14,8 +14,6 @@ import LottieHandler from "../Lottie/LottieHandler";
 import LoaderAnimation from "../Assets/loaderAnimate.json";
 import { t } from "i18next";
 import { Helmet } from "react-helmet";
-import SessionAlertPopup from './SessionAlertPopup'; // Import the alert component
-
 export default function RoutingSession({ Session, Student }) {
   const [colorsActive, setColorsActive] = useState({
     tab1: "tab1",
@@ -28,7 +26,6 @@ export default function RoutingSession({ Session, Student }) {
     tab8: "tab1",
   });
   const [loading, setLoading] = useState(true);
-  const [showAlert, setShowAlert] = useState(false); // State to control alert visibility
   const savedLang = localStorage.getItem("lang") || 'en';
   const [Lang, setLang] = useState(savedLang);
 
@@ -45,15 +42,10 @@ export default function RoutingSession({ Session, Student }) {
     const fetchSessions = async () => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       setLoading(false);
-      
-      // Show alert if no sessions are available
-      if (Session.length === 0) {
-        setShowAlert(true);
-      }
     };
 
     fetchSessions();
-  }, [Session]);
+  }, [])
 
   const handleColorsClick = (value) => {
     if (value === colorsActive) {
@@ -64,6 +56,7 @@ export default function RoutingSession({ Session, Student }) {
 
   const tabButtonStyles = "tabsOfRoute";
 
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -72,105 +65,109 @@ export default function RoutingSession({ Session, Student }) {
     );
   }
 
+
   return (
     <>
-      <Helmet>
-        <title>Dashboard - UniHome</title>
-        <meta name="description" content="Welcome to your UniHome Dashboard. Manage your courses, track your progress, and access personalized learning resources." />
-        <meta name="keywords" content="UniHome, dashboard, course management, progress tracking, online learning, personalized resources, English courses" />
-        <meta name="author" content="UniHome" />
-        <meta property="og:title" content="Dashboard - UniHome" />
-        <meta property="og:description" content="Manage your learning journey with the UniHome Dashboard. Access courses, track your progress, and connect with your tutors." />
-        <meta property="og:image" content="./src/components/Assets/images/UniHome.png" />
-        <meta property="og:url" content="https://unih0me.com/dashboard" />
-        <meta property="og:type" content="website" />
-        <meta property="og:locale" content="ar_EG" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Dashboard - UniHome" />
-        <meta name="twitter:description" content="Your UniHome Dashboard is here! Manage your courses and track your progress easily." />
-        <meta name="twitter:image" content="./src/components/Assets/images/UniHome.png" />
-        <link rel="canonical" href="https://unih0me.com/dashboard" />
-      </Helmet>
-      <div className="mb-3">
-        <h1 className="text-center text-6xl font-bold text-white my-6 relative">
-          <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">{t("Sessions")}</span>
-          <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
-        </h1>
-        {/* Centered Tabs */}
-        <div className="flex justify-center items-center" dir={Lang === "ar" ? "rtl" : "ltr"}>
-          <TETabs className="flex justify-center items-center">
-            <TETabsItem
-              onClick={() => handleColorsClick({ ...colorsActive, tab8: "tab1" })}
-              active={colorsActive.tab8 === "tab1"}
-              className={`${tabButtonStyles} ${colorsActive.tab8 === "tab1" ? "ActivetabsOfRoute" : ""}`}
-            >
-              {t("All Lessons")}
-            </TETabsItem>
-            <TETabsItem
-              onClick={() => handleColorsClick({ ...colorsActive, tab8: "tab5" })}
-              active={colorsActive.tab8 === "tab5"}
-              className={`${tabButtonStyles} ${colorsActive.tab8 === "tab5" ? "ActivetabsOfRoute" : ""}`}
-            >
-              {t("Booked")}
-            </TETabsItem>
-            <TETabsItem
-              onClick={() => handleColorsClick({ ...colorsActive, tab8: "tab2" })}
-              active={colorsActive.tab8 === "tab2"}
-              className={`${tabButtonStyles} ${colorsActive.tab8 === "tab2" ? "ActivetabsOfRoute" : ""}`}
-            >
-              {t("Completed")}
-            </TETabsItem>
-            <TETabsItem
-              onClick={() => handleColorsClick({ ...colorsActive, tab8: "tab4" })}
-              active={colorsActive.tab8 === "tab4"}
-              className={`${tabButtonStyles} ${colorsActive.tab8 === "tab4" ? "ActivetabsOfRoute" : ""}`}
-            >
-              {t("Incompleted")}
-            </TETabsItem>
-            <TETabsItem
-              onClick={() => handleColorsClick({ ...colorsActive, tab8: "tab3" })}
-              active={colorsActive.tab8 === "tab3"}
-              className={`${tabButtonStyles} ${colorsActive.tab8 === "tab3" ? "ActivetabsOfRoute" : ""}`}
-            >
-              {t("Cancelled")}
-            </TETabsItem>
-          </TETabs>
-        </div>
+    <Helmet>
+            <title>Dashboard - UniHome</title>
+            <meta name="description" content="Welcome to your UniHome Dashboard. Manage your courses, track your progress, and access personalized learning resources." />
+            <meta name="keywords" content="UniHome, dashboard, course management, progress tracking, online learning, personalized resources, English courses" />
+            <meta name="author" content="UniHome" />
+            <meta property="og:title" content="Dashboard - UniHome" />
+            <meta property="og:description" content="Manage your learning journey with the UniHome Dashboard. Access courses, track your progress, and connect with your tutors." />
+            <meta property="og:image" content="./src/components/Assets/images/UniHome.png" />
+            <meta property="og:url" content="https://unih0me.com/dashboard" />
+            <meta property="og:type" content="website" />
+            <meta property="og:locale" content="ar_EG" />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="Dashboard - UniHome" />
+            <meta name="twitter:description" content="Your UniHome Dashboard is here! Manage your courses and track your progress easily." />
+            <meta name="twitter:image" content="./src/components/Assets/images/UniHome.png" />
+            <link rel="canonical" href="https://unih0me.com/dashboard" />
+        </Helmet>
+    <div className="mb-3">
+    <h1 className="text-center text-6xl font-bold text-white my-6 relative">
+        <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">{t("Sessions")}</span>
+        <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
+      </h1>
+      {/* Centered Tabs */}
+      <div className="flex justify-center" dir={Lang === "ar" ? "rtl" : "ltr"}>
+        <TETabs>
+          <TETabsItem
+            onClick={() => handleColorsClick({ ...colorsActive, tab8: "tab1" })}
+            active={colorsActive.tab8 === "tab1"}
+            className={`${tabButtonStyles} ${colorsActive.tab8 === "tab1" ? "ActivetabsOfRoute" : ""
+              }`}
+          >
+            {t("All Lessons")}
+          </TETabsItem>
+          <TETabsItem
+            onClick={() => handleColorsClick({ ...colorsActive, tab8: "tab5" })}
+            active={colorsActive.tab8 === "tab5"}
+            className={`${tabButtonStyles} ${colorsActive.tab8 === "tab5" ? "ActivetabsOfRoute" : ""
+              }`}
+          >
+            {t("Booked")}
+          </TETabsItem>
+          <TETabsItem
+            onClick={() => handleColorsClick({ ...colorsActive, tab8: "tab2" })}
+            active={colorsActive.tab8 === "tab2"}
+            className={`${tabButtonStyles} ${colorsActive.tab8 === "tab2" ? "ActivetabsOfRoute" : ""
+              }`}
+          >
+            {t("Completed")}
+          </TETabsItem>
 
-        {/* Tab Content */}
-        <div className="mt-5">
-          <TETabsContent>
-            <TETabsPane show={colorsActive.tab8 === "tab1"}>
-              {Session.map((e, index) => (
-                <LessonCard StudentData={Student} key={index} Session={e} />
-              ))}
-            </TETabsPane>
-            <TETabsPane show={colorsActive.tab8 === "tab2"}>
-              {Session.map((e, index) => (
-                <Completed StudentData={Student} key={index} Session={e} />
-              ))}
-            </TETabsPane>
-            <TETabsPane show={colorsActive.tab8 === "tab3"}>
-              {Session.map((e, index) => (
-                <Cancelled StudentData={Student} key={index} Session={e} />
-              ))}
-            </TETabsPane>
-            <TETabsPane show={colorsActive.tab8 === "tab4"}>
-              {Session.map((e, index) => (
-                <Incomplete StudentData={Student} key={index} Session={e} />
-              ))}
-            </TETabsPane>
-            <TETabsPane show={colorsActive.tab8 === "tab5"}>
-              {Session.map((e, index) => (
-                <Booked StudentData={Student} key={index} Session={e} />
-              ))}
-            </TETabsPane>
-          </TETabsContent>
-        </div>
-
-        {/* Show alert popup if applicable */}
-        {showAlert && <SessionAlertPopup hasBookedSession={false} />}
+          <TETabsItem
+            onClick={() => handleColorsClick({ ...colorsActive, tab8: "tab4" })}
+            active={colorsActive.tab8 === "tab4"}
+            className={`${tabButtonStyles} ${colorsActive.tab8 === "tab4" ? "ActivetabsOfRoute" : ""
+              }`}
+          >
+            {t("Incompleted")}
+          </TETabsItem>
+          <TETabsItem
+            onClick={() => handleColorsClick({ ...colorsActive, tab8: "tab3" })}
+            active={colorsActive.tab8 === "tab3"}
+            className={`${tabButtonStyles} ${colorsActive.tab8 === "tab3" ? "ActivetabsOfRoute" : ""
+              }`}
+          >
+            {t("Cancelled")}
+          </TETabsItem>
+        </TETabs>
       </div>
+
+      {/* Tab Content */}
+      <div className="mt-5">
+        <TETabsContent>
+          <TETabsPane show={colorsActive.tab8 === "tab1"}>
+            {Session.map((e, index) => (
+              <LessonCard StudentData={Student} key={index} Session={e} />
+            ))}
+          </TETabsPane>
+          <TETabsPane show={colorsActive.tab8 === "tab2"}>
+            {Session.map((e, index) => (
+              <Completed StudentData={Student} key={index} Session={e} />
+            ))}
+          </TETabsPane>
+          <TETabsPane show={colorsActive.tab8 === "tab3"}>
+            {Session.map((e, index) => (
+              <Cancelled StudentData={Student} key={index} Session={e} />
+            ))}
+          </TETabsPane>
+          <TETabsPane show={colorsActive.tab8 === "tab4"}>
+            {Session.map((e, index) => (
+              <Incomplete StudentData={Student} key={index} Session={e} />
+            ))}
+          </TETabsPane>
+          <TETabsPane show={colorsActive.tab8 === "tab5"}>
+            {Session.map((e, index) => (
+              <Booked StudentData={Student} key={index} Session={e} />
+            ))}
+          </TETabsPane>
+        </TETabsContent>
+      </div>
+    </div>
     </>
   );
 }
