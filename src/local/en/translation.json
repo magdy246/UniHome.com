@@ -287,5 +287,11 @@
         "contactDescription": "Unihome welcomes your questions or comments regarding this Statement of Privacy."
     },
     "Forget Password": "Forget Password",
-    "Reset Password": "Reset Password"
+    "Reset Password": "Reset Password",
+    "No Wallet Data Available": "No Wallet Data Available",
+    "For your security, please log in to access your wallet and view transactions.": "For your security, please log in to access your wallet and view transactions.",
+    "Login again": "Login again",
+    "Close": "Close",
+    "For your security, please press (Login again) to access your Sessions if you booked Sessions before, if you don't book before press (Close).": "For your security, please press (Login again) to access your Sessions if you booked Sessions before, if you don't book before press (Close).",
+    "No Session Data Available": "No Session Data Available"
 }

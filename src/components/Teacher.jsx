@@ -46,8 +46,9 @@ export default function Teacher() {
   }
 
   useEffect(() => {
-    getData()
-  }, [])
+    getData();
+  }, [Teacher_id]);
+
 
   const totalRate = data.reduce((sum, review) => sum + review.rate, 0);
   let averageRate = (totalRate / data.length).toFixed(1);
@@ -159,7 +160,8 @@ export default function Teacher() {
       );
 
     } catch (error) {
-      toast.success("Transaction successful!");
+      console.log
+        ("Transaction successful!");
     }
   };
 
@@ -294,17 +296,17 @@ export default function Teacher() {
 
           {/* New Dashboard Section */}
           <div className="block w-full m-auto sm:mt-4">
-              {/* Legend for Booked and Available */}
-              <div className="flex justify-center space-x-4 mb-2 font-bold select-none">
-                <div className="flex items-center space-x-2">
-                  <div className="w-10 h-5 rounded-sm bg-red-500"></div>
-                  <span>Booked</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <div className="w-10 h-5 rounded-sm bg-green-500"></div>
-                  <span>Available</span>
-                </div>
+            {/* Legend for Booked and Available */}
+            <div className="flex justify-center space-x-4 mb-2 font-bold select-none">
+              <div className="flex items-center space-x-2">
+                <div className="w-10 h-5 rounded-sm bg-red-500"></div>
+                <span>Booked</span>
               </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-10 h-5 rounded-sm bg-green-500"></div>
+                <span>Available</span>
+              </div>
+            </div>
             <FullCalendar
               plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
               headerToolbar={{

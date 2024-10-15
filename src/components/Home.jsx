@@ -34,7 +34,7 @@ export default function Home() {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('access_token'); // Adjust this if your token is in a fragment
     if (token) {
-      Cookies.set("accessToken", token, { expires: 7 });
+      localStorage.setItem("accessToken", token);
       userData()
       navigate("/"); // Redirect user to home page or any other page
     }

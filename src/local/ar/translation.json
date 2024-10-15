@@ -285,5 +285,11 @@
     "contactDescription": "ترحب Unihome بأسئلتك أو تعليقاتك بخصوص هذا البيان."
   },
   "Forget Password": "نسيت كلمة المرور",
-  "Reset Password": "إعادة تعيين كلمة المرور"
+  "Reset Password": "إعادة تعيين كلمة المرور",
+  "No Wallet Data Available": "لا توجد بيانات محفظة متاحة",
+  "For your security, please log in to access your wallet and view transactions.": "من أجل أمانك، يُرجى تسجيل الدخول لوصول إلى محفظتك ومراجعة المعاملات.",
+  "Login again": "أعد تسجيل الدخول",
+  "Close": "إغلاق",
+  "For your security, please press (Login again) to access your Sessions if you booked Sessions before, if you don't book before press (Close).": "من أجل أمانك، يُرجى الضغط على (أعد تسجيل الدخول) لوصول إلى جلساتك إذا قمت بالحجز من قبل، إذا لم تقم بالحجز من قبل اضغط على (إغلاق).",
+  "No Session Data Available": "لا توجد بيانات جلسات متاحة"
 }

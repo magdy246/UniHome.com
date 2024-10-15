@@ -162,7 +162,7 @@ export default function NavBar({
                 </div>
               )} */}
               <div className="text-xl font-bold text-gray-500 flex justify-center gap-2 items-center capitalize">
-                <span className="text-orange-500 text-2xl">Hi </span>
+                <span className="text-orange-500 text-2xl">{t("Hi")} </span>
                 {dataUser?.firstname.split(' ')[0]}
               </div>
               {/* User Profile */}
@@ -179,7 +179,7 @@ export default function NavBar({
                 <ul
                   tabIndex={0}
                   className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                  <div className="px-4 py-3 bg-gray-200 rounded-lg mb-2">
+                  <div className="px-4 py-3 bg-gray-200 rounded-lg mb-2" dir="ltr">
                     <span className="block text-sm font-bold text-gray-500 capitalize dark:text-white">
                       {dataUser?.firstname} {dataUser?.lastname}
                     </span>

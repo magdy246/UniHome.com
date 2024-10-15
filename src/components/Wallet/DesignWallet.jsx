@@ -5,12 +5,17 @@ import { GiWallet } from "react-icons/gi";
 import { MdWavingHand } from "react-icons/md";
 import { apiWallet } from "../../App";
 import { Helmet } from 'react-helmet';
-import Cookies from "js-cookie";
+import { useNavigate } from 'react-router-dom';
 import { t } from "i18next";
-const DesignWallet = () => {
+import WalletAlertPopup from './WalletAlertPopup';
 
+const DesignWallet = () => {
   const savedLang = localStorage.getItem("lang") || 'en';
   const [Lang, setLang] = useState(savedLang);
+  const navigate = useNavigate();
+  const { dataUse } = useContext(apiWallet);
+  let nameUser = JSON.parse(localStorage.getItem("user"));
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     try {
@@ -21,10 +26,17 @@ const DesignWallet = () => {
     }
   }, [savedLang]);
 
-  const { dataUse } = useContext(apiWallet);
-  let nameUser = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (!dataUse) {
+        setShowPopup(true);
+      }
+    }, 10000);
 
-  const walletData = dataUse && dataUse.length > 0 ? dataUse[0] : { totalAmount: 0 };
+    return () => clearTimeout(timeoutId);
+  }, [dataUse]);
+
+  const walletData = dataUse && dataUse.length > 0 ? dataUse[0] : { balance: 0 };
 
   return (
     <>
@@ -45,11 +57,13 @@ const DesignWallet = () => {
         <meta name="twitter:image" content="/src/components/Assets/images/UniHome.png" />
         <link rel="canonical" href="https://unih0me.com/wallet" />
       </Helmet>
+
       <h1 className="text-center text-6xl font-bold text-white my-6 relative">
         <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">{t("Wallet")}</span>
         <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
       </h1>
-      <section className="py-6" dir={Lang === "ar" ? "rtl" : "ltr"} >
+
+      <section className="py-6" dir={Lang === "ar" ? "rtl" : "ltr"}>
         <div className="w-full max-w-5xl mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
           {/* Wallet Info Section */}
           <div className="bg-white select-none p-6 rounded-lg shadow mb-4">
@@ -71,7 +85,7 @@ const DesignWallet = () => {
 
             <div className="flex select-none flex-col md:flex-row justify-between items-end">
               <p className="text-gray-600 text-sm mb-3 md:mb-0 w-full md:w-1/2">
-                {t("To ensure accuracy and security, regularly review your wallet details by verifying transaction histories, checking balances, and confirming the authenticity of each entry.Stay vigilant for any discrepancies and update your information as needed to maintain full control over your account.")}
+                {t("To ensure accuracy and security, regularly review your wallet details by verifying transaction histories, checking balances, and confirming the authenticity of each entry.")}
               </p>
               <div className="flex flex-col items-end w-full md:w-1/2">
                 <div className="text-4xl font-bold text-green-500">
@@ -89,27 +103,12 @@ const DesignWallet = () => {
             <table className="w-full text-sm text-gray-500 text-center">
               <thead className="text-xs text-gray-700 uppercase bg-gray-200">
                 <tr>
-                  <th scope="col" className="px-6 py-3">
-                    {t("Id")}
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    {t("Date")}
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    {t("Credit")}
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    {t("Debit")}
-                  </th>
-                  {/* <th scope="col" className="px-6 py-3">
-                    {t("Balance")}
-                  </th> */}
-                  <th scope="col" className="px-6 py-3">
-                    {t("Comments")}
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    {t("Status")}
-                  </th>
+                  <th scope="col" className="px-6 py-3">{t("Id")}</th>
+                  <th scope="col" className="px-6 py-3">{t("Date")}</th>
+                  <th scope="col" className="px-6 py-3">{t("Credit")}</th>
+                  <th scope="col" className="px-6 py-3">{t("Debit")}</th>
+                  <th scope="col" className="px-6 py-3">{t("Comments")}</th>
+                  <th scope="col" className="px-6 py-3">{t("Status")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -123,18 +122,11 @@ const DesignWallet = () => {
                     ) : (
                       <td></td>
                     )}
-
                     {e.type === "debit" ? (
-                      <td className="px-2 py-4 font-bold text-red-500">
-                        EGP {e?.amount}
-                      </td>
+                      <td className="px-2 py-4 font-bold text-red-500">EGP {e?.amount}</td>
                     ) : (
                       <td></td>
                     )}
-
-                    {/* <td className="px-2 py-4 font-bold text-blue-500">
-                      EGP {e.balance}
-                    </td> */}
                     <td className="px-6 py-4">{e.description}</td>
                     <td className="px-6 py-4 flex justify-center items-center">
                       {e.status === 0 ? (
@@ -155,12 +147,13 @@ const DesignWallet = () => {
                     </td>
                   </tr>
                 ))}
-
               </tbody>
             </table>
           </div>
         </div>
       </section>
+
+      {showPopup && <WalletAlertPopup navigate={navigate} />}
     </>
   );
 };

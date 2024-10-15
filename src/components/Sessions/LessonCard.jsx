@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Sesssion.css";
 import { ImLoop2 } from "react-icons/im";
-import Avatar from "../../images/profile.jpg";
 import { AiOutlineMessage } from "react-icons/ai";
 import { RiCloseLargeFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
