@@ -202,7 +202,7 @@ export default function Chat() {
                       </div>
                       <div>
                         <h2 className="font-bold text-xl">{response.firstname}</h2>
-                        <span className="text-sm opacity-80">{t("Online")}</span>
+                        {/* <span className="text-sm opacity-80">{t("Online")}</span> */}
                       </div>
                     </div>
 
@@ -223,7 +223,7 @@ export default function Chat() {
                             </div>
                           </div>
                           <div
-                            className={`chat-bubble px-4 py-2 rounded-lg shadow-sm ${msg.sender_id === user.id
+                            className={`chat-bubble px-3 flex justify-center items-center rounded-lg shadow-sm ${msg.sender_id === user.id
                                 ? "bg-orange-500 text-white shadow-md"
                                 : "bg-gray-200 text-gray-800"
                               }`}

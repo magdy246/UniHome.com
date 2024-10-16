@@ -29,9 +29,7 @@ export default function Login() {
         loginInput
       );
       localStorage.setItem("accessToken", response.data.access_token);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
-      console.log(response);
-      
+      localStorage.setItem("user", JSON.stringify(response.data.user));      
       navigate("/");
     } catch (error) {
       setError("The email or password you entered doesn't match");

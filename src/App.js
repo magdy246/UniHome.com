@@ -6,25 +6,21 @@ import { Outlet, useLocation } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import NetworkStatus from "./components/NetworkStatus/NetworkStatus";
-import Alert from "./components/Alert"; // Import Alert component
+import Alert from "./components/Alert";
 
 export const apiWallet = createContext(null);
 
 export default function App() {
-  // ****************disabeled inspect****************
+  // **************** Disabled Inspect ****************
   useEffect(() => {
-    const handleContextMenu = (event) => {
-      event.preventDefault();
-    };
+    const handleContextMenu = (event) => event.preventDefault();
 
     const handleKeyDown = (event) => {
       const key = event.key || event.keyCode;
-
       if (key === "F12" || key === 123) {
         event.preventDefault();
       } else if (
-        (event.ctrlKey && event.shiftKey && key === "I") ||
-        (event.ctrlKey && event.shiftKey && key === "J")
+        (event.ctrlKey && event.shiftKey && (key === "I" || key === "J"))
       ) {
         event.preventDefault();
       }
@@ -38,16 +34,15 @@ export default function App() {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
-  // ****************End Code****************
+  // **************** End Code ****************
 
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const storedLanguage = JSON.parse(localStorage.getItem("lang")) || "en";
   const currentLanguage = i18n.language;
 
   useEffect(() => {
     const direction = i18n.dir(currentLanguage);
     document.body.setAttribute("dir", direction);
-    console.log("currentLanguage: ", currentLanguage);
   }, [currentLanguage, i18n]);
 
   useEffect(() => {
@@ -57,127 +52,111 @@ export default function App() {
   }, [storedLanguage, currentLanguage, i18n]);
 
   const [dataUse, setDataUse] = useState([]);
-  const [refAPI, setRefAPI] = useState([]);
-  const [userTable, setUserTable] = useState();
-  const loc = useLocation();
-  const { t } = useTranslation();
-
+  const [refAPI, setRefAPI] = useState("");
+  const [userTable, setUserTable] = useState(null);
   const [showAlert, setShowAlert] = useState(false); // State to control slow network alert
+  const loc = useLocation();
 
   // Function to close alert
   const closeAlert = () => setShowAlert(false);
 
-  // Axios interceptors to detect slow network requests
-  useEffect(() => {
-    const axiosInstance = axios.create();
+  // Axios instance with interceptors
+  const axiosInstance = axios.create();
 
-    // Request interceptor
-    axiosInstance.interceptors.request.use(
-      (config) => {
-        config.metadata = { startTime: new Date() };
-        return config;
-      },
-      (error) => {
-        return Promise.reject(error);
+  // Request interceptor
+  axiosInstance.interceptors.request.use(
+    (config) => {
+      config.metadata = { startTime: new Date() };
+      return config;
+    },
+    (error) => Promise.reject(error)
+  );
+
+  // Response interceptor to detect slow network
+  axiosInstance.interceptors.response.use(
+    (response) => {
+      const endTime = new Date();
+      const duration = endTime - response.config.metadata.startTime;
+      if (duration > 4000) {
+        setShowAlert(true);
       }
-    );
-
-    // Response interceptor to check response time
-    axiosInstance.interceptors.response.use(
-      (response) => {
-        const endTime = new Date();
-        const duration = endTime - response.config.metadata.startTime;
-        if (duration > 4000) { // threshold
-          setShowAlert(true);
-        }
-        return response;
-      },
-      (error) => {
-        const endTime = new Date();
-        const duration = endTime - error.config.metadata.startTime;
-        if (duration > 3000) {
-          setShowAlert(true);
-        }
-        return Promise.reject(error);
+      return response;
+    },
+    (error) => {
+      const endTime = new Date();
+      const duration = endTime - error.config.metadata.startTime;
+      if (duration > 3000) {
+        setShowAlert(true);
       }
-    );
-
-    // Example API call for teachers
-    const usersData = async () => {
-      try {
-        const userTable = await axiosInstance.get("https://yousab-tech.com/unihome/public/api/teachers");
-        setUserTable(userTable);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
-    usersData();
-  }, []);
-
-  const token = localStorage.getItem("accessToken");
-
-  // Token refresh logic
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const refreshToken = async () => {
-        if (token) {
-          try {
-            const res = await axios.post(
-              "https://yousab-tech.com/unihome/public/api/auth/refresh",
-              {},
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${token}`,
-                },
-              }
-            );
-
-            localStorage.setItem("accessToken", res.data.access_token);
-            setRefAPI(res.data.access_token);
-          } catch (error) {
-            console.log("Error refreshing token:", error);
-          }
-        }
-      };
-
-      refreshToken();
-    }, 660000); // Refresh token every 11 minutes
-
-    return () => clearInterval(interval); // Clear interval on unmount
-  }, [token]);
+      return Promise.reject(error);
+    }
+  );
 
   // Fetch wallet data
-  useEffect(() => {
-    const getWalletData = async () => {
+  const fetchWalletData = async (token) => {
+    try {
+      const res = await axiosInstance.get("https://yousab-tech.com/unihome/public/api/auth/wallets", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setDataUse(res.data.data.wallets);
+    } catch (error) {
+      console.log("Error fetching wallet data:", error);
+    }
+  };
+
+  // Fetch user data
+  const fetchUserData = async () => {
+    try {
+      const res = await axiosInstance.get("https://yousab-tech.com/unihome/public/api/teachers");
+      setUserTable(res.data);
+    } catch (error) {
+      console.log("Error fetching user data:", error);
+    }
+  };
+
+  // Refresh token
+  const refreshToken = async () => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
       try {
-        const res = await axios.get("https://yousab-tech.com/unihome/public/api/auth/wallets", {
+        const res = await axiosInstance.post("https://yousab-tech.com/unihome/public/api/auth/refresh", {}, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         });
-        setDataUse(res.data.data.wallets);
+        localStorage.setItem("accessToken", res.data.access_token);
+        setRefAPI(res.data.access_token);
       } catch (error) {
-        console.log("Error fetching wallet data:", error);
+        console.log("Error refreshing token:", error);
       }
-    };
+    }
+  };
 
-    getWalletData();
-  }, [loc.pathname, refAPI, token]);
+  useEffect(() => {
+    const interval = setInterval(refreshToken, 660000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Fetch data when location or refAPI changes
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      fetchWalletData(token);
+    }
+    fetchUserData();
+  }, [loc.pathname, refAPI]);
 
   return (
     <apiWallet.Provider value={{ dataUse, setDataUse, userTable, setUserTable }}>
       <div>
-        {token ? (
-          <div className="m-auto">
-            <NavBar showLink4={false} showLink1={true} />
-          </div>
+        {localStorage.getItem("accessToken") ? (
+          <NavBar showLink4={false} showLink1={true} />
         ) : (
-          <div className="m-auto">
-            <NavBar showLink4={true} showLink1={false} />
-          </div>
+          <NavBar showLink4={true} showLink1={false} />
         )}
 
         {showAlert && (
