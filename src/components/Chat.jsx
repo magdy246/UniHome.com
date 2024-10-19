@@ -5,7 +5,6 @@ import {
   TETabsItem,
   TETabsPane,
 } from "tw-elements-react";
-import Cookies from "js-cookie";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { useRef } from "react";

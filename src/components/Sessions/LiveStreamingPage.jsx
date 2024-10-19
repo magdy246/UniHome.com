@@ -15,15 +15,15 @@ const LiveStreamingPage = (Session) => {
   const [mainTimer, setMainTimer] = useState(86400 * 2);
   const [dataSession, setDataSession] = useState(null);
   const [dis, setDis] = useState(false);
-  const SingleSession = useParams();  
+  const SingleSession = useParams();
   const token = localStorage.getItem("accessToken");
-  let id = Number(SingleSession?.SingleSession);  
+  let id = Number(SingleSession?.SingleSession);
   let dateSection = new Date(`${dataSession?.date} ${dataSession?.time}`);
   let dateNew = new Date().getTime();
   let DateAll = dateSection - dateNew;
   const [timeLeft, setTimeLeft] = useState(DateAll > 0 ? DateAll : 0);
   let dataUser = JSON.parse(localStorage.getItem("user"));
-  const teacherId = dataSession?.teacher?.id  
+  const teacherId = dataSession?.teacher?.id
 
   let nav = useNavigate();
 
@@ -40,22 +40,22 @@ const LiveStreamingPage = (Session) => {
     }
   }
 
-  async function compeletSession() {
-    try {
-      const response = await axios.post(
-        "https://yousab-tech.com/unihome/public/api/complete/session",
-        { session_id: sessionId },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      toast.success("the session compeleted");
-    } catch (error) {
-      toast.error("the session is not Start");
-    }
-  }
+  // async function compeletSession() {
+  //   try {
+  //     const response = await axios.post(
+  //       "https://yousab-tech.com/unihome/public/api/complete/session",
+  //       { session_id: sessionId },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     toast.success("the session compeleted");
+  //   } catch (error) {
+  //     toast.error("the session is not Start");
+  //   }
+  // }
 
   async function inCompeletSession() {
     try {
@@ -128,7 +128,7 @@ const LiveStreamingPage = (Session) => {
             },
           }
         );
-        let Session = response.data.data.sessions;       
+        let Session = response.data.data.sessions;
         setDataSession(Session.find((session) => (session.id === id)));
       } catch (error) {
       }
@@ -310,7 +310,7 @@ const LiveStreamingPage = (Session) => {
               </div>
             </div>
             <div className="my-3 flex sm:justify-center justify-start flex-wrap items-center gap-3">
-              <button
+              {/* <button
                 onClick={() => {
                   compeletSession();
                   handleBookingConfirm();
@@ -319,7 +319,7 @@ const LiveStreamingPage = (Session) => {
                 className="flex items-center text-white text-lg rounded-3xl py-1 px-3 font-bold bg-blue-600 border-b-4 border-blue-800 transition-transform duration-300 hover:border-b-0 hover:translate-y-0.5 active:outline-none active:bg-blue-700 active:scale-95"
               >
                 {t("End Lesson")}
-              </button>
+              </button> */}
               {dataUser.type === "teacher" ?
                 <Link
                   to="/addQuestion"
