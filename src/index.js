@@ -208,6 +208,16 @@ const routes = [
         ),
       },
       {
+        path: "Session/:SingleSession/VideoConference/:id",
+        element: (
+          <ProtectedRoute>
+            <Suspense fallback={<LottieHandler animationData={Loader} />}>
+              <VideoConference />
+            </Suspense>
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: "addQuestion",
         element: (
           <ProtectedRoute>
