@@ -50,9 +50,7 @@ export default function Register() {
         registerInput
       );
 
-      localStorage.setItem("accessToken", response.data.access_token, {
-        expires: 7,
-      });
+      localStorage.setItem("accessToken", response.data.access_token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
       navigate("/");
     } catch (error) {
@@ -71,10 +69,10 @@ export default function Register() {
   function selectUser(e) {
     if (e.target.value === "student") {
       setTeacherOrStudent("teacher");
-      localStorage.setItem("user", "teacher");
+      localStorage.setItem("type", "teacher");
     } else {
       setTeacherOrStudent("student");
-      localStorage.setItem("user", "student");
+      localStorage.setItem("type", "student");
     }
   }
 

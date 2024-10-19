@@ -29,7 +29,7 @@ export default function Login() {
         loginInput
       );
       localStorage.setItem("accessToken", response.data.access_token);
-      localStorage.setItem("user", JSON.stringify(response.data.user));      
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       navigate("/");
     } catch (error) {
       setError("The email or password you entered doesn't match");
@@ -138,12 +138,12 @@ export default function Login() {
                     </button>
                   </div>
 
-                  <Link
+                  {/* <Link
                     to={"/forgetPassword"}
                     className="text-sm text-gray-500 font-bold hover:text-gray-900 text-end w-full mt-2"
                   >
                     {t("forgetPassword")}
-                  </Link>
+                  </Link> */}
                 </div>
                 <div className="mt-8">
                   <button className="auth_button" type="submit">

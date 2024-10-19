@@ -1,41 +1,63 @@
-import { useMemo, useState, useRef, useContext } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import userProfile from "../Assets/images/profile.jpg";
 import axios from "axios";
 import countryList from "react-select-country-list";
 import timezone from "../timezones.json";
-import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
-import { apiWallet } from "../../App";
 
 export default function Account() {
   const options = useMemo(() => countryList().getData(), []);
   const timezoneMap = useMemo(() => timezone, []);
   const [imgAvatar, setImgAvatar] = useState(null);
-  const { ReToken } = useContext(apiWallet)
   const [dataUser, setDataUser] = useState({});
   const [profileInput, setProfileInput] = useState({
     image: "",
     country: "",
     timeZone: "",
+    gender: "",
+    whats: "",
+    firstname: "",
+    lastname: "",
   });
+  const userToken = localStorage.getItem("user");
+  const userData = userToken ? JSON.parse(userToken) : null;
 
   // Reference for file input
   const fileInputRef = useRef(null);
   const token = localStorage.getItem("accessToken");
 
   async function profile() {
-    let response = await axios.post(
-      "https://yousab-tech.com/unihome/public/api/auth/user-profile/student",
-      profileInput,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    setDataUser(response.data);
-    Cookies.set("user", JSON.stringify(response.data.user), { expires: 7 });
-    ReToken()
+    const formData = new FormData();
+
+    // Append image file only if it exists and is a JPG
+    if (imgAvatar && imgAvatar.type === "image/jpeg") {
+      formData.append("image", imgAvatar);
+    }
+
+    // Append other profile inputs
+    formData.append("country", profileInput.country);
+    formData.append("timeZone", profileInput.timeZone);
+    formData.append("gender", profileInput.gender);
+    formData.append("whats", profileInput.whats);
+    formData.append("firstname", profileInput.firstname);
+    formData.append("lastname", profileInput.lastname);
+
+    try {
+      const response = await axios.post(
+        `https://yousab-tech.com/unihome/public/api/auth/user-profile/${userData.type}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      setDataUser(response.data);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+    } catch (error) {
+      console.error("Error uploading profile:", error);
+    }
   }
 
   function input(e) {
@@ -69,19 +91,13 @@ export default function Account() {
   return (
     <>
       <section className="p-5 bg-gray-100 rounded-3xl max-w-lg sm:max-w-xl lg:max-w-4xl accountSettings mx-auto">
-        <div
-          className="w-full flex flex-col md:flex-row justify-between flex-wrap"
-          id="profileSetting"
-        >
+        <div className="w-full flex flex-col md:flex-row justify-between flex-wrap" id="profileSetting">
           {/* Form Section */}
-          <div className="formSetting basis-full md:basis-1/2 mb-10">
+          <div className="formSetting basis-full mb-10">
             <form className="w-full">
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                  <label
-                    className="block capitalize tracking-wide text-blue-600 text-sm font-bold mb-2 ms-5"
-                    htmlFor="grid-first-name"
-                  >
+                  <label className="block capitalize tracking-wide text-blue-600 text-sm font-bold mb-2 ms-5" htmlFor="grid-first-name">
                     {t("form.firstName")}
                   </label>
                   <input
@@ -95,15 +111,12 @@ export default function Account() {
                   />
                 </div>
                 <div className="w-full md:w-1/2 px-3">
-                  <label
-                    className="block capitalize tracking-wide text-blue-600 text-sm font-bold mb-2 ms-5"
-                    htmlFor="grid-last-name"
-                  >
+                  <label className="block capitalize tracking-wide text-blue-600 text-sm font-bold mb-2 ms-5" htmlFor="grid-last-name">
                     {t("form.lastName")}
                   </label>
                   <input
                     onChange={input}
-                    className="appearance-none block w-full bg-gray-200 text-blue-600 border-none rounded-3xl py-4 px-4 leading-tight focus:outline-none focus:bg-white"
+                    className="appearance-none block w-full bg-gray-200 text-gray-600 border-none rounded-3xl py-4 px-4 leading-tight focus:outline-none focus:bg-white"
                     id="grid-last-name"
                     type="text"
                     placeholder={t("Mohamed")}
@@ -113,11 +126,8 @@ export default function Account() {
                 </div>
               </div>
               <div className="flex flex-wrap -mx-3 mb-6">
-                <div className="basis-full  w-full px-3">
-                  <label
-                    className="block capitalize tracking-wide text-blue-600 text-sm font-bold mb-2 ms-5"
-                    htmlFor="grid-whats"
-                  >
+                <div className="basis-full w-full px-3">
+                  <label className="block capitalize tracking-wide text-blue-600 text-sm font-bold mb-2 ms-5" htmlFor="grid-whats">
                     {t("form.whatsappNumber")}
                   </label>
                   <input
@@ -130,7 +140,9 @@ export default function Account() {
                     onChange={input}
                   />
                 </div>
-                <div className="flex flex-col basis-full w-full  gap-2 px-3">
+              </div>
+              <div className="flex flex-wrap -mx-3 mb-6">
+                <div className="flex flex-col basis-full w-full gap-2 px-3">
                   <label className="block capitalize tracking-wide text-blue-600 text-sm font-bold ms-6">
                     {t("form.gender")}
                   </label>
@@ -144,10 +156,7 @@ export default function Account() {
                         name="gender"
                         className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
                       />
-                      <label
-                        htmlFor="bordered-radio-1"
-                        className="w-full py-3 px-4 text-sm font-medium text-gray-900"
-                      >
+                      <label htmlFor="bordered-radio-1" className="w-full py-3 px-4 text-sm font-medium text-gray-900">
                         {t("form.female")}
                       </label>
                     </div>
@@ -160,10 +169,7 @@ export default function Account() {
                         name="gender"
                         className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
                       />
-                      <label
-                        htmlFor="bordered-radio-2"
-                        className="w-full py-4 ms-3 text-sm font-medium text-gray-900"
-                      >
+                      <label htmlFor="bordered-radio-2" className="w-full py-4 ms-3 text-sm font-medium text-gray-900">
                         {t("form.male")}
                       </label>
                     </div>
@@ -172,10 +178,7 @@ export default function Account() {
               </div>
               <div className="flex flex-wrap -mx-3 mb-2">
                 <div className="w-full md:w-1/2 px-3 mb-6">
-                  <label
-                    className="block capitalize tracking-wide text-blue-600 text-sm font-bold mb-2 ms-5"
-                    htmlFor="grid-country"
-                  >
+                  <label className="block capitalize tracking-wide text-blue-600 text-sm font-bold mb-2 ms-5" htmlFor="grid-country">
                     {t("form.country")}
                   </label>
                   <div className="relative">
@@ -196,10 +199,7 @@ export default function Account() {
                   </div>
                 </div>
                 <div className="w-full md:w-1/2 px-3 mb-6">
-                  <label
-                    className="block capitalize tracking-wide text-blue-600 text-sm font-bold mb-2 ms-5"
-                    htmlFor="grid-timezone"
-                  >
+                  <label className="block capitalize tracking-wide text-blue-600 text-sm font-bold mb-2 ms-5" htmlFor="grid-timezone">
                     {t("form.timezone")}
                   </label>
                   <div className="relative">
@@ -221,51 +221,49 @@ export default function Account() {
                   </div>
                 </div>
               </div>
+              {/* Avatar and Buttons */}
+              <div className="pictureAvatar flex flex-col justify-center items-center basis-full md:basis-1/2">
+                <span className="font-bold text-lg mb-4">{t("Change your profile picture")}</span>
+                <img
+                  className="w-24 h-24 md:w-36 md:h-36 avatar mt-5 mb-5 rounded-full shadow-lg shadow-black"
+                  src={imgAvatar ? URL.createObjectURL(imgAvatar) : userProfile}
+                  alt="rounded avatar"
+                  id="avatar"
+                />
+                <div className="btnPicture w-full flex flex-col items-center duration-500 transition-all">
+                  <div className="mt-4">
+                    <label
+                      htmlFor="upload"
+                      className="border-2 border-orange-500 bg-orange-500 hover:bg-white hover:text-black cursor-pointer duration-500 w-full text-white font-bold py-2 px-10 md:px-20 rounded-3xl focus:outline-none focus:shadow-outline"
+                    >
+                      {t("Upload")}
+                    </label>
+                    <input
+                      className="w-full"
+                      hidden
+                      type="file"
+                      id="upload"
+                      name="image"
+                      ref={fileInputRef}
+                      onChange={uploadPictureProfile}
+                    />
+                  </div>
+                  {imgAvatar && (
+                    <div className="mt-4">
+                      <button
+                        onClick={removePictureProfile}
+                        className="border-2 border-red-600 bg-red-600 hover:bg-white hover:text-black cursor-pointer duration-500 w-full text-white font-bold py-2 px-10 md:px-20 rounded-3xl focus:outline-none focus:shadow-outline"
+                      >
+                        {t("Remove")}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
             </form>
           </div>
-          {/* Avatar and Buttons */}
-          <div className="pictureAvatar flex flex-col justify-center items-center basis-full md:basis-1/2">
-            <span className="font-bold text-lg mb-4">
-              {t("Change your profile picture")}
-            </span>
-            <img
-              className="w-24 h-24 md:w-36 md:h-36 avatar mt-5 mb-5 rounded-full shadow-lg shadow-black"
-              src={imgAvatar ? URL.createObjectURL(imgAvatar) : userProfile}
-              alt="rounded avatar"
-              id="avatar"
-            />
-            <div className="btnPicture w-full flex flex-col items-center duration-500 transition-all">
-              <div className="mt-4">
-                <label
-                  htmlFor="upload"
-                  className="border-2 border-orange-500 bg-orange-500 hover:bg-white hover:text-black cursor-pointer duration-500 w-full text-white font-bold py-2 px-10 md:px-20 rounded-3xl focus:outline-none focus:shadow-outline"
-                >
-                  {t("Upload")}
-                </label>
-                <input
-                  className="w-full"
-                  hidden
-                  type="file"
-                  id="upload"
-                  name="image"
-                  ref={fileInputRef}
-                  onChange={uploadPictureProfile}
-                />
-              </div>
-              {imgAvatar && (
-                <div className="mt-4">
-                  <button
-                    onClick={removePictureProfile}
-                    className="border-2 border-red-600 bg-red-600 hover:bg-white hover:text-black cursor-pointer duration-500 w-full text-white font-bold py-2 px-10 md:px-20 rounded-3xl focus:outline-none focus:shadow-outline"
-                  >
-                    {t("Remove")}
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
         </div>
-        <div className="formBtn flex justify-center w-full mt-10">
+        <div className="formBtn flex flex-col justify-center items-center w-full mt-10">
           <button
             onClick={profile}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 md:px-10 rounded-3xl focus:outline-none focus:shadow-outline"
@@ -273,7 +271,12 @@ export default function Account() {
             {t("Save Changes")}
           </button>
         </div>
+        <p className="mt-4 text-sm bg-red-600 text-white rounded-xl font-semibold px-2 py-1 w-fit mx-auto">
+          {t("Sign out and login again after saving changes.")}
+        </p>
+
       </section>
+
     </>
   );
 }

@@ -12,12 +12,27 @@ import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet";
 
+// Helper function to check and convert URLs into clickable links
+const renderMessageWithLinks = (message) => {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  return message.split(" ").map((part, index) => {
+    if (part.match(urlRegex)) {
+      return (
+        <a key={index} href={part} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+          {part}
+        </a>
+      );
+    }
+    return <span key={index}>{part} </span>;
+  });
+};
+
 export default function Chat() {
   const [verticalActive, setVerticalActive] = useState();
   const [messages, setMessages] = useState([]);
   const [dataUserSHat, setDataUserSHat] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [searchQuery, setSearchQuery] = useState(""); // State for search query
+  const [searchQuery, setSearchQuery] = useState("");
   const token = localStorage.getItem("accessToken");
   const user = JSON.parse(localStorage.getItem("user"));
   const location = useLocation();
@@ -83,8 +98,8 @@ export default function Chat() {
   };
 
   useEffect(() => {
-    if (verticalActive) {
-      const fetchMessages = async () => {
+    const fetchMessages = async () => {
+      if (verticalActive) {
         try {
           const res = await axios.get(
             `https://yousab-tech.com/unihome/public/api/auth/chats/${verticalActive}`,
@@ -97,10 +112,14 @@ export default function Chat() {
           );
           setMessages(res.data.data.chats);
         } catch (error) { }
-      };
-      fetchMessages();
-    }
-  }, [verticalActive, newMessage, token]);
+      }
+    };
+
+    fetchMessages();
+    const intervalId = setInterval(fetchMessages, 5000);
+
+    return () => clearInterval(intervalId);
+  }, [verticalActive, token]);
 
   useEffect(() => {
     if (messages.length === 0 && idT) {
@@ -161,9 +180,9 @@ export default function Chat() {
                     key={e.id}
                     onClick={() => handleVerticalClick(e.id)}
                     active={verticalActive === e.id}
-                    className={`p-3 flex items-center rounded-lg cursor-pointer transition-all duration-200 transform ${verticalActive === e.id
-                        ? "bg-orange-500 text-white shadow-md scale-105"
-                        : "hover:bg-orange-100 hover:shadow-sm text-gray-700"
+                    className={`p-3 hover:text-black flex items-center rounded-lg cursor-pointer transition-all duration-200 transform ${verticalActive === e.id
+                      ? "bg-orange-500 text-white shadow-md scale-105"
+                      : "hover:bg-orange-100 hover:shadow-sm text-gray-700"
                       }`}
                   >
                     <div className="flex items-center gap-3">
@@ -201,20 +220,33 @@ export default function Chat() {
                         </div>
                       </div>
                       <div>
-                        <h2 className="font-bold text-xl">{response.firstname}</h2>
+                        <h2 className="font-bold text-xl">{response.firstname}{" "}{response.lastname}</h2>
                         {/* <span className="text-sm opacity-80">{t("Online")}</span> */}
                       </div>
                     </div>
 
                     {/* Messages Section */}
-                    <div className="p-5 flex-1 overflow-y-auto bg-gray-50 space-y-4">
+                    <div className="p-5 flex-1 w-full overflow-y-auto bg-gray-50 space-y-4">
                       {messages.map((msg, index) => (
                         <div
                           key={index}
-                          className={`flex ${msg.sender_id === user.id ? "justify-end" : "justify-start"
+                          className={`flex gap-1 items-start ${msg.sender_id === user.id ? "justify-end" : "justify-start"
                             }`}
                         >
-                          <div className="chat-image avatar">
+                          <div
+                            className={`chat-bubble px-3 py-2 flex flex-wrap justify-start items-start rounded-lg shadow-sm ${msg.sender_id === user.id
+                              ? "bg-orange-500 text-white shadow-md order-1"
+                              : "bg-gray-200 text-gray-800 order-2"
+                              } max-w-[80%] md:max-w-[50%]`}
+                          >
+                            <p className="w-full break-words">
+                              {renderMessageWithLinks(msg.message)}
+                            </p>
+                          </div>
+                          <div className={`avatar ${msg.sender_id === user.id
+                            ? "order-2"
+                            : "order-1"
+                            }`}>
                             <div className="w-10 rounded-full">
                               <img
                                 alt="Chat Avatar"
@@ -222,30 +254,23 @@ export default function Chat() {
                               />
                             </div>
                           </div>
-                          <div
-                            className={`chat-bubble px-3 flex justify-center items-center rounded-lg shadow-sm ${msg.sender_id === user.id
-                                ? "bg-orange-500 text-white shadow-md"
-                                : "bg-gray-200 text-gray-800"
-                              }`}
-                          >
-                            {msg.message}
-                          </div>
-                          <div className="chat-footer opacity-50 text-xs ml-2">
-                            {msg.sender_id === user.id ? t("You") : response.firstname}
-                            <time className="block">{msg.timestamp}</time>
-                          </div>
                         </div>
                       ))}
                     </div>
 
-                    {/* Message Input */}
-                    <div className="p-3 flex items-center gap-3">
+                    {/* Message Input Section */}
+                    <div className="p-4 bg-gray-100 border-t flex items-center rounded-b-lg gap-2">
                       <input
                         type="text"
+                        placeholder={t("type_message")}
                         value={newMessage}
                         onChange={(e) => setNewMessage(e.target.value)}
-                        className="input input-bordered w-full focus:outline-none px-4 py-2 bg-gray-200 rounded-lg"
-                        placeholder={t("type_message")}
+                        className="input input-ghost w-full focus:bg-white text-gray-800 focus:outline-none h-12 border border-gray-300 rounded-lg px-3 text-sm"
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            sendMessage();
+                          }
+                        }}
                       />
                       <button
                         onClick={sendMessage}
@@ -260,7 +285,7 @@ export default function Chat() {
             </TETabsContent>
           </div>
         </div>
-      </section>
+      </section >
     </>
   );
 }
