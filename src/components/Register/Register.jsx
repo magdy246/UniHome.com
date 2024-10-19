@@ -69,10 +69,10 @@ export default function Register() {
   function selectUser(e) {
     if (e.target.value === "student") {
       setTeacherOrStudent("teacher");
-      localStorage.setItem("type", "teacher");
+      // localStorage.setItem("type", "teacher");
     } else {
       setTeacherOrStudent("student");
-      localStorage.setItem("type", "student");
+      // localStorage.setItem("type", "student");
     }
   }
 

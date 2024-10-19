@@ -3,15 +3,17 @@ import './instractorCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
+import { AiFillStar } from 'react-icons/ai';
 
 const CardComponent = ({
   img,
   firstName,
   lastName,
   country,
-  lessons,
+  Lessons,
   students,
-  about
+  about,
+  Review
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -33,33 +35,29 @@ const CardComponent = ({
             {firstName} {lastName}
           </h2>
           <div className="flex justify-center items-center mt-2">
-            {/* Display rating */}
-            {[...Array(5)].map((_, index) => (
-              <FontAwesomeIcon
-                key={index}
-                className="text-yellow-300"
-                icon={faStar}
-              />
-            ))}
+            <div className="flex items-center text-yellow-400 text-lg mb-4">
+              <AiFillStar className="mr-1" />
+              <span className="font-semibold text-yellow-500">({Review} {t("Reviews")})</span>
+            </div>
           </div>
         </div>
 
         {/* Information Section */}
-        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2">
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-2">
           <div className='text-start'>
             <span className="block text-gray-500">{t('teacher')}: {country}</span>
             <span className="block text-gray-500">{t('From')}: {country}</span>
           </div>
           <div className='text-start md:text-center'>
-            <span className="block text-gray-500">{t('Lessons')}: {lessons}</span>
+            <span className="block text-gray-500">{t('Lessons')}: {Lessons}</span>
             <span className="block text-gray-500">{t('Students')}: {students}</span>
           </div>
         </div>
 
         {/* Description Section */}
         <div className="mt-4">
-          <p className={`${isExpanded ? '' : 'line-clamp-3'} text-gray-600`}>
-            {about ? about.split(' ').slice(0, 10).join(' ') + '...' : "Lorem ipsum dolor sit, amet consectetur adipisicing elit."}
+          <p className={`line-clamp-1 text-gray-600`}>
+            {about ? about : "Lorem ipsum dolor sit, amet consectetur adipisicing elit."}
           </p>
           <button
             className="text-blue-600 pt-4 focus:outline-none hover:underline"
