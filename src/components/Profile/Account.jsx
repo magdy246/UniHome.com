@@ -35,12 +35,12 @@ export default function Account() {
     }
 
     // Append other profile inputs
-    formData.append("country", profileInput.country);
-    formData.append("timeZone", profileInput.timeZone);
-    formData.append("gender", profileInput.gender);
-    formData.append("whats", profileInput.whats);
-    formData.append("firstname", profileInput.firstname);
-    formData.append("lastname", profileInput.lastname);
+    formData.append("country", profileInput.country || userData.country);
+    formData.append("timeZone", profileInput.timeZone || userData.timeZone);
+    formData.append("gender", profileInput.gender || userData.gender);
+    formData.append("whats", profileInput.whats || userData.whats);
+    formData.append("firstname", profileInput.firstname || userData.firstname);
+    formData.append("lastname", profileInput.lastname || userData.lastname);
 
     try {
       const response = await axios.post(
@@ -53,12 +53,43 @@ export default function Account() {
           },
         }
       );
+
+      // Set user data and store in localStorage
       setDataUser(response.data);
       localStorage.setItem("user", JSON.stringify(response.data.user));
+
+      // After successfully updating the profile, refresh the token
+      await refreshToken();
     } catch (error) {
       console.error("Error uploading profile:", error);
     }
   }
+
+
+  async function refreshToken() {
+    try {
+      const response = await axios.post(
+        `https://yousab-tech.com/unihome/public/api/auth/refresh`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // Update local storage with new tokens and user data
+      localStorage.removeItem("accessToken");
+      localStorage.setItem("accessToken", response.data.access_token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+
+      // Optionally set state if needed
+      setDataUser(response.data.user);
+    } catch (error) {
+      console.error("Error refreshing token:", error);
+    }
+  }
+
 
   function input(e) {
     const { name, value } = e.target;
@@ -105,9 +136,9 @@ export default function Account() {
                     className="appearance-none block w-full bg-gray-200 text-gray-700 border-none rounded-3xl py-4 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     id="grid-first-name"
                     type="text"
-                    placeholder={t("Ahmed")}
+                    placeholder={userData.firstname}
                     name="firstname"
-                    value={profileInput.firstname || ""}
+                    value={profileInput.firstname || userData.firstname}
                   />
                 </div>
                 <div className="w-full md:w-1/2 px-3">
@@ -119,9 +150,9 @@ export default function Account() {
                     className="appearance-none block w-full bg-gray-200 text-gray-600 border-none rounded-3xl py-4 px-4 leading-tight focus:outline-none focus:bg-white"
                     id="grid-last-name"
                     type="text"
-                    placeholder={t("Mohamed")}
+                    placeholder={userData.lastname}
                     name="lastname"
-                    value={profileInput.lastname || ""}
+                    value={profileInput.lastname || userData.lastname}
                   />
                 </div>
               </div>
@@ -134,9 +165,9 @@ export default function Account() {
                     className="appearance-none block w-full bg-gray-200 text-gray-700 border-none rounded-3xl py-4 px-4 m-0 leading-tight focus:outline-none focus:bg-white"
                     id="grid-whats"
                     type="text"
-                    placeholder={t("Enter WhatsApp number")}
+                    placeholder={userData.whats}
                     name="whats"
-                    value={profileInput.whats || ""}
+                    value={profileInput.whats || userData.whats}
                     onChange={input}
                   />
                 </div>
@@ -154,6 +185,7 @@ export default function Account() {
                         type="radio"
                         value="female"
                         name="gender"
+                        checked={userData.gender === "female"}
                         className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
                       />
                       <label htmlFor="bordered-radio-1" className="w-full py-3 px-4 text-sm font-medium text-gray-900">
@@ -167,6 +199,7 @@ export default function Account() {
                         type="radio"
                         value="male"
                         name="gender"
+                        checked={userData.gender === "male"}
                         className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
                       />
                       <label htmlFor="bordered-radio-2" className="w-full py-4 ms-3 text-sm font-medium text-gray-900">
@@ -187,7 +220,7 @@ export default function Account() {
                       id="grid-country"
                       name="country"
                       onChange={input}
-                      value={profileInput.country}
+                      value={profileInput.country || userData.country}
                     >
                       <option hidden>{t("Select")}</option>
                       {options.map((option, index) => (
@@ -208,7 +241,7 @@ export default function Account() {
                       id="grid-timezone"
                       name="timeZone"
                       onChange={input}
-                      value={profileInput.timeZone}
+                      value={profileInput.timeZone || userData.timezone}
                       disabled
                     >
                       <option value="">{t("Select Timezone")}</option>
@@ -226,7 +259,7 @@ export default function Account() {
                 <span className="font-bold text-lg mb-4">{t("Change your profile picture")}</span>
                 <img
                   className="w-24 h-24 md:w-36 md:h-36 avatar mt-5 mb-5 rounded-full shadow-lg shadow-black"
-                  src={imgAvatar ? URL.createObjectURL(imgAvatar) : userProfile}
+                  src={imgAvatar ? URL.createObjectURL(imgAvatar) : userData.image}
                   alt="rounded avatar"
                   id="avatar"
                 />
@@ -271,10 +304,6 @@ export default function Account() {
             {t("Save Changes")}
           </button>
         </div>
-        <p className="mt-4 text-sm bg-red-600 text-white rounded-xl font-semibold px-2 py-1 w-fit mx-auto">
-          {t("Sign out and login again after saving changes.")}
-        </p>
-
       </section>
 
     </>

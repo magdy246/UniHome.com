@@ -39,6 +39,7 @@ export default function App() {
   const { i18n, t } = useTranslation();
   const storedLanguage = JSON.parse(localStorage.getItem("lang")) || "en";
   const currentLanguage = i18n.language;
+  const token = localStorage.getItem("accessToken");
 
   useEffect(() => {
     const direction = i18n.dir(currentLanguage);
@@ -117,28 +118,35 @@ export default function App() {
     }
   };
 
-  // Refresh token
-  const refreshToken = async () => {
-    const token = localStorage.getItem("accessToken");
-    if (token) {
-      try {
-        const res = await axiosInstance.post("https://yousab-tech.com/unihome/public/api/auth/refresh", {}, {
+  async function refreshToken() {
+    try {
+      const response = await axios.post(
+        `https://yousab-tech.com/unihome/public/api/auth/refresh`,
+        {},
+        {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        });
-        localStorage.setItem("accessToken", res.data.access_token);
-        setRefAPI(res.data.access_token);
-      } catch (error) {
-        console.log("Error refreshing token:", error);
-      }
+        }
+      );
+
+      localStorage.removeItem("accessToken");
+      localStorage.setItem("accessToken", response.data.access_token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      setRefAPI(response.data.access_token)
+    } catch (error) {
+      console.error("Error refreshing token:", error);
     }
-  };
+  }
 
   useEffect(() => {
-    const interval = setInterval(refreshToken, 660000);
-    return () => clearInterval(interval);
+    const refreshInterval = 300000;
+  
+    const tokenRefreshInterval = setInterval(() => {
+      refreshToken();
+    }, refreshInterval);
+  
+    return () => clearInterval(tokenRefreshInterval);
   }, []);
 
   // Fetch data when location or refAPI changes

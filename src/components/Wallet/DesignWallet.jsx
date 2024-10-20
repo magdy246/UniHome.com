@@ -61,7 +61,7 @@ const DesignWallet = () => {
               </div>
               <div className="text-xl font-bold text-gray-500 flex justify-center gap-2 items-center">
                 <span className="text-orange-500 text-2xl">{t("Hi")} </span>
-                {nameUser.firstname}
+                {nameUser?.firstname?.split(' ')[0]}
                 <span>
                   <MdWavingHand className="text-yellow-300" />
                 </span>
