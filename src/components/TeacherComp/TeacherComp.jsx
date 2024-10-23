@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
 import countries from "../flag.json";
 import "./TeacherComp.css";
+import Test2 from './Test2';
 
 export default function TeacherComp() {
     const getCountryFlag = (countryName) => {
@@ -46,9 +47,9 @@ export default function TeacherComp() {
 
             <div className="py-6 px-1 md:px-11">
                 {loading ? (
-                    <div className="w-full flex justify-center items-center mx-auto my-10 gap-10">
+                    <div className="w-3/4 flex justify-center items-center mx-auto my-10 gap-10">
                         <Suspense fallback={<div>Loading...</div>}>
-                            {/* Add loading components here if needed */}
+                            <Test2 />
                         </Suspense>
                     </div>
                 ) : (
