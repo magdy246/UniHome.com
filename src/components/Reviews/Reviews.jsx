@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import userCommentIcon from "../Assets/images/user comment.com.png";
+import rate from "../Assets/images/Animation-rate.gif";
 import "./Reviews.css";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -91,46 +92,58 @@ export default function Reviews(teacher) {
         <div>
           <h1 className="mt-5 mb-4 text-3xl font-semibold text-black">{t("Reviews")}</h1>
         </div>
-        <div className="overflow-y-scroll h-screen p-4">
-          {data.map((item, index) => (
-            <div
-              key={index}
-              className="mt-5 flex justify-between items-start p-5 bg-gray-100 shadow-lg rounded-3xl hover:shadow-xl transition duration-300 ease-in-out"
-            >
-              {/* User Info and Rating */}
-              <div className="flex gap-4 items-center">
-                {/* User Icon */}
-                <div className="w-12 h-12 rounded-full overflow-hidden">
-                  <img src={userCommentIcon} alt="User Comment Icon" className="w-full h-full object-cover" />
-                </div>
+        {data && data.length > 0 ? (
+          <div className="overflow-y-scroll h-screen p-4">
+            {data.map((item, index) => (
+              <div
+                key={index}
+                className="mt-5 flex justify-between items-start p-5 bg-gray-100 shadow-lg rounded-3xl hover:shadow-xl transition duration-300 ease-in-out"
+              >
+                {/* User Info and Rating */}
+                <div className="flex gap-4 items-center">
+                  {/* User Icon */}
+                  <div className="w-12 h-12 rounded-full overflow-hidden">
+                    <img src={userCommentIcon} alt="User Comment Icon" className="w-full h-full object-cover" />
+                  </div>
 
-                {/* User Name and Date */}
-                <div className="flex flex-col">
-                  <span className="text-lg font-semibold text-gray-800">
-                    {item.student.firstname + " " + item.student.lastname}
-                  </span>
-                  <span className="text-sm text-gray-500">{item.created_at.split("T")[0]}</span>
-
-                  {/* Rating */}
-                  <div className="flex items-center mt-2">
-                    <span className="px-3 py-1 font-bold text-white bg-yellow-500 rounded-full mr-2">
-                      {`${item.rate}.0`}
+                  {/* User Name and Date */}
+                  <div className="flex flex-col">
+                    <span className="text-lg font-semibold text-gray-800">
+                      {item.student.firstname + " " + item.student.lastname}
                     </span>
-                    {starRating(item.rate)}
+                    <span className="text-sm text-gray-500">{item.created_at.split("T")[0]}</span>
+
+                    {/* Rating */}
+                    <div className="flex items-center mt-2">
+                      <span className="px-3 py-1 font-bold text-white bg-yellow-500 rounded-full mr-2">
+                        {`${item.rate}.0`}
+                      </span>
+                      {starRating(item.rate)}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* User Comment */}
-              <div className="ml-8 w-full max-w-xl">
-                <p className="text-base text-gray-700 leading-relaxed border-l-4 pl-4 border-yellow-400">
-                  {item.comment}
-                </p>
+                {/* User Comment */}
+                <div className="ml-8 w-full max-w-xl">
+                  <p className="text-base text-gray-700 leading-relaxed border-l-4 pl-4 border-yellow-400">
+                    {item.comment}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        ) : (
+          <>
+            <div class="flex flex-col items-center justify-center h-full p-8">
+              <div class="max-w-md text-center p-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">No Reviews Yet</h2>
+                <p class="text-sm md:text-base text-gray-600 mb-6">Be the first to leave a review and share your experience!</p>
+                <img src={rate} alt="No reviews illustration" class="w-3/4 md:w-1/2 mx-auto mb-4 rounded-lg shadow-sm" />
               </div>
             </div>
-          ))}
-
-        </div>
+          </>
+        )}
 
         {user.type === "student" && (
           <form onSubmit={handleReview} className="mt-5 bg-gray-100 shadow-lg rounded-lg p-6 flex flex-col md:flex-row items-center">

@@ -1,0 +1,73 @@
+/* teacherCard.css */
+.teacher-card-container {
+    @apply flex flex-col md:flex-row items-center bg-gradient-to-r from-white to-gray-300 p-4 md:p-6 lg:p-8 rounded-xl shadow-md hover:shadow-lg transition duration-300 mx-auto border border-gray-200;
+    @apply w-[90vw] md:w-full !important;
+}
+
+.teacher-avatar {
+    @apply w-2/3 md:w-1/4 flex justify-center md:justify-start mb-4 md:mb-0 !important;
+}
+
+.teacher-avatar-img-wrapper {
+    @apply relative w-24 h-24 md:w-full md:h-full rounded-full md:rounded-xl overflow-hidden border-2 md:border-4 border-gray-500 shadow-md !important;
+}
+
+.teacher-avatar-img {
+    @apply w-full h-full object-cover !important;
+}
+
+.teacher-info {
+    @apply w-full md:w-2/3 md:pl-4 lg:pl-8 !important;
+}
+
+.teacher-name {
+    @apply text-xl text-center md:text-start md:text-2xl lg:text-3xl font-bold text-gray-900 !important;
+}
+
+.teacher-intro {
+    @apply text-gray-700 text-center md:text-start text-xs md:text-sm lg:text-base mt-1 md:mt-2 line-clamp-3 md:line-clamp-2 !important;
+}
+
+.teacher-stats {
+    @apply flex justify-evenly md:justify-between items-baseline text-gray-700 mt-4 md:mt-6 !important;
+}
+
+.teacher-stat-item {
+    @apply flex flex-col items-center md:items-start !important;
+}
+
+.teacher-stat-label {
+    @apply text-xs md:text-sm lg:text-base font-semibold !important;
+}
+
+.teacher-stat-value {
+    @apply text-base md:text-lg lg:text-xl !important;
+}
+
+.teacher-country {
+    @apply flex justify-center items-center mt-2 md:mt-0 !important;
+}
+
+.country-flag {
+    @apply w-6 md:w-8 rounded-sm mx-1 md:mx-2 !important;
+}
+
+.teacher-rating {
+    @apply flex items-center mt-2 md:mt-4 justify-center md:justify-start !important;
+}
+
+.star-icon {
+    @apply text-yellow-400 text-base md:text-lg lg:text-xl !important;
+}
+
+.teacher-review {
+    @apply ml-2 font-semibold text-gray-600 text-base md:text-lg lg:text-xl !important;
+}
+
+.read-more-button {
+    @apply text-blue-500 text-xs md:text-sm lg:text-base font-medium hover:underline mt-2 md:mt-4 !important;
+}
+
+.teacher-link {
+    @apply block md:w-3/4 w-full mx-auto !important;
+}

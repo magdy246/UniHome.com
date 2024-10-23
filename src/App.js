@@ -41,6 +41,7 @@ export default function App() {
   const currentLanguage = i18n.language;
   const token = localStorage.getItem("accessToken");
 
+
   useEffect(() => {
     const direction = i18n.dir(currentLanguage);
     document.body.setAttribute("dir", direction);
@@ -105,6 +106,8 @@ export default function App() {
       setDataUse(res.data.data.wallets);
     } catch (error) {
       console.log("Error fetching wallet data:", error);
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("user");
     }
   };
 
@@ -119,6 +122,7 @@ export default function App() {
   };
 
   async function refreshToken() {
+    const token = localStorage.getItem("accessToken");
     try {
       const response = await axios.post(
         `https://yousab-tech.com/unihome/public/api/auth/refresh`,
@@ -131,23 +135,29 @@ export default function App() {
       );
 
       localStorage.removeItem("accessToken");
+      localStorage.removeItem("user");
       localStorage.setItem("accessToken", response.data.access_token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
-      setRefAPI(response.data.access_token)
+      setRefAPI(response.data.access_token);
+
+      // Fetch wallet data with the new token
+      fetchWalletData(response.data.access_token);
     } catch (error) {
       console.error("Error refreshing token:", error);
     }
   }
 
-  useEffect(() => {
-    const refreshInterval = 300000;
-  
+  function startTokenRefresh() {
+    const refreshInterval = 10000000;
+
     const tokenRefreshInterval = setInterval(() => {
       refreshToken();
     }, refreshInterval);
-  
+
     return () => clearInterval(tokenRefreshInterval);
-  }, []);
+  }
+
+  startTokenRefresh();
 
   // Fetch data when location or refAPI changes
   useEffect(() => {
@@ -156,7 +166,8 @@ export default function App() {
       fetchWalletData(token);
     }
     fetchUserData();
-  }, [loc.pathname, refAPI]);
+  }, [token, loc.pathname, refAPI]);
+
 
   return (
     <apiWallet.Provider value={{ dataUse, setDataUse, userTable, setUserTable }}>

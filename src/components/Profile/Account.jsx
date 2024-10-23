@@ -4,6 +4,7 @@ import axios from "axios";
 import countryList from "react-select-country-list";
 import timezone from "../timezones.json";
 import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
 
 export default function Account() {
   const options = useMemo(() => countryList().getData(), []);
@@ -13,7 +14,7 @@ export default function Account() {
   const [profileInput, setProfileInput] = useState({
     image: "",
     country: "",
-    timeZone: "",
+    timezone: "",
     gender: "",
     whats: "",
     firstname: "",
@@ -36,7 +37,7 @@ export default function Account() {
 
     // Append other profile inputs
     formData.append("country", profileInput.country || userData.country);
-    formData.append("timeZone", profileInput.timeZone || userData.timeZone);
+    formData.append("timezone", profileInput.timezone || userData.timezone);
     formData.append("gender", profileInput.gender || userData.gender);
     formData.append("whats", profileInput.whats || userData.whats);
     formData.append("firstname", profileInput.firstname || userData.firstname);
@@ -85,7 +86,9 @@ export default function Account() {
 
       // Optionally set state if needed
       setDataUser(response.data.user);
+      toast.success("Profile updated successfully.")
     } catch (error) {
+      toast.error("An error occurred while updating your information. Please check your inputs and try again.")
       console.error("Error refreshing token:", error);
     }
   }
@@ -101,7 +104,7 @@ export default function Account() {
 
       // Update timezone if country changes
       if (name === "country") {
-        updatedInput.timeZone = timezoneMap[value] || "";
+        updatedInput.timezone = timezoneMap[value] || "";
       }
 
       return updatedInput;
@@ -239,12 +242,12 @@ export default function Account() {
                     <select
                       className="block appearance-none w-full bg-gray-200 text-gray-700 py-4 px-4 pr-8 rounded-3xl leading-tight focus:outline-none focus:bg-white"
                       id="grid-timezone"
-                      name="timeZone"
+                      name="timezone"
                       onChange={input}
-                      value={profileInput.timeZone || userData.timezone}
+                      value={profileInput.timezone || userData.timezone}
                       disabled
                     >
-                      <option value="">{t("Select Timezone")}</option>
+                      <option value="">{t("Select timezone")}</option>
                       {Object.entries(timezoneMap).map(([key, value]) => (
                         <option key={key} value={value}>
                           {value}

@@ -48,7 +48,7 @@ export default function Header() {
                 </p>
 
                 <Link
-                    to="/TeacherS"
+                    to="/TeacherCards"
                     className="inline-block px-6 py-3 sm:px-8 sm:py-3 md:px-10 md:py-4 text-base sm:text-lg md:text-xl lg:text-2xl text-white bg-gradient-to-r from-blue-500 to-orange-500 hover:from-orange-500 hover:to-blue-500 rounded-full font-[Cairo-B] shadow-lg transform hover:scale-105 transition-all duration-500"
                 >
                     {t('buttonText')}

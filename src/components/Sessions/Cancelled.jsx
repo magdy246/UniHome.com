@@ -52,9 +52,12 @@ const Cancelled = (Session) => {
   const formattedStartTime = convertTo12HourFormat(startTime);
   const formattedEndTime = convertTo12HourFormat(endTime);
 
-  if (Session.Session.status !== "canceled") {
-    return null
-  }
+  let Status = Session?.status
+  if (Status === "Cancelled") {
+    Status = "Cancelled";
+  } else {
+    return null;
+  }  
 
   return (
     <div className="p-4" dir={Lang === "ar" ? "rtl" : "ltr"}>
@@ -111,7 +114,7 @@ const Cancelled = (Session) => {
         <div className="text-center mb-6 bg-gray-100 p-3 rounded-lg flex flex-col sm:flex-row justify-around items-center space-y-4 sm:space-y-0">
           <div className="text-center capitalize">
             <h3 className="text-gray-500 text-sm lg:text-base">{t("Status")}</h3>
-            <p className=" text-green-500 font-bold">{Session.Session.status ? "cancelld" : null}</p>
+            <p className=" text-green-500 font-bold">{Status}</p>
           </div>
           <div>
             <h3 className="text-gray-500 text-sm lg:text-base mb-3">{t("Actions")}</h3>

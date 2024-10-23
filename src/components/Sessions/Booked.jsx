@@ -37,8 +37,6 @@ const Booked = ({ Session }) => {
   const formattedStartTime = convertTo12HourFormat(startTime);
   const formattedEndTime = convertTo12HourFormat(endTime);
 
-  const sessionStatus = Session?.status === "booked" ? "Booked" : "Not Booked";
-  
   const savedLang = localStorage.getItem("lang") || 'en';
   const [Lang, setLang] = useState(savedLang);
 
@@ -51,7 +49,14 @@ const Booked = ({ Session }) => {
     }
   }, [savedLang]);
 
-  
+  let Status = Session?.status
+  if (Status === "Booked") {
+    Status = "Booked";
+  } else {
+    return null;
+  }
+
+
   return (
     <div className="p-4" dir={Lang === "ar" ? "rtl" : "ltr"}>
       <div className="bg-white rounded-lg shadow-md px-6 py-10 mx-auto max-w-lg sm:max-w-xl lg:max-w-4xl mt-6 relative">
@@ -108,7 +113,7 @@ const Booked = ({ Session }) => {
         <div className="text-center mb-6 bg-gray-100 p-3 rounded-lg flex flex-col sm:flex-row justify-around items-center space-y-4 sm:space-y-0">
           <div className="text-center capitalize">
             <h3 className="text-gray-500 text-sm lg:text-base">{t("Status")}</h3>
-            <p className=" text-green-500 font-bold">{sessionStatus}</p>
+            <p className=" text-green-500 font-bold">{Status}</p>
           </div>
           <div>
             <h3 className="text-gray-500 text-sm lg:text-base mb-3">{t("Actions")}</h3>

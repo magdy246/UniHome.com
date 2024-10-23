@@ -205,7 +205,7 @@ export default function NavBar({
                   </li>
                   <li>
                     <NavLink
-                      to="/TeacherS"
+                      to="/TeacherCards"
                       className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                     >
                       {t('Teachers')}
@@ -254,7 +254,7 @@ export default function NavBar({
               </span>
               <span>
                 <NavLink
-                  to="/TeacherS"
+                  to="/TeacherCards"
                   className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500  w-full text-white font-bold px-3 py-2 rounded-3xl focus:outline-none focus:shadow-outline"
                 >
                   {t("Teachers")}
@@ -321,7 +321,7 @@ export default function NavBar({
                   </li>
                   <li>
                     <NavLink
-                      to="/TeacherS"
+                      to="/TeacherCards"
                       className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                     >
                       {t("Teachers")}

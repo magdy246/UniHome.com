@@ -5,7 +5,6 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Cookies from "js-cookie";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { AiFillStar, AiOutlineMessage } from "react-icons/ai";
 import { BsPeople } from "react-icons/bs";
@@ -56,7 +55,6 @@ export default function Teacher() {
     averageRate = 0
   }
 
-
   // Fetch teacher data
   useEffect(() => {
     const apiData = async () => {
@@ -87,6 +85,8 @@ export default function Teacher() {
               end: endDate,
               title: session.title,
               status: session.status,
+              sessionBreak: session.break,
+              sessionDate: session.date
             };
           });
           setSession(userData.sessions);
@@ -101,12 +101,13 @@ export default function Teacher() {
 
   // Customize event display
   const eventContent = (eventInfo) => {
-    const { status } = eventInfo.event.extendedProps;
+    const { status, sessionBreak, sessionDate } = eventInfo.event.extendedProps;
     const currentDate = new Date();
-    const sessionDateObj = new Date(date);
+    const sessionDateObj = new Date(sessionDate);
 
     let counter = currentDate <= sessionDateObj ? 0 : 1
-    const backgroundColor = status === counter ? "green" : "red";
+    const backgroundColor = status === counter ? (sessionBreak === 1 ? "blue" : "green") : "red";
+
     return (
       <div className="relative select-none">
         <div
@@ -129,7 +130,6 @@ export default function Teacher() {
     const eventData = info.event.extendedProps;
     const eventId = Number(info.event._def.publicId);
     const singleSession = session.find((e) => e.id === eventId);
-
     if (singleSession?.status === 0) {
       setPopupEvent(eventData);
       setSingleSession(singleSession);
@@ -172,6 +172,7 @@ export default function Teacher() {
   const { t } = useTranslation();
   const Popup = ({ event, onClose }) => {
     if (!event) return null;
+
     return (
       <div className="popup-overlay profile-tether z-50" onClick={onClose}>
         <div className="popup-content" onClick={(e) => e.stopPropagation()}>
@@ -242,7 +243,7 @@ export default function Teacher() {
                 className="w-24 h-24 rounded-3xl border-2 border-gray-300 shadow-sm mr-4"
               />
               <div>
-                <h2 className="text-3xl font-bold text-gray-800 mb-1">
+                <h2 className="text-2xl font-bold text-gray-800 mb-1">
                   {dataApi?.firstname} {dataApi?.lastname}
                 </h2>
                 <p className="flex items-center font-bold text-gray-600 text-md px-2 py-1 bg-gray-200 w-fit rounded-lg ring-2 ring-gray-500">
@@ -267,7 +268,7 @@ export default function Teacher() {
               <div className="text-center">
                 <BsPeople className="text-4xl text-yellow-500 mb-2 mx-auto" />
                 <p className="text-gray-800 font-semibold">
-                  <span className="block text-3xl">{dataApi?.students}</span>{" "}
+                  <span className="block text-3xl">{dataApi?.students === null || dataApi?.students === undefined ? "0" : dataApi?.students}</span>{" "}
                   {t("Students")}
                 </p>
               </div>
@@ -306,6 +307,10 @@ export default function Teacher() {
                 <div className="w-10 h-5 rounded-sm bg-green-500"></div>
                 <span>Available</span>
               </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-10 h-5 rounded-sm bg-blue-600"></div>
+                <span>Break</span>
+              </div>
             </div>
             <FullCalendar
               plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -314,10 +319,16 @@ export default function Teacher() {
                 center: "title",
                 right: "timeGridWeek",
               }}
+              weekends={true}
               initialView="timeGridWeek"
               events={events}
               eventClick={handleEventClick}
               eventContent={eventContent}
+              scrollTime="00:00:00"
+              dayHeaders={true}
+              nowIndicator={true}
+              slotMinTime="00:00:00"
+              slotMaxTime="24:00:00"
             />
           </div>
 

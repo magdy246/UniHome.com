@@ -60,9 +60,8 @@ export default function SliderTeatcher() {
       </h1>
       <div className="py-6 px-11">
         {loading ? (
-          <div className="w-full flex justify-center items-center mx-auto my-10">
+          <div className="w-full flex justify-center items-center mx-auto my-10 gap-10">
             <Suspense fallback={<div>Loading...</div>}>
-              <Test />
               <Test />
               <Test />
               <Test />

@@ -70,10 +70,10 @@ const TeacherCard = ({ Session }) => {
                 </div>
               </td>
               <td className="px-3 sm:px-6 py-4">
-                <h3>{dataSession === "canceled" ? dataSession === 0 : 1}</h3>
+                <h3>{dataSession === "Cancelled" ? dataSession === "0" : "1"}</h3>
               </td>
               <td className="px-3 sm:px-6 py-4">
-                <h3>{dataSession === "booked" ? dataSession === 0 : 1}</h3>
+                <h3>{dataSession === "Booked" ? dataSession === "0" : "1"}</h3>
               </td>
               <td className="px-3 sm:px-6 py-4">
                 <Link

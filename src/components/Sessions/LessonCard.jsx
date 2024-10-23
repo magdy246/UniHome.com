@@ -24,7 +24,7 @@ const addOneHour = (time24) => {
 
 const LessonCard = (Session) => {
   const teacherId = Session?.Session?.teacher?.id;
-
+  
   let dateSection = new Date(`${Session.Session.session_table.date} ${Session.Session.session_table.time}`);
   let dateNew = new Date().getTime();
   let DateAll = dateSection - dateNew;
@@ -55,7 +55,7 @@ const LessonCard = (Session) => {
     return country ? country.flag : "";
   };
 
-  const token = localStorage.getItem("accessToken");
+  const token = localStorage.getItem("accessToken");  
 
   async function cancelSession() {
     try {
@@ -154,7 +154,7 @@ const LessonCard = (Session) => {
             <div className="text-center capitalize">
               <h3 className="text-gray-500 text-sm lg:text-base">{t("Status")}</h3>
               <p className="text-green-500 font-bold">
-                {Session.Session.status === "canceled" ? "Cancelled" : Session.Session.status}
+                {Session?.Session?.status}
               </p>
             </div>
             <div>

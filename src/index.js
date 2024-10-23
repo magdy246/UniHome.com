@@ -12,7 +12,6 @@ import {
   RouterProvider,
   Navigate,
 } from "react-router-dom";
-import Cookies from "js-cookie";
 import './i18n';
 import { Toaster } from "react-hot-toast";
 import ProtectedRouterLog from "./ProtectedRouteLog";
@@ -24,6 +23,7 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import Developers from "./components/Developers";
 import ForgetPassword from "./components/Password/ForgetPassword";
 import ResetPassword from "./components/Password/ResetPassword";
+import TeacherComp from "./components/TeacherComp/TeacherComp";
 const Home = lazy(() => import("./components/Home"));
 const About = lazy(() => import("./components/About"));
 const Dashboard = lazy(() => import("./components/Dashboard"));
@@ -158,7 +158,25 @@ const routes = [
         ),
       },
       {
+        path: "TeacherCards",
+        element: (
+          <Suspense fallback={<LottieHandler animationData={Loader} />}>
+            <TeacherComp />
+          </Suspense>
+        ),
+      },
+      {
         path: "TeacherS/:Teacher",
+        element: (
+          <ProtectedRoute>
+            <Suspense fallback={<LottieHandler animationData={Loader} />}>
+              <Teacher />
+            </Suspense>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "TeacherCards/:Teacher",
         element: (
           <ProtectedRoute>
             <Suspense fallback={<LottieHandler animationData={Loader} />}>

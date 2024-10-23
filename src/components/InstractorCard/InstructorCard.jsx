@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import './instractorCard.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { AiFillStar } from 'react-icons/ai';
 
@@ -37,7 +35,7 @@ const CardComponent = ({
           <div className="flex justify-center items-center mt-2">
             <div className="flex items-center text-yellow-400 text-lg mb-4">
               <AiFillStar className="mr-1" />
-              <span className="font-semibold text-yellow-500">({Review} {t("Reviews")})</span>
+              <span className="font-semibold text-yellow-500">( {Review} {t("Reviews")})</span>
             </div>
           </div>
         </div>

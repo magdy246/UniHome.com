@@ -52,9 +52,12 @@ const InCompeleted = (Session) => {
   const formattedStartTime = convertTo12HourFormat(startTime);
   const formattedEndTime = convertTo12HourFormat(endTime);
 
-  if (Session.Session.status !== "incompleted") {
-    return null
-  }
+  let Status = Session?.status
+  if (Status === "InCompleted" || Status === "inCompleted") {
+    Status = "InCompleted";
+  } else {
+    return null;
+  }  
 
   return (
     <div className="p-4" dir={Lang === "ar" ? "rtl" : "ltr"}>
@@ -71,18 +74,18 @@ const InCompeleted = (Session) => {
               {/* Profile Avatar */}
               <img
                 className="w-16 h-16 sm:w-24 sm:h-24 rounded-3xl"
-                src={Session.Session?.teacher?.image} // Placeholder for Avatar
+                src={Session?.Session?.teacher?.image} // Placeholder for Avatar
                 alt="User Avatar"
               />
             </div>
             <div className="capitalize">
               {/* User Name & Country */}
               <h2 className="text-gray-800 font-bold text-sm sm:text-md lg:text-2xl">
-                {Session.Session?.teacher?.firstname} {Session.Session?.teacher?.lastname}
+                {Session?.Session?.teacher?.firstname} {Session?.Session?.teacher?.lastname}
               </h2>
               <p className="text-gray-500 text-sm lg:text-base">
-                <span className="mr-1">{getCountryFlag(Session.Session?.teacher?.country)}</span>
-                {Session.Session?.teacher?.country}
+                <span className="mr-1">{getCountryFlag(Session?.Session?.teacher?.country)}</span>
+                {Session?.Session?.teacher?.country}
               </p>
             </div>
           </div>
@@ -100,7 +103,7 @@ const InCompeleted = (Session) => {
                   </span>
                 </p>
                 <p className="text-gray-800 font-medium">
-                  {t("Date")}: {Session.Session.session_table.date}
+                  {t("Date")}: {Session?.Session?.session_table?.date}
                 </p>
               </div>
             </div>
@@ -111,7 +114,7 @@ const InCompeleted = (Session) => {
         <div className="text-center mb-6 bg-gray-100 p-3 rounded-lg flex flex-col sm:flex-row justify-around items-center space-y-4 sm:space-y-0">
           <div className="text-center capitalize">
             <h3 className="text-gray-500 text-sm lg:text-base">{t("status")}</h3>
-            <p className=" text-green-500 font-bold">{Session.Session.status}</p>
+            <p className=" text-green-500 font-bold">{Status}</p>
           </div>
           <div>
             <h3 className="text-gray-500 text-sm lg:text-base mb-3">{t("Actions")}</h3>
