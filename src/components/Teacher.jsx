@@ -106,7 +106,7 @@ export default function Teacher() {
     const sessionDateObj = new Date(sessionDate);
 
     let counter = currentDate <= sessionDateObj ? 0 : 1
-    const backgroundColor = status === counter ? (sessionBreak === 1 ? "blue" : "green") : "red";
+    const backgroundColor = status === "green" : counter ?"green": sessionBreak === 1 ? "blue" :  "red";
 
     return (
       <div className="relative select-none">
