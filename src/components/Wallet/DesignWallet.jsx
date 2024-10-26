@@ -74,7 +74,7 @@ const DesignWallet = () => {
               </p>
               <div className="flex flex-col items-end w-full md:w-1/2">
                 <div className="text-4xl font-bold text-green-500">
-                  {t("EGP")} {walletData.balance}{" "}
+                  {t("EGP")} {walletData.balance || "00.0"}{" "}
                 </div>
                 <div className="text-sm font-semibold text-orange-500">
                   {t("Your Wallet Balance.")}
@@ -100,9 +100,9 @@ const DesignWallet = () => {
                   <th scope="col" className="px-6 py-3">
                     {t("Debit")}
                   </th>
-                  <th scope="col" className="px-6 py-3">
+                  {/* <th scope="col" className="px-6 py-3">
                     {t("Balance")}
-                  </th>
+                  </th> */}
                   <th scope="col" className="px-6 py-3">
                     {t("Comments")}
                   </th>
@@ -118,9 +118,9 @@ const DesignWallet = () => {
                     <td className="px-6 py-4">{e.id}</td>
                     <td className="px-1 py-4">{e.date}</td>
                     {e.type === "credit" ? (
-                      <td className="px-2 py-4 font-bold">EGP {e?.amount}</td>
+                      <td className="px-2 py-4 font-bold text-blue-500">EGP {e?.amount}</td>
                     ) : (
-                      <td></td>
+                      <td className="px-2 py-4 font-bold text-blue-500">EGP 00.0</td>
                     )}
 
                     {e.type === "debit" ? (
@@ -128,13 +128,13 @@ const DesignWallet = () => {
                         EGP {e?.amount}
                       </td>
                     ) : (
-                      <td></td>
+                      <td className="px-2 py-4 font-bold text-red-500">EGP 00.0</td>
                     )}
 
-                    <td className="px-2 py-4 font-bold text-blue-500">
+                    {/* <td className="px-2 py-4 font-bold text-blue-500">
                       EGP {e.balance}
-                    </td>
-                    <td className="px-6 py-4">{e.description}</td>
+                    </td> */}
+                    <td className="px-6 py-4">{e.description || "No Comment"}</td>
                     <td className="px-6 py-4 flex justify-center items-center">
                       {e.status === 0 ? (
                         <div className="bg-green-500 flex justify-center items-center gap-2 py-1 px-3 rounded-3xl w-fit">

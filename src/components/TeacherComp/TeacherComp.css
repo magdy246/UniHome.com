@@ -9,7 +9,7 @@
 }
 
 .teacher-avatar-img-wrapper {
-    @apply relative w-24 h-24 md:w-full md:h-full rounded-full md:rounded-xl overflow-hidden border-2 md:border-4 border-gray-500 shadow-md !important;
+    @apply relative w-24 h-24 md:w-full md:h-full rounded-full md:rounded-3xl overflow-hidden border-2 md:border-4 border-gray-500 shadow-md !important;
 }
 
 .teacher-avatar-img {

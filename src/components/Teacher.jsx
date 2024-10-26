@@ -104,9 +104,16 @@ export default function Teacher() {
     const { status, sessionBreak, sessionDate } = eventInfo.event.extendedProps;
     const currentDate = new Date();
     const sessionDateObj = new Date(sessionDate);
+    const counter = currentDate <= sessionDateObj ? 0 : 1;
+    let backgroundColor;
 
-    let counter = currentDate <= sessionDateObj ? 0 : 1
-    const backgroundColor = status === counter ? (sessionBreak === 1 ? "blue" : "green") : "red";
+    if (sessionBreak === 1) {
+      backgroundColor = "blue";
+    } else if (counter === 1) {
+      backgroundColor = "red"; // Booked session color
+    } else {
+      backgroundColor = status === 1 ? "red" : "green";
+    }
 
     return (
       <div className="relative select-none">
@@ -115,11 +122,10 @@ export default function Teacher() {
           style={{
             backgroundColor,
             color: "white",
-            borderRadius: "5px",
-            padding: "11px",
+            padding: "13px",
           }}
         >
-          {date}
+          {sessionDate}
         </div>
       </div>
     );
@@ -127,16 +133,25 @@ export default function Teacher() {
 
   // Handle event click
   const handleEventClick = (info) => {
+    const { sessionBreak, sessionDate } = info.event.extendedProps;
+    const currentDate = new Date();
+    const sessionDateObj = new Date(sessionDate);
+    const counter = currentDate <= sessionDateObj ? 0 : 1;
     const eventData = info.event.extendedProps;
     const eventId = Number(info.event._def.publicId);
     const singleSession = session.find((e) => e.id === eventId);
-    if (singleSession?.status === 0) {
+
+    // Check if the session is booked
+    if (counter === 1 || sessionBreak === 1) {
+      toast.error("You can't book this session");
+    } else if (singleSession?.status === 0) {
       setPopupEvent(eventData);
       setSingleSession(singleSession);
     } else {
       toast.error("This session is already booked.");
     }
   };
+
 
   // Confirm booking
   const handleBookingConfirm = async () => {
@@ -178,7 +193,7 @@ export default function Teacher() {
         <div className="popup-content" onClick={(e) => e.stopPropagation()}>
           <h3>{event.title}</h3>
           <p>
-            Date: {event.start ? event.start.toString() : "No date available"}
+            Date: {event.sessionDate ? event.sessionDate : "No date available"}
           </p>
           <p>Status: {event.status === 0 ? "Available" : "Unavailable"}</p>
           <div className="mt-4">
@@ -202,6 +217,8 @@ export default function Teacher() {
       </div>
     );
   };
+
+
   return (
     <>
       <Helmet>
@@ -254,7 +271,7 @@ export default function Teacher() {
             </div>
             <div className="flex items-center text-yellow-400 text-lg mb-4">
               <AiFillStar className="mr-1" />
-              <span className="font-semibold text-yellow-500">{averageRate} ({data.length} {t("Reviews")})</span>
+              <span className="font-semibold text-yellow-500">({dataApi?.review} {t("Reviews")})</span>
             </div>
 
             <div className="text-center mb-4">

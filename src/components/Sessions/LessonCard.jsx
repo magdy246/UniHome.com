@@ -24,7 +24,7 @@ const addOneHour = (time24) => {
 
 const LessonCard = (Session) => {
   const teacherId = Session?.Session?.teacher?.id;
-  
+
   let dateSection = new Date(`${Session.Session.session_table.date} ${Session.Session.session_table.time}`);
   let dateNew = new Date().getTime();
   let DateAll = dateSection - dateNew;
@@ -55,7 +55,7 @@ const LessonCard = (Session) => {
     return country ? country.flag : "";
   };
 
-  const token = localStorage.getItem("accessToken");  
+  const token = localStorage.getItem("accessToken");
 
   async function cancelSession() {
     try {
@@ -75,9 +75,9 @@ const LessonCard = (Session) => {
   }
 
   useEffect(() => {
-    if (Session.Session.id) {
-      setSessionId(Session.Session.id);
-    }    
+    if (Session?.Session?.id) {
+      setSessionId(Session?.Session?.id);
+    }
   }, []);
 
   useEffect(() => {

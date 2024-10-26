@@ -56,6 +56,10 @@
   @apply text-2xl border-none target:text-blue-400 active:bg-blue-700 text-black font-medium w-full capitalize !important;
 } */
 
+.hide-dropDown {
+  @apply block md:hidden !important;
+}
+
 .hideUniHome {
   @apply block;
 }
@@ -116,7 +120,9 @@
 }
 
 @keyframes shadow-throb {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0px 0px 4px 4px orange, 0px 0px 4px 4px orange, 0px 0px 4px 4px orange;
   }
 

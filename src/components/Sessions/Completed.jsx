@@ -50,7 +50,7 @@ const Completed = (Session) => {
   const formattedStartTime = convertTo12HourFormat(startTime);
   const formattedEndTime = convertTo12HourFormat(endTime);
 
-  let Status = Session?.status
+  let Status = Session?.Session?.status
   if (Status === "Completed") {
     Status = "Completed";
   } else {

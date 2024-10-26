@@ -112,8 +112,18 @@ export default function Account() {
   }
 
   function uploadPictureProfile(e) {
-    setImgAvatar(e.target.files[0]);
-    fileInputRef.current.value = "";
+    const file = e.target.files[0];
+
+    // Check if file is of type image/jpeg
+    if (file && file.type !== "image/jpeg") {
+      toast.error("Please upload a JPG image.");
+      toast.error("Only JPG images are allowed.");
+      fileInputRef.current.value = ""; // Reset file input
+      return;
+    }
+
+    setImgAvatar(file); // Set the file if it’s a JPEG
+    fileInputRef.current.value = ""; // Reset file input after setting
   }
 
   function removePictureProfile() {
@@ -262,8 +272,8 @@ export default function Account() {
                 <span className="font-bold text-lg mb-4">{t("Change your profile picture")}</span>
                 <img
                   className="w-24 h-24 md:w-36 md:h-36 avatar mt-5 mb-5 rounded-full shadow-lg shadow-black"
-                  src={imgAvatar ? URL.createObjectURL(imgAvatar) : userData.image}
-                  alt="rounded avatar"
+                  src={userData.image}
+                  alt="avatar"
                   id="avatar"
                 />
                 <div className="btnPicture w-full flex flex-col items-center duration-500 transition-all">

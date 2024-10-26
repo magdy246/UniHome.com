@@ -3,6 +3,7 @@ import axios from "axios";
 import comment from "../../images/comment-icon.png";
 import { FaMinus } from "react-icons/fa6";
 import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
 
 export default function AddQuestions() {
   const [quizTitle, setQuizTitle] = useState("");
@@ -90,10 +91,12 @@ export default function AddQuestions() {
 
       const data = Array.isArray(response?.data) ? response.data : [];
       setQuestions(data);
+      toast.success("Questions already sending.")
 
       return response;
     } catch (error) {
       console.error("Error adding questions:", error);
+      toast.error("Questions are not sending.")
       return error;
     }
   }

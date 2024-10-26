@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import userCommentIcon from "../Assets/images/user comment.com.png";
+import userCommentIcon from "../Assets/images/userComment.com.png";
 import rate from "../Assets/images/Animation-rate.gif";
 import "./Reviews.css";
 import axios from "axios";
@@ -103,7 +103,7 @@ export default function Reviews(teacher) {
                 <div className="flex gap-4 items-center">
                   {/* User Icon */}
                   <div className="w-12 h-12 rounded-full overflow-hidden">
-                    <img src={userCommentIcon} alt="User Comment Icon" className="w-full h-full object-cover" />
+                    <img src={item.student.image || userCommentIcon} alt="User Comment Icon" className="w-full h-full object-cover" />
                   </div>
 
                   {/* User Name and Date */}

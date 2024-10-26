@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Cookies from "js-cookie";
 
 import comment from "../../images/comment-icon.png";
+import toast from "react-hot-toast";
 
 export default function SubmitAnswer() {
   const [quizzes, setQuizzes] = useState([]);
@@ -39,7 +39,7 @@ export default function SubmitAnswer() {
 
   const handleSubmit = async () => {
     try {
-      const token = localStorage.getitem("accessToken");
+      const token = localStorage.getItem("accessToken");
 
       if (!token) {
         console.error("No token found");
@@ -64,8 +64,10 @@ export default function SubmitAnswer() {
           },
         }
       );
+      toast.success("the answers already Submited.")
 
     } catch (error) {
+      toast.error("the answers are not Submited.")
       console.error("Error submitting exam:", error);
     }
   };
@@ -137,8 +139,8 @@ export default function SubmitAnswer() {
                       <div
                         key={choice.id}
                         className={`border-2 border-gray-300 rounded-3xl flex justify-between items-center cursor-pointer transition-all duration-300 ${selectedAnswers[question.id] === choice.id
-                            ? "bg-blue-600 border-blue-500 text-white"
-                            : ""
+                          ? "bg-blue-600 border-blue-500 text-white"
+                          : ""
                           } hover:bg-blue-400 hover:border-blue-500 active:bg-blue-700`}
                         onClick={() =>
                           handleAnswerChange(question.id, choice.id)

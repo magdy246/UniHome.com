@@ -290,7 +290,7 @@ export default function NavBar({
                 </span>
               </div>
               {/* User Profile */}
-              <div className="dropdown dropdown-end md:hidden block">
+              <div className="dropdown dropdown-end hide-dropDown">
                 <div tabIndex={0} role="button" className="w-16 h-16 btn btn-ghost btn-circle avatar">
                   <div className="rounded-full" id="animation-register">
                     <img

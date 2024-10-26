@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Cookies from "js-cookie";
 import commentIcon from "../../images/comment-icon.png";
 import { useTranslation } from "react-i18next";
 
