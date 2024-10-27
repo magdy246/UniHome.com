@@ -123,6 +123,7 @@ export default function Teacher() {
             backgroundColor,
             color: "white",
             padding: "13px",
+            cursor: "pointer"
           }}
         >
           {sessionDate}
@@ -175,8 +176,7 @@ export default function Teacher() {
       );
 
     } catch (error) {
-      console.log
-        ("Transaction successful!");
+      toast.success("Transaction successful!");
     }
   };
 
@@ -218,6 +218,34 @@ export default function Teacher() {
     );
   };
 
+  const getCalendarView = () => {
+    const width = window.innerWidth;
+    if (width <= 480) return "timeGridThreeDay"; // Mobile: 3-day view
+    if (width <= 768) return "timeGridFiveDay";  // Tablet: 5-day view
+    return "timeGridWeek";                       // Desktop: full week view
+  };
+
+  const [calendarView, setCalendarView] = useState(getCalendarView);
+
+  useEffect(() => {
+    const handleResize = () => setCalendarView(getCalendarView);
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const customViews = {
+    timeGridThreeDay: {
+      type: "timeGrid",
+      duration: { days: 3 },
+      buttonText: "3 days",
+    },
+    timeGridFiveDay: {
+      type: "timeGrid",
+      duration: { days: 5 },
+      buttonText: "5 days",
+    },
+  };
 
   return (
     <>
@@ -337,7 +365,8 @@ export default function Teacher() {
                 right: "timeGridWeek",
               }}
               weekends={true}
-              initialView="timeGridWeek"
+              initialView={calendarView}
+              views={customViews}
               events={events}
               eventClick={handleEventClick}
               eventContent={eventContent}

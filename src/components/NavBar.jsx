@@ -179,7 +179,7 @@ export default function NavBar({
                 <ul
                   tabIndex={0}
                   className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                  <div className="px-4 py-3 bg-gray-200 rounded-lg mb-2" dir="ltr">
+                  <div className="px-4 py-3 bg-gray-200 rounded-lg mb-2 w-full" dir="ltr">
                     <span className="block text-sm font-bold text-gray-500 capitalize dark:text-white">
                       {dataUser?.firstname} {dataUser?.lastname}
                     </span>
@@ -189,7 +189,7 @@ export default function NavBar({
                   </div>
                   <li>
                     <NavLink
-                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 w-full mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                       to="Chat"
                     >
                       {t('Chat')}
@@ -197,7 +197,7 @@ export default function NavBar({
                   </li>
                   <li>
                     <NavLink
-                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 w-full mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                       to="/Dashboard"
                     >
                       {t('Dashboard')}
@@ -206,7 +206,7 @@ export default function NavBar({
                   <li>
                     <NavLink
                       to="/TeacherCards"
-                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 w-full mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                     >
                       {t('Teachers')}
                     </NavLink>
@@ -214,7 +214,7 @@ export default function NavBar({
                   <li>
                     <NavLink
                       to="/setting"
-                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 w-full mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                     >
                       {t('Settings')}
                     </NavLink>
@@ -222,7 +222,7 @@ export default function NavBar({
                   <li>
                     <NavLink
                       to="/wallet"
-                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 w-full mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                     >
                       {t('Wallet')}
                     </NavLink>
@@ -233,7 +233,7 @@ export default function NavBar({
                         logOut();
                         // window.location.reload();
                       }}
-                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 w-full mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                     >
                       {t('SignOut')}
                     </Link>
@@ -305,7 +305,7 @@ export default function NavBar({
                   className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                   <li>
                     <NavLink
-                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 my-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 w-full my-1 block rounded-xl focus:outline-none focus:shadow-outline"
                       to="/"
                     >
                       {t("Home")}
@@ -314,7 +314,7 @@ export default function NavBar({
                   <li>
                     <NavLink
                       to="/about"
-                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 w-full mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                     >
                       {t("About")}
                     </NavLink>
@@ -322,7 +322,7 @@ export default function NavBar({
                   <li>
                     <NavLink
                       to="/TeacherCards"
-                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 w-full mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                     >
                       {t("Teachers")}
                     </NavLink>
@@ -330,7 +330,7 @@ export default function NavBar({
                   <li>
                     <NavLink
                       to="/login"
-                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 w-full mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                     >
                       {t("signIn.login")}
                     </NavLink>
@@ -338,7 +338,7 @@ export default function NavBar({
                   <li>
                     <NavLink
                       to="/register"
-                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
+                      className="border-2 border-orange-500 bg-orange-500 text-center hover:bg-white hover:text-black duration-500 text-white font-bold py-1 px-10 w-full mb-1 block rounded-xl focus:outline-none focus:shadow-outline"
                     >
                       {t("Register")}
                     </NavLink>

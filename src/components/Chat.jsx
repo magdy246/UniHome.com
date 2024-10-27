@@ -150,6 +150,23 @@ export default function Chat() {
     user.firstname.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const renderMessageWithLinks = (message) => {
+    const linkRegex = /(https?:\/\/[^\s]+)/g; // Regex to find links
+    const parts = message.split(linkRegex);
+
+    return parts.map((part, index) => {
+      // Check if the part is a link
+      if (linkRegex.test(part)) {
+        return (
+          <a key={index} href={part} className="text-black hover:text-blue-600 underline font-semibold" target="_blank" rel="noopener noreferrer">
+            {part}
+          </a>
+        );
+      }
+      return part; // Return the text part as is
+    });
+  };
+
   return (
     <>
       <Helmet>
@@ -239,9 +256,15 @@ export default function Chat() {
                               } max-w-[80%] md:max-w-[50%]`}
                           >
                             <p className="w-full break-words">
-                              {renderMessageWithLinks(msg.message)}
+                              {renderMessageWithLinks(
+                                msg.message,
+                                {
+                                  linkStyle: "text-blue-500 underline font-semibold", // Style for links
+                                }
+                              )}
                             </p>
                           </div>
+
                           <div className={`avatar ${msg.sender_id === user.id
                             ? "order-2"
                             : "order-1"

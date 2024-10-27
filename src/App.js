@@ -7,6 +7,7 @@ import { createContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import NetworkStatus from "./components/NetworkStatus/NetworkStatus";
 import Alert from "./components/Alert";
+import UpIcon from "./components/UpIcon";
 
 export const apiWallet = createContext(null);
 
@@ -189,6 +190,7 @@ export default function App() {
           <Outlet />
         </main>
         <SupportIcon />
+        <UpIcon />
         <NetworkStatus />
         <Footer />
       </div>

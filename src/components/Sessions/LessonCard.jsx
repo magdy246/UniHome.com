@@ -24,16 +24,18 @@ const addOneHour = (time24) => {
 
 const LessonCard = (Session) => {
   const teacherId = Session?.Session?.teacher?.id;
+  const userCookie = localStorage.getItem("user");
+  const dataUser = userCookie ? JSON.parse(userCookie) : null;
 
-  let dateSection = new Date(`${Session.Session.session_table.date} ${Session.Session.session_table.time}`);
+  let dateSection = new Date(`${Session?.Session?.session_table?.date} ${Session?.Session?.session_table?.time}`);
   let dateNew = new Date().getTime();
   let DateAll = dateSection - dateNew;
 
   const [timeLeft, setTimeLeft] = useState(DateAll > 0 ? DateAll : 0);
   const [sessionId, setSessionId] = useState(null);
-  const dateSession = new Date(Session.Session.session_table.created_at);
+  const dateSession = new Date(Session?.Session?.session_table?.created_at);
   const date = dateSession.toLocaleDateString();
-  const startTime = Session.Session.session_table.time;
+  const startTime = Session?.Session?.session_table?.time;
   const endTime = addOneHour(startTime);
   const formattedStartTime = convertTo12HourFormat(startTime);
   const formattedEndTime = convertTo12HourFormat(endTime);
@@ -71,6 +73,25 @@ const LessonCard = (Session) => {
       toast.success("The session cancelled");
     } catch (error) {
       toast.error("The session is already cancelled");
+    }
+  }
+
+  async function completeSession() {
+    try {
+      const response = await axios.post(
+        "https://yousab-tech.com/unihome/public/api/complete/session",
+        { session_id: sessionId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response);
+      toast.success("The session completed successfully.");
+    } catch (error) {
+      toast.error("Error: The session is already completed.");
+      console.error("Complete session error:", error);
     }
   }
 
@@ -172,8 +193,13 @@ const LessonCard = (Session) => {
           </div>
           <div className="w-full flex justify-end">
             <Link to={`/Session/${Session?.Session?.id}`} className="my-3 h-11 w-fit">
-              <button className="flex items-center justify-center text-white text-lg rounded-3xl py-2 px-4 disabled:bg-gray-500 disabled:border-gray-700 disabled:active:bg-gray-700 font-bold bg-blue-600 border-b-4 border-blue-800 transition-transform duration-300 hover:border-b-0 hover:translate-y-0.5 active:outline-none active:bg-blue-700 active:scale-95"
-                disabled={timeLeft > 0}
+              <button
+                onClick={dataUser.type === "teacher" ? () => { completeSession() } : null}
+                className="flex items-center justify-center text-white text-lg rounded-3xl py-2 px-4 disabled:bg-gray-500 disabled:border-gray-700 disabled:active:bg-gray-700 font-bold bg-blue-600 border-b-4 border-blue-800 transition-transform duration-300 hover:border-b-0 hover:translate-y-0.5 active:outline-none active:bg-blue-700 active:scale-95"
+                disabled={
+                  dataUser.type !== "teacher" &&
+                  (timeLeft > 0 || (Session?.Session?.status !== "Completed"))
+                }
               >
                 {t("Join Lesson")}
               </button>

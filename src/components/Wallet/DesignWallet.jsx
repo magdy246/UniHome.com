@@ -134,7 +134,7 @@ const DesignWallet = () => {
                     {/* <td className="px-2 py-4 font-bold text-blue-500">
                       EGP {e.balance}
                     </td> */}
-                    <td className="px-6 py-4">{e.description || "No Comment"}</td>
+                    <td className="px-6 py-4">{e.description === "<br>" ? "No Comment" : e.description || "No Comment"}</td>
                     <td className="px-6 py-4 flex justify-center items-center">
                       {e.status === 0 ? (
                         <div className="bg-green-500 flex justify-center items-center gap-2 py-1 px-3 rounded-3xl w-fit">
