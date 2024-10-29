@@ -154,7 +154,7 @@ const Support = () => {
                         href="https://www.facebook.com/unih0me?mibextid=LQQJ4d"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-500"
+                        className="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 transition-all duration-500"
                     >
                         <FaFacebookF size={24} />
                     </a>
@@ -163,7 +163,7 @@ const Support = () => {
                         href="https://www.instagram.com/unih0me1?igsh=ZmI4YXplYjYwaWNt&utm_source=qr"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white p-4 rounded-full shadow-lg hover:bg-gradient-to-r hover:from-purple-600 hover:via-pink-600 hover:to-orange-600 transition-all duration-500"
+                        className="bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:scale-105 text-white p-4 rounded-full shadow-lg hover:bg-gradient-to-r hover:from-purple-600 hover:via-pink-600 hover:to-orange-600 transition-all duration-500"
                     >
                         <FaInstagram size={24} />
                     </a>
@@ -172,7 +172,7 @@ const Support = () => {
                         href="https://wa.me/201222515066"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-all duration-500"
+                        className="bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-500 hover:scale-105 transition-all duration-500"
                     >
                         <FaWhatsapp size={24} />
                     </a>

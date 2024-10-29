@@ -104,16 +104,16 @@ const Footer = () => {
 
               {/* Social Icons */}
               <ul className="flex justify-center sm:justify-start gap-2 mt-4">
-                <a href="https://www.instagram.com/unih0me1?igsh=ZmI4YXplYjYwaWNt&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-white bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-full p-2">
+                <a href="https://www.instagram.com/unih0me1?igsh=ZmI4YXplYjYwaWNt&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-white bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-full p-2 hover:scale-105 transition-all duration-300">
                   <FaInstagram />
                 </a>
-                <a href="https://www.facebook.com/unih0me/" target="_blank" rel="noopener noreferrer" className="bg-blue-600 text-white rounded-full p-2">
+                <a href="https://www.facebook.com/unih0me/" target="_blank" rel="noopener noreferrer" className="bg-blue-600 text-white rounded-full p-2 hover:scale-105 transition-all duration-300">
                   <FaFacebook />
                 </a>
-                <a href="https://www.youtube.com/@UniHome1" target="_blank" rel="noopener noreferrer" className="text-white bg-red-600 rounded-full p-2">
+                <a href="https://www.youtube.com/@UniHome1" target="_blank" rel="noopener noreferrer" className="text-white bg-red-600 rounded-full p-2 hover:scale-105 transition-all duration-300">
                   <FaYoutube />
                 </a>
-                <a href="https://wa.me/201222515066" target="_blank" rel="noopener noreferrer" className="text-white bg-green-500 rounded-full p-2">
+                <a href="https://wa.me/201222515066" target="_blank" rel="noopener noreferrer" className="text-white bg-green-500 rounded-full p-2 hover:scale-105 transition-all duration-300">
                   <FaWhatsapp />
                 </a>
                 {/* <a href="#d" className="text-white bg-blue-600 rounded-full p-2"><FaLinkedin /></a> */}

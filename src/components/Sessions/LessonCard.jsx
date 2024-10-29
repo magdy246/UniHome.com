@@ -7,6 +7,7 @@ import axios from "axios";
 import countries from "../flag.json";
 import toast from "react-hot-toast";
 import { t } from "i18next";
+import Notiflix from "notiflix";
 
 const convertTo12HourFormat = (time24) => {
   let [hour, minute] = time24.split(":").map(Number);
@@ -60,6 +61,50 @@ const LessonCard = (Session) => {
   const token = localStorage.getItem("accessToken");
 
   async function cancelSession() {
+    if (timeLeft <= 86400000) {
+      Notiflix.Report.failure(
+        '⚠️ Important Notice',
+        'You can’t cancel the session within 24 hours of the scheduled time. Thank you for understanding our policy.',
+        'Understood',
+        {
+          width: '380px',
+          backgroundColor: 'linear-gradient(135deg, #f5faff, #dceffd)',
+          titleColor: '#125b8d',
+          messageColor: '#1a3e61',
+          buttonBackground: 'linear-gradient(135deg, #1d72b8, #125b8d)',
+          buttonColor: '#ffffff',
+          borderRadius: '16px',
+          titleFontSize: '1.6rem',
+          messageFontSize: '1.2rem',
+          plainText: false,
+          svgSize: '50px',
+          backOverlay: true,
+          backOverlayColor: 'rgba(0, 0, 0, 0.25)',
+          cssAnimationStyle: 'zoom',
+          customCss: `
+            .notiflix-report__icon-info {
+              color: #125b8d;
+            }
+            .notiflix-report__title {
+              font-weight: bold;
+              letter-spacing: 0.5px;
+            }
+            .notiflix-report__body {
+              padding: 20px;
+            }
+            .notiflix-report__button {
+              font-size: 1.1rem;
+              padding: 10px 24px;
+              text-transform: uppercase;
+            }
+            .notiflix-report__text {
+              text-align: center;
+            }
+          `,
+        }
+      );
+      return;
+    }
     try {
       const response = await axios.post(
         "https://yousab-tech.com/unihome/public/api/cancel/session",
@@ -137,7 +182,7 @@ const LessonCard = (Session) => {
                 <img className="w-16 h-16 sm:w-24 sm:h-24 rounded-3xl" src={Session?.Session?.teacher?.image} alt="User Avatar" />
               </div>
               <div className="capitalize">
-              <h2 className="text-xl font-bold text-gray-800 mb-1">
+                <h2 className="text-xl font-bold text-gray-800 mb-1">
                   {Session?.Session?.teacher?.firstname} {Session?.Session?.teacher?.lastname}
                 </h2>
                 <p className="flex items-center font-bold text-gray-600 text-md px-2 py-1 bg-gray-200 w-fit rounded-lg ring-2 ring-gray-500">
@@ -185,7 +230,7 @@ const LessonCard = (Session) => {
                   <AiOutlineMessage className="text-white" />
                 </Link>
 
-                <button onClick={() => cancelSession()} className="p-2 sm:p-3 bg-red-500 rounded-full hover:scale-110 transition-all duration-500">
+                <button onClick={cancelSession} className={`${timeLeft <= 86400000 ? "cursor-not-allowed p-2 sm:p-3 bg-red-500 rounded-full hover:scale-110 transition-all duration-500" : "p-2 sm:p-3 bg-red-500 rounded-full hover:scale-110 transition-all duration-500"}`}>
                   <RiCloseLargeFill className="text-white" />
                 </button>
               </div>

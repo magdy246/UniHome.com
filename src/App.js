@@ -80,7 +80,7 @@ export default function App() {
     (response) => {
       const endTime = new Date();
       const duration = endTime - response.config.metadata.startTime;
-      if (duration > 4000) {
+      if (duration > 15000) {
         setShowAlert(true);
       }
       return response;
@@ -88,7 +88,7 @@ export default function App() {
     (error) => {
       const endTime = new Date();
       const duration = endTime - error.config.metadata.startTime;
-      if (duration > 3000) {
+      if (duration > 15000) {
         setShowAlert(true);
       }
       return Promise.reject(error);
