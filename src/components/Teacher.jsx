@@ -182,7 +182,7 @@ export default function Teacher() {
 
   const embedLink =
     dataApi?.youtube_link?.replace("watch?v=", "embed/") ||
-    "https://www.youtube.com/embed/dQw4w9WgXcQ";
+    "https://www.youtube.com/embed/MdWOdQVneZY";
 
   const { t } = useTranslation();
   const Popup = ({ event, onClose }) => {
@@ -281,7 +281,7 @@ export default function Teacher() {
 
           {/* Teacher Information */}
           <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
-            <div className="flex items-start mb-4">
+            <div dir="ltr" className="flex items-start mb-4">
               <img
                 src={dataApi?.image || Avatar}
                 alt="Teacher Avatar"
@@ -319,7 +319,7 @@ export default function Teacher() {
               </div>
               <Link to={`/chat?id=${Teacher_id}`}>
                 <button className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white transition-transform duration-300 transform bg-blue-600 rounded-lg shadow hover:scale-105">
-                  <AiOutlineMessage className="mr-1" />
+                  <AiOutlineMessage className="mx-1" />
                   {t("message")}
                 </button>
               </Link>
@@ -343,7 +343,7 @@ export default function Teacher() {
           {/* New Dashboard Section */}
           <div className="block w-full m-auto sm:mt-4">
             {/* Legend for Booked and Available */}
-            <div className="flex justify-center space-x-4 mb-2 font-bold select-none">
+            <div dir="ltr" className="flex justify-center space-x-4 mb-2 font-bold select-none">
               <div className="flex items-center space-x-2">
                 <div className="w-10 h-5 rounded-sm bg-red-500"></div>
                 <span>Booked</span>
@@ -375,6 +375,7 @@ export default function Teacher() {
               nowIndicator={true}
               slotMinTime="00:00:00"
               slotMaxTime="24:00:00"
+              timeZone="local" // Setting timezone to Tunisia
             />
           </div>
 

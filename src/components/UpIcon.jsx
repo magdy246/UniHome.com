@@ -40,7 +40,7 @@ export default function UpIcon() {
             duration-500 
             ${isVisible ? 'opacity-100 scale-100 translate-0' : 'opacity-0 scale-0 -translate-x-10 translate-y-10'}
             z-50
-            w-10 h-10 flex items-center justify-center`}
+            w-10 h-10 flex items-center justify-center pointer-events-auto`}
             onClick={scrollToTop}
         >
             <FontAwesomeIcon icon={faAngleUp} className="text-xl" />

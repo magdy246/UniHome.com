@@ -135,11 +135,11 @@ export default function Reviews(teacher) {
 
         ) : (
           <>
-            <div class="flex flex-col items-center justify-center h-full p-8">
-              <div class="max-w-md text-center p-6">
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">No Reviews Yet</h2>
-                <p class="text-sm md:text-base text-gray-600 mb-6">Be the first to leave a review and share your experience!</p>
-                <img src={rate} alt="No reviews illustration" class="w-3/4 md:w-1/2 mx-auto mb-4 rounded-lg shadow-sm" />
+            <div className="flex flex-col items-center justify-center h-full p-8">
+              <div className="max-w-md text-center p-6">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">No Reviews Yet</h2>
+                <p className="text-sm md:text-base text-gray-600 mb-6">Be the first to leave a review and share your experience!</p>
+                <img src={rate} alt="No reviews illustration" className="w-3/4 md:w-1/2 mx-auto mb-4 rounded-lg shadow-sm" />
               </div>
             </div>
           </>

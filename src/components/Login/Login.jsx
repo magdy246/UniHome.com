@@ -84,7 +84,7 @@ export default function Login() {
           <img src={imgLogin} alt="img Login" className=" w-[95vw] m-auto" />
         </div>
 
-        <div class="formLogin xl:basis-2/5 lg:basis-2/5 basis-full">
+        <div className="formLogin xl:basis-2/5 lg:basis-2/5 basis-full">
           <div className=" flex bg-white rounded-lg shadow-lg border overflow-hidden w-full">
             <div className="w-full p-8 ">
               <p className="text-2xl pb-5 text-gray-600 text-center">

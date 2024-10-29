@@ -142,8 +142,8 @@ export default function Register() {
                   <input onChange={selectUser}
                     name="type"
                     type="checkbox"
-                    value={teacherOrStudent} class="sr-only peer"></input>
-                  <div class="relative w-11 h-6 bg-orange-500 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-white after:border after:rounded-full after:w-5 after:h-5 after:transition-all peer-checked:bg-blue-700"></div>
+                    value={teacherOrStudent} className="sr-only peer"></input>
+                  <div className="relative w-11 h-6 bg-orange-500 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-white after:border after:rounded-full after:w-5 after:h-5 after:transition-all peer-checked:bg-blue-700"></div>
                   <span className="label-text text-base	font-bold">
                     {t("Teacher")}
                   </span>

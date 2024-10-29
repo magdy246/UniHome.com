@@ -109,7 +109,7 @@ export default function NavBar({
                 <img
                   src={isEnglish ? USA : EUA}
                   alt={isEnglish ? 'English' : 'Arabic'}
-                  className="h-6 w-8 transform transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:rotate-3"
+                  className="h-6 w-8 transform transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:translate-t-6"
                 />
               </button>
 

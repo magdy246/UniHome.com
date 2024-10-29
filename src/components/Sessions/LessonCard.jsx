@@ -137,11 +137,11 @@ const LessonCard = (Session) => {
                 <img className="w-16 h-16 sm:w-24 sm:h-24 rounded-3xl" src={Session?.Session?.teacher?.image} alt="User Avatar" />
               </div>
               <div className="capitalize">
-                <h2 className="text-gray-800 font-bold text-sm sm:text-md lg:text-2xl">
+              <h2 className="text-xl font-bold text-gray-800 mb-1">
                   {Session?.Session?.teacher?.firstname} {Session?.Session?.teacher?.lastname}
                 </h2>
-                <p className="text-gray-500 text-sm lg:text-base">
-                  <span className="mr-1">{getCountryFlag(Session?.Session?.teacher?.country)}</span>
+                <p className="flex items-center font-bold text-gray-600 text-md px-2 py-1 bg-gray-200 w-fit rounded-lg ring-2 ring-gray-500">
+                  <span className="mx-2"><img className="w-8 rounded-sm" src={getCountryFlag(Session?.Session?.teacher?.country)} alt="flag" /></span>
                   {Session?.Session?.teacher?.country}
                 </p>
               </div>
