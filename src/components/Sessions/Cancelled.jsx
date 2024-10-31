@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Avatar from "../../images/profile.jpg";
 import { AiOutlineMessage } from "react-icons/ai";
 import countries from "../flag.json";
 import { Link } from "react-router-dom";
@@ -38,7 +37,7 @@ const Cancelled = (Session) => {
   }, [savedLang]);
 
 
-  const teacherId = Session?.Session?.Session?.teacher?.id
+
   const getCountryFlag = (countryName) => {
     const country = countries.find((c) => c.country === countryName);
     return country ? country.flag : ""; // Return the flag or an empty string if not found
@@ -52,15 +51,29 @@ const Cancelled = (Session) => {
   const formattedStartTime = convertTo12HourFormat(startTime);
   const formattedEndTime = convertTo12HourFormat(endTime);
 
+  const userCookie = localStorage.getItem("user");
+  const dataUser = userCookie ? JSON.parse(userCookie) : null;
+
+  const [userType, setUserType] = useState(null);
+  const teacherId = userType?.id
+
+  useEffect(() => {
+    if (dataUser.type === "student") {
+      setUserType(Session?.Session?.teacher)
+    } else {
+      setUserType(Session?.Session?.student)
+    }
+  }, [dataUser.type]);
+
   let Status = Session?.Session?.status
   if (Status === "Cancelled") {
     Status = "Cancelled";
   } else {
     return null;
-  }  
+  }
 
   return (
-    <div className="p-4" dir={Lang === "ar" ? "rtl" : "ltr"}>
+    <div className="p-4" dir={Lang === "ar" ? "ltr" : "ltr"}>
       <div className="bg-white rounded-lg shadow-md px-6 py-10 mx-auto max-w-lg sm:max-w-xl lg:max-w-4xl mt-6 relative">
         {/* Date Styled Inside the Card */}
         <div className={`absolute top-0 ${Lang === "ar" ? "right-0" : "left-0"}  p-2 bg-gray-200 text-gray-600 rounded-br-lg shadow-md`}>
@@ -74,19 +87,19 @@ const Cancelled = (Session) => {
               {/* Profile Avatar */}
               <img
                 className="w-16 h-16 sm:w-24 sm:h-24 rounded-3xl"
-                src={Session?.Session?.teacher?.image} // Placeholder for Avatar
+                src={userType?.image} // Placeholder for Avatar
                 alt="User Avatar"
               />
             </div>
             <div className="capitalize">
               {/* User Name & Country */}
               <h2 className="text-xl font-bold text-gray-800 mb-1">
-                  {Session?.Session?.teacher?.firstname} {Session?.Session?.teacher?.lastname}
-                </h2>
-                <p className="flex items-center font-bold text-gray-600 text-md px-2 py-1 bg-gray-200 w-fit rounded-lg ring-2 ring-gray-500">
-                  <span className="mx-2"><img className="w-8 rounded-sm" src={getCountryFlag(Session?.Session?.teacher?.country)} alt="flag" /></span>
-                  {Session?.Session?.teacher?.country}
-                </p>
+                {userType?.firstname} {userType?.lastname}
+              </h2>
+              <p className="flex items-center font-bold text-gray-600 text-md px-2 py-1 bg-gray-200 w-fit rounded-lg ring-2 ring-gray-500">
+                <span className="mx-2"><img className="w-8 rounded-sm" src={getCountryFlag(userType?.country)} alt="flag" /></span>
+                {t(userType?.country)}
+              </p>
             </div>
           </div>
 

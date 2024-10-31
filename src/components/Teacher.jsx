@@ -293,7 +293,7 @@ export default function Teacher() {
                 </h2>
                 <p className="flex items-center font-bold text-gray-600 text-md px-2 py-1 bg-gray-200 w-fit rounded-lg ring-2 ring-gray-500">
                   <span className="mx-2"><img className="w-8 rounded-sm" src={getCountryFlag(dataApi?.country)} alt="flag" /></span>
-                  {dataApi?.country}
+                  {t(dataApi?.country)}
                 </p>
               </div>
             </div>

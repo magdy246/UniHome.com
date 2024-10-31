@@ -22,7 +22,6 @@ const addOneHour = (time24) => {
 };
 
 const Booked = ({ Session }) => {
-  const teacherId = Session?.teacher?.id;
   const getCountryFlag = (countryName) => {
     const country = countries.find((c) => c.country === countryName);
     return country ? country.flag : ""; // Return the flag or an empty string if not found
@@ -36,6 +35,20 @@ const Booked = ({ Session }) => {
   const endTime = addOneHour(startTime);
   const formattedStartTime = convertTo12HourFormat(startTime);
   const formattedEndTime = convertTo12HourFormat(endTime);
+
+  const userCookie = localStorage.getItem("user");
+  const dataUser = userCookie ? JSON.parse(userCookie) : null;
+
+  const [userType, setUserType] = useState(null);
+  const teacherId = userType?.id
+
+  useEffect(() => {
+    if (dataUser.type === "student") {
+      setUserType(Session?.teacher)
+    } else {
+      setUserType(Session?.student)
+    }
+  }, [dataUser.type]);
 
   const savedLang = localStorage.getItem("lang") || 'en';
   const [Lang, setLang] = useState(savedLang);
@@ -58,7 +71,7 @@ const Booked = ({ Session }) => {
 
 
   return (
-    <div className="p-4" dir={Lang === "ar" ? "rtl" : "ltr"}>
+    <div className="p-4" dir={Lang === "ar" ? "ltr" : "ltr"}>
       <div className="bg-white rounded-lg shadow-md px-6 py-10 mx-auto max-w-lg sm:max-w-xl lg:max-w-4xl mt-6 relative">
         {/* Date Styled Inside the Card */}
         <div className={`absolute top-0 ${Lang === "ar" ? "right-0" : "left-0"}  p-2 bg-gray-200 text-gray-600 rounded-br-lg shadow-md`}>
@@ -73,19 +86,19 @@ const Booked = ({ Session }) => {
               {/* Profile Avatar */}
               <img
                 className="w-16 h-16 sm:w-24 sm:h-24 rounded-3xl"
-                src={Session?.teacher?.image} // Placeholder for Avatar
+                src={userType?.image} // Placeholder for Avatar
                 alt="User Avatar"
               />
             </div>
             <div className="capitalize">
               {/* User Name & Country */}
               <h2 className="text-xl font-bold text-gray-800 mb-1">
-                  {Session?.teacher?.firstname} {Session?.teacher?.lastname}
-                </h2>
-                <p className="flex items-center font-bold text-gray-600 text-md px-2 py-1 bg-gray-200 w-fit rounded-lg ring-2 ring-gray-500">
-                  <span className="mx-2"><img className="w-8 rounded-sm" src={getCountryFlag(Session?.teacher?.country)} alt="flag" /></span>
-                  {Session?.teacher?.country}
-                </p>
+                {userType?.firstname} {userType?.lastname}
+              </h2>
+              <p className="flex items-center font-bold text-gray-600 text-md px-2 py-1 bg-gray-200 w-fit rounded-lg ring-2 ring-gray-500">
+                <span className="mx-2"><img className="w-8 rounded-sm" src={getCountryFlag(userType?.country)} alt="flag" /></span>
+                {t(userType?.country)}
+              </p>
             </div>
           </div>
 

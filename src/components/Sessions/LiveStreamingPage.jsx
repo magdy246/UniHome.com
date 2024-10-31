@@ -277,7 +277,7 @@ const LiveStreamingPage = (Session) => {
                 <h2 className="text-gray-700 font-bold text-md">
                   {dataSession?.teacher?.firstname} {dataSession?.teacher?.lastname}
                 </h2>
-                <p className="text-gray-400 text-sm">{dataSession?.teacher?.country}</p>
+                <p className="text-gray-400 text-sm">{t(dataSession?.teacher?.country)}</p>
               </div>
             </div>
             <h3 className="text-xl font-semibold mb-4">{t("Lesson Details")}:</h3>

@@ -45,7 +45,7 @@ export default function TeacherComp() {
                 <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
             </h1>
 
-            <div className="py-6 px-1 md:px-11">
+            <div className="py-6 px-1 md:px-11" dir='ltr'>
                 {loading ? (
                     <div className="w-3/4 flex justify-center items-center mx-auto my-10 gap-10">
                         <Suspense fallback={<div>Loading...</div>}>
@@ -84,9 +84,9 @@ export default function TeacherComp() {
                                             {/* Stats (Country, Lessons, Students) */}
                                             <div className="teacher-stats">
                                                 <div className="teacher-stat-item">
-                                                    <span className="teacher-stat-label">{t('Country')}</span>
+                                                    <span className="teacher-stat-label">{t('country')}</span>
                                                     <strong className="teacher-country">
-                                                        {teacher.country}
+                                                        {t(teacher.country)}
                                                         <span>
                                                             <img
                                                                 className="country-flag"

@@ -37,11 +37,11 @@
 }
 
 .teacher-stat-label {
-    @apply text-xs md:text-sm lg:text-base font-semibold !important;
+    @apply text-xs md:text-sm lg:text-base mx-auto font-semibold !important;
 }
 
 .teacher-stat-value {
-    @apply text-base md:text-lg lg:text-xl !important;
+    @apply text-base md:text-lg mx-auto lg:text-xl !important;
 }
 
 .teacher-country {

@@ -24,7 +24,6 @@ const addOneHour = (time24) => {
 };
 
 const LessonCard = (Session) => {
-  const teacherId = Session?.Session?.teacher?.id;
   const userCookie = localStorage.getItem("user");
   const dataUser = userCookie ? JSON.parse(userCookie) : null;
 
@@ -40,6 +39,16 @@ const LessonCard = (Session) => {
   const endTime = addOneHour(startTime);
   const formattedStartTime = convertTo12HourFormat(startTime);
   const formattedEndTime = convertTo12HourFormat(endTime);
+  const [userType, setUserType] = useState(null);
+  const teacherId = userType?.id;
+
+  useEffect(() => {
+    if (dataUser.type === "student") {
+      setUserType(Session?.Session?.teacher)
+    } else {
+      setUserType(Session?.Session?.student)
+    }
+  }, [dataUser.type]);
 
   const savedLang = localStorage.getItem("lang") || "en";
   const [Lang, setLang] = useState(savedLang);
@@ -63,9 +72,9 @@ const LessonCard = (Session) => {
   async function cancelSession() {
     if (timeLeft <= 86400000) {
       Notiflix.Report.failure(
-        '⚠️ Important Notice',
-        'You can’t cancel the session within 24 hours of the scheduled time. Thank you for understanding our policy.',
-        'Understood',
+        t('alert.noticeTitle'),
+        t('alert.noticeMessage'),
+        t('alert.noticeButton'),
         {
           width: '380px',
           backgroundColor: 'linear-gradient(135deg, #f5faff, #dceffd)',
@@ -170,7 +179,7 @@ const LessonCard = (Session) => {
 
   return (
     <>
-      <div id={Session?.Session?.id} className="p-4" dir={Lang === "ar" ? "rtl" : "ltr"}>
+      <div id={Session?.Session?.id} className="p-4" dir={Lang === "ar" ? "ltr" : "ltr"}>
         <div className="bg-white rounded-lg shadow-md px-6 py-10 mx-auto max-w-lg sm:max-w-xl lg:max-w-4xl mt-6 relative">
           <div className={`absolute top-0 ${Lang === "ar" ? "right-0" : "left-0"}  p-2 bg-gray-200 text-gray-600 rounded-br-lg shadow-md`}>
             <p className="text-sm font-semibold">{t("Date")}: {date}</p>
@@ -179,15 +188,15 @@ const LessonCard = (Session) => {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
             <div className="flex items-center space-x-4 mb-4 sm:mb-0">
               <div>
-                <img className="w-16 h-16 sm:w-24 sm:h-24 rounded-3xl" src={Session?.Session?.teacher?.image} alt="User Avatar" />
+                <img className="w-16 h-16 sm:w-24 sm:h-24 rounded-3xl" src={userType?.image} alt="User Avatar" />
               </div>
               <div className="capitalize">
                 <h2 className="text-xl font-bold text-gray-800 mb-1">
-                  {Session?.Session?.teacher?.firstname} {Session?.Session?.teacher?.lastname}
+                  {userType?.firstname} {userType?.lastname}
                 </h2>
                 <p className="flex items-center font-bold text-gray-600 text-md px-2 py-1 bg-gray-200 w-fit rounded-lg ring-2 ring-gray-500">
-                  <span className="mx-2"><img className="w-8 rounded-sm" src={getCountryFlag(Session?.Session?.teacher?.country)} alt="flag" /></span>
-                  {Session?.Session?.teacher?.country}
+                  <span className="mx-2"><img className="w-8 rounded-sm" src={getCountryFlag(userType?.country)} alt="flag" /></span>
+                  {t(userType?.country)}
                 </p>
               </div>
             </div>
@@ -242,8 +251,8 @@ const LessonCard = (Session) => {
                 onClick={dataUser.type === "teacher" ? () => { completeSession() } : null}
                 className="flex items-center justify-center text-white text-lg rounded-3xl py-2 px-4 disabled:bg-gray-500 disabled:border-gray-700 disabled:active:bg-gray-700 font-bold bg-blue-600 border-b-4 border-blue-800 transition-transform duration-300 hover:border-b-0 hover:translate-y-0.5 active:outline-none active:bg-blue-700 active:scale-95"
                 disabled={
-                  dataUser.type !== "teacher" &&
-                  (timeLeft > 0 || (Session?.Session?.status !== "Completed"))
+                  Session?.Session?.status === "Cancelled" &&
+                  (dataUser.type !== "teacher" || timeLeft > 0 || Session?.Session?.status !== "Completed")
                 }
               >
                 {t("Join Lesson")}
