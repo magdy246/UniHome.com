@@ -251,7 +251,7 @@ const LessonCard = (Session) => {
                 onClick={dataUser.type === "teacher" ? () => { completeSession() } : null}
                 className="flex items-center justify-center text-white text-lg rounded-3xl py-2 px-4 disabled:bg-gray-500 disabled:border-gray-700 disabled:active:bg-gray-700 font-bold bg-blue-600 border-b-4 border-blue-800 transition-transform duration-300 hover:border-b-0 hover:translate-y-0.5 active:outline-none active:bg-blue-700 active:scale-95"
                 disabled={
-                  Session?.Session?.status === "Cancelled" &&
+                  Session?.Session?.status === "Cancelled" ||
                   (dataUser.type !== "teacher" || timeLeft > 0 || Session?.Session?.status !== "Completed")
                 }
               >
