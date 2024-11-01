@@ -86,9 +86,9 @@ export default function Account() {
 
       // Optionally set state if needed
       setDataUser(response.data.user);
-      toast.success("Profile updated successfully.")
+      toast.success(t("Profile updated successfully."))
     } catch (error) {
-      toast.error("An error occurred while updating your information. Please check your inputs and try again.")
+      toast.error(t("An error occurred while updating your information. Please check your inputs and try again."))
       console.error("Error refreshing token:", error);
     }
   }
@@ -116,8 +116,8 @@ export default function Account() {
 
     // Check if file is of type image/jpeg
     if (file && file.type !== "image/jpeg") {
-      toast.error("Please upload a JPG image.");
-      toast.error("Only JPG images are allowed.");
+      toast.error(t("Please upload a JPG image."));
+      toast.error(t("Only JPG images are allowed."));
       fileInputRef.current.value = ""; // Reset file input
       return;
     }

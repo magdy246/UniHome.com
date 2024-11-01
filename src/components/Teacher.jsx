@@ -144,12 +144,12 @@ export default function Teacher() {
 
     // Check if the session is booked
     if (counter === 1 || sessionBreak === 1) {
-      toast.error("You can't book this session");
+      toast.error(t("You can't book this session"));
     } else if (singleSession?.status === 0) {
       setPopupEvent(eventData);
       setSingleSession(singleSession);
     } else {
-      toast.error("This session is already booked.");
+      toast.error(t("This session is already booked."));
     }
   };
 
@@ -168,7 +168,7 @@ export default function Teacher() {
         }
       );
       setPopupEvent(null);
-      toast.success("Transaction successful!");
+      toast.success(t("Transaction successful!"));
       setEvents((prevEvents) =>
         prevEvents.map((event) =>
           event.id === singleSession.id ? { ...event, status: 1 } : event
@@ -176,7 +176,7 @@ export default function Teacher() {
       );
 
     } catch (error) {
-      toast.success("Transaction successful!");
+      toast.success(t("Transaction successful!"));
     }
   };
 

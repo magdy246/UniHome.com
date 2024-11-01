@@ -29,7 +29,7 @@ const CardComponent = ({
 
         {/* Name and Rating Section */}
         <div className="text-center mt-4">
-          <h2 className="text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors duration-300">
+          <h2 className="text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors duration-300 line-clamp-1">
             Hi, I'm {firstName} {lastName}
           </h2>
           <div className="flex justify-center items-center mt-2">

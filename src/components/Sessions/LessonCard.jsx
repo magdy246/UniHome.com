@@ -71,49 +71,41 @@ const LessonCard = (Session) => {
 
   async function cancelSession() {
     if (timeLeft <= 86400000) {
-      Notiflix.Report.failure(
+      Notiflix.Confirm.show(
         t('alert.noticeTitle'),
         t('alert.noticeMessage'),
         t('alert.noticeButton'),
+        t(`Don't Cancel`),
+        () => {
+          // This function only runs if the "Understood" button is clicked
+          confirmCancelSession();
+        },
+        () => {
+          // This function runs if the "Do Not Cancel" button is clicked
+          toast.success(t("Session not cancelled"));
+        },
         {
           width: '380px',
           backgroundColor: 'linear-gradient(135deg, #f5faff, #dceffd)',
           titleColor: '#125b8d',
           messageColor: '#1a3e61',
-          buttonBackground: 'linear-gradient(135deg, #1d72b8, #125b8d)',
-          buttonColor: '#ffffff',
+          okButtonBackground: 'linear-gradient(135deg, #1d72b8, #125b8d)',
+          okButtonColor: '#ffffff',
+          cancelButtonBackground: '#d9534f',
+          cancelButtonColor: '#ffffff',
           borderRadius: '16px',
           titleFontSize: '1.6rem',
           messageFontSize: '1.2rem',
           plainText: false,
-          svgSize: '50px',
-          backOverlay: true,
-          backOverlayColor: 'rgba(0, 0, 0, 0.25)',
-          cssAnimationStyle: 'zoom',
-          customCss: `
-            .notiflix-report__icon-info {
-              color: #125b8d;
-            }
-            .notiflix-report__title {
-              font-weight: bold;
-              letter-spacing: 0.5px;
-            }
-            .notiflix-report__body {
-              padding: 20px;
-            }
-            .notiflix-report__button {
-              font-size: 1.1rem;
-              padding: 10px 24px;
-              text-transform: uppercase;
-            }
-            .notiflix-report__text {
-              text-align: center;
-            }
-          `,
         }
       );
       return;
     }
+    // Proceed with cancellation if within allowed time
+    confirmCancelSession();
+  }
+
+  async function confirmCancelSession() {
     try {
       const response = await axios.post(
         "https://yousab-tech.com/unihome/public/api/cancel/session",
@@ -142,9 +134,9 @@ const LessonCard = (Session) => {
         }
       );
       console.log(response);
-      toast.success("The session completed successfully.");
+      toast.success(t("The session completed successfully."));
     } catch (error) {
-      toast.error("Error: The session is already completed.");
+      toast.error(t("Error: The session is already completed."));
       console.error("Complete session error:", error);
     }
   }
@@ -239,7 +231,7 @@ const LessonCard = (Session) => {
                   <AiOutlineMessage className="text-white" />
                 </Link>
 
-                <button onClick={cancelSession} className={`${timeLeft <= 86400000 ? "cursor-not-allowed p-2 sm:p-3 bg-red-500 rounded-full hover:scale-110 transition-all duration-500" : "p-2 sm:p-3 bg-red-500 rounded-full hover:scale-110 transition-all duration-500"}`}>
+                <button onClick={cancelSession} className={`${timeLeft <= 86400000 ? "p-2 sm:p-3 bg-red-500 rounded-full hover:scale-110 transition-all duration-500" : "p-2 sm:p-3 bg-red-500 rounded-full hover:scale-110 transition-all duration-500"}`}>
                   <RiCloseLargeFill className="text-white" />
                 </button>
               </div>
