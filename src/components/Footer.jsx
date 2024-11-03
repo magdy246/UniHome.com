@@ -23,10 +23,10 @@ const Footer = () => {
     <>
       <footer className="bg-gray-800 pt-5 text-white">
         <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-around gap-8">
+          <div className="flex flex-col lg:flex-row justify-center flex-wrap lg:justify-around w-full">
 
             {/* Logo and Social Section */}
-            <div className="md:w-1/4 w-full sm:w-auto text-center sm:text-left">
+            <div className="2xl:w-1/4 w-full sm:w-auto text-center mx-auto lg:mx-0 lg:text-left">
               <Link to="/" className="flex items-center justify-center sm:justify-start mb-6 sm:mb-0">
                 <img src={UniHomeLogo} className="w-20 me-3 rounded-xl" alt="Logo" />
                 <span className="text-4xl md:text-5xl font-semibold dark:text-white font-[AntonSC-R]">
@@ -40,7 +40,7 @@ const Footer = () => {
             </div>
 
             {/* Links Section */}
-            <div className="md:w-1/4 w-full sm:w-auto text-center sm:text-left">
+            <div className="2xl:w-1/4 w-full sm:w-auto text-center lg:text-left">
               <h6 className="text-[#ff5a1f] py-3 text-base md:text-lg font-bold uppercase">Links</h6>
               <ul className="text-white dark:text-gray-400 font-medium mt-4 space-y-2">
                 <li>
@@ -67,7 +67,7 @@ const Footer = () => {
             </div>
 
             {/* Platform Section */}
-            <div className="md:w-1/4 w-full sm:w-auto text-center sm:text-left">
+            <div className="2xl:w-1/4 w-full sm:w-auto text-center lg:text-left">
               <h6 className="text-[#ff5a1f] py-3 text-base md:text-lg font-bold uppercase">Platform</h6>
               <ul className="text-white dark:text-gray-400 font-medium mt-4 space-y-2">
                 <li>
@@ -89,7 +89,7 @@ const Footer = () => {
             </div>
 
             {/* Contact Section */}
-            <div className="md:w-1/4 w-full sm:w-auto text-center sm:text-left">
+            <div className="2xl:w-1/4 w-full sm:w-auto text-center mx-auto lg:mx-0 lg:text-left">
               <h6 className="text-[#ff5a1f] py-3 text-base md:text-lg font-bold uppercase">{t('contactUs')}</h6>
               <address className="mt-4 text-sm md:text-base m-0 mb-1"><i className="bi bi-pin-map"></i> {t('address')}</address>
               <a href="tel:01222515066" className="text-white mb-1 text-sm md:text-base hover:underline block">
