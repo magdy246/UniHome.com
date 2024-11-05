@@ -21,7 +21,7 @@ const Footer = () => {
   const { t } = useTranslation();
   return (
     <>
-      <footer className="bg-gray-800 pt-5 text-white">
+      <footer className="bg-gray-800 pt-5 text-white" dir='ltr'>
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row justify-center flex-wrap lg:justify-around w-full">
 

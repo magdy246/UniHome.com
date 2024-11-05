@@ -23,6 +23,9 @@ const DesignWallet = () => {
   const { dataUse } = useContext(apiWallet);
   let nameUser = JSON.parse(localStorage.getItem("user"));
 
+  console.log(dataUse);
+
+
   const walletData = dataUse && dataUse.length > 0 ? dataUse[0] : { balance: 0 };
 
   return (
@@ -136,7 +139,7 @@ const DesignWallet = () => {
                     </td> */}
                     <td className="px-6 py-4 font-bold">{e.description === "<br>" ? "No Comment" : e.description || "No Comment"}</td>
                     <td className="px-6 py-4 flex justify-center items-center">
-                      {e.status === 0 ? (
+                      {e.status === 1 ? (
                         <div className="bg-green-500 flex justify-center items-center gap-2 py-1 px-3 rounded-3xl w-fit">
                           <span className="text-white">
                             <FaCheckCircle />

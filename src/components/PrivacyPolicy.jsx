@@ -53,6 +53,7 @@ const PrivacyPolicy = () => {
 
             <h2 className="text-2xl font-semibold mt-6 mb-2">{t('privacyPolicy.rightToErasure')}</h2>
             <p>{t('privacyPolicy.erasureDescription')}</p>
+            <p>{t('privacyPolicy.sessionDescription')}</p>
 
             <h2 className="text-2xl font-semibold mt-6 mb-2">{t('privacyPolicy.deleteAccount')}</h2>
             <p>{t('privacyPolicy.deleteDescription')}</p>

@@ -176,7 +176,7 @@ export default function Teacher() {
       );
 
     } catch (error) {
-      toast.success(t("Transaction successful!"));
+      toast.success(t(`Transaction successful! But if you don't have money in your wallet the session will be never Booked`));
     }
   };
 
@@ -251,11 +251,11 @@ export default function Teacher() {
     <>
       <Helmet>
         <title>{`${dataApi?.firstname} - English Teacher at UniHome`}</title>
-        <meta name="description" content={`Learn English with ${dataApi?.firstname}, a professional English tutor at UniHome. ${dataApi?.intro}`} />
+        <meta name="description" content={`Learn English with ${dataApi?.firstname}, a professional English tutor at UniHome.${dataApi?.intro} `} />
         <meta name="keywords" content={`UniHome, ${dataApi?.firstname}, English teacher, professional tutor, learn English, English lessons, personalized learning`} />
         <meta name="author" content={dataApi?.firstname} />
         <meta property="og:title" content={`${dataApi?.firstname} - English Teacher at UniHome`} />
-        <meta property="og:description" content={`Meet ${dataApi?.firstname}, a professional tutor at UniHome. Learn English with personalized lessons and flexible scheduling.`} />
+        <meta property="og:description" content={`Meet ${dataApi?.firstname}, a professional tutor at UniHome.Learn English with personalized lessons and flexible scheduling.`} />
         <meta property="og:image" content={dataApi?.image} />
         <meta property="og:url" content="https://unih0me.com/teachers" />
         <meta property="og:type" content="website" />
@@ -265,7 +265,7 @@ export default function Teacher() {
         <meta name="twitter:description" content={`Learn English with ${dataApi?.firstname}. Book personalized lessons today!`} />
         <meta name="twitter:image" content={dataApi?.image} />
         <link rel="canonical" href={`https://unih0me.com/teachers/${dataApi?.firstname}`} />
-      </Helmet>
+      </Helmet >
       <section className="py-6">
         <div className="max-w-5xl mx-auto p-6 bg-gray-100 rounded-lg shadow-md">
           {/* Video Section */}
