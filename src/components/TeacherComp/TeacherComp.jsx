@@ -99,7 +99,7 @@ export default function TeacherComp() {
                                                 <div className="teacher-stat-item">
                                                     <span className="teacher-stat-label">{t('Lessons')}</span>
                                                     <strong className="teacher-stat-value">
-                                                        {teacher.sessions.length || "0"}
+                                                        {teacher.lessons || "0"}
                                                     </strong>
                                                 </div>
                                                 <div className="teacher-stat-item">

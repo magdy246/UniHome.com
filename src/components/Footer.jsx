@@ -27,16 +27,12 @@ const Footer = () => {
           <div className="flex flex-wrap justify-between">
             {/* Logo and Social Section */}
             <div className="w-full lg:w-1/4 text-center lg:text-left">
-              <Link to="/" className="flex items-center justify-center lg:justify-start mb-6">
+              <Link to="/" className="flex items-center justify-center mb-6">
                 <img
                   src={UniHomeLogo}
                   alt="UniHome Logo"
                   className="w-20 h-20 rounded-xl mr-3"
                 />
-                <span className="text-4xl font-bold font-[AntonSC-R]">
-                  <span className="text-blue-600">Uni</span>
-                  <span className="text-orange-500">Home</span>
-                </span>
               </Link>
               <p className="text-sm md:text-base leading-6">
                 Get the best private lessons online with professional teachers.

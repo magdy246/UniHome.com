@@ -85,7 +85,7 @@ export default function SliderTeatcher() {
                     country={e.country}
                     about={e.intro}
                     students={e.students === null ? e.students = "0" : e.students}
-                    Lessons={e.sessions.length === null || e.sessions.length === 0 ? "0" : e.sessions.length}
+                    Lessons={e.lessons || "0"}
                     Review={e.review === null ? e.review = "0" : e.review}
                     type={e.type}
                     className="bg-white rounded-lg shadow-md px-6 py-8 max-w-md mt-6 relative"
