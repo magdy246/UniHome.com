@@ -12,60 +12,51 @@ const PrivacyPolicy = () => {
                 <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
             </h1>
 
-            <h2 className="text-2xl font-semibold mb-2">{t('privacyPolicy.termsConditions')}</h2>
-            <p>
-                {t('privacyPolicy.statement')} <a href="http://www.unih0me.com" className="text-blue-600">{t('privacyPolicy.siteName')}</a> {t('privacyPolicy.purpose')}
-            </p>
+                <section className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg p-8 space-y-12">
 
-            <h2 className="text-2xl font-semibold mt-6 mb-2">{t('privacyPolicy.collectionInfo')}</h2>
-            <p>{t('privacyPolicy.collectDetails')}</p>
-            <ul className="list-disc ml-8 mt-2">
-                <li>{t('privacyPolicy.infoList.name')}</li>
-                <li>{t('privacyPolicy.infoList.address')}</li>
-                <li>{t('privacyPolicy.infoList.email')}</li>
-                <li>{t('privacyPolicy.infoList.phone')}</li>
-                <li>{t('privacyPolicy.infoList.credentials')}</li>
-            </ul>
+                    {/* Policy Content */}
+                    <div>
+                        <h1 className="text-4xl font-extrabold text-blue-700 mb-6 text-center">{t('policy.title')}</h1>
+                        <p className="mb-6 text-gray-800 text-lg leading-relaxed">{t('policy.introduction')}</p>
+                        <p className="mb-10 text-gray-800 text-lg leading-relaxed">{t('policy.commitment')}</p>
+                    </div>
 
-            <p className="mt-4">{t('privacyPolicy.purchaseInfo')}</p>
-            <p>{t('privacyPolicy.usePersonalInfo')}</p>
+                    {/* Rights Section */}
+                    <div className="bg-blue-50 rounded-lg p-6 shadow-inner">
+                        <h2 className="text-2xl font-semibold text-blue-600 mb-4 border-b-2 border-blue-200 pb-2">{t('policy.rights.title')}</h2>
+                        <ul className="list-disc list-inside space-y-3 text-gray-700 text-lg pl-4">
+                            <li>{t('policy.rights.description1')}</li>
+                            <li>{t('policy.rights.description2')}</li>
+                            <li>{t('policy.rights.description3')}</li>
+                            <li>{t('policy.rights.description4')}</li>
+                            <li>{t('policy.rights.description5')}</li>
+                        </ul>
+                    </div>
 
-            <h2 className="text-2xl font-semibold mt-6 mb-2">{t('privacyPolicy.sharingInfo')}</h2>
-            <p>{t('privacyPolicy.sharingDescription')}</p>
+                    {/* Contact Section */}
+                    <div className="bg-blue-50 rounded-lg p-6 shadow-inner">
+                        <h2 className="text-2xl font-semibold text-blue-600 mb-4 border-b-2 border-blue-200 pb-2">{t('policy.contact.title')}</h2>
+                        <p className="text-gray-700 text-lg leading-relaxed">{t('policy.contact.description')}</p>
+                    </div>
 
-            <h2 className="text-2xl font-semibold mt-6 mb-2">{t('privacyPolicy.autoCollectedInfo')}</h2>
-            <p>{t('privacyPolicy.autoDescription')}</p>
+                    {/* Updates Section */}
+                    <div className="bg-blue-50 rounded-lg p-6 shadow-inner">
+                        <h2 className="text-2xl font-semibold text-blue-600 mb-4 border-b-2 border-blue-200 pb-2">{t('policy.updates.title')}</h2>
+                        <p className="text-gray-700 text-lg leading-relaxed">{t('policy.updates.description')}</p>
+                    </div>
 
-            <h2 className="text-2xl font-semibold mt-6 mb-2">{t('privacyPolicy.cookies')}</h2>
-            <p>{t('privacyPolicy.cookiesDescription')}</p>
+                    {/* Escalation Section */}
+                    <div className="bg-blue-50 rounded-lg p-6 shadow-inner">
+                        <h2 className="text-2xl font-semibold text-blue-600 mb-4 border-b-2 border-blue-200 pb-2">{t('policy.escalation.title')}</h2>
+                        <p className="text-gray-700 text-lg leading-relaxed">{t('policy.escalation.description')}</p>
+                    </div>
 
-            <h2 className="text-2xl font-semibold mt-6 mb-2">{t('privacyPolicy.links')}</h2>
-            <p>{t('privacyPolicy.linksDescription')}</p>
-
-            <h2 className="text-2xl font-semibold mt-6 mb-2">{t('privacyPolicy.securityInfo')}</h2>
-            <p>{t('privacyPolicy.securityDescription')}</p>
-            <ul className="list-disc ml-8 mt-2">
-                <li>{t('privacyPolicy.ssl')}</li>
-            </ul>
-
-            <h2 className="text-2xl font-semibold mt-6 mb-2">{t('privacyPolicy.childrenUnder13')}</h2>
-            <p>{t('privacyPolicy.childrenDescription')}</p>
-
-            <h2 className="text-2xl font-semibold mt-6 mb-2">{t('privacyPolicy.rightToErasure')}</h2>
-            <p>{t('privacyPolicy.erasureDescription')}</p>
-            <p>{t('privacyPolicy.sessionDescription')}</p>
-
-            <h2 className="text-2xl font-semibold mt-6 mb-2">{t('privacyPolicy.deleteAccount')}</h2>
-            <p>{t('privacyPolicy.deleteDescription')}</p>
-
-            <h2 className="text-2xl font-semibold mt-6 mb-2">{t('privacyPolicy.emailCommunications')}</h2>
-            <p>{t('privacyPolicy.emailDescription')}</p>
-
-            <h2 className="text-2xl font-semibold mt-6 mb-2">{t('privacyPolicy.changesToStatement')}</h2>
-            <p>{t('privacyPolicy.changesDescription')}</p>
-
-            <h2 className="text-2xl font-semibold mt-6 mb-2">{t('privacyPolicy.contactInfo')}</h2>
-            <p>{t('privacyPolicy.contactDescription')}</p>
+                    {/* Retention Section */}
+                    <div className="bg-blue-50 rounded-lg p-6 shadow-inner">
+                        <h2 className="text-2xl font-semibold text-blue-600 mb-4 border-b-2 border-blue-200 pb-2">{t('policy.retention.title')}</h2>
+                        <p className="text-gray-700 text-lg leading-relaxed">{t('policy.retention.description')}</p>
+                    </div>
+                </section>
         </div>
     );
 };

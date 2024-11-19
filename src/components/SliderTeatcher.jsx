@@ -11,6 +11,8 @@ export default function SliderTeatcher() {
   const [dataApi, setDataApi] = useState([]);
   const [loading, setLoading] = useState(true);
   const { t } = useTranslation();
+  console.log(dataApi);
+  
   const apiData = async () => {
     try {
       const res = await axios.get("https://yousab-tech.com/unihome/public/api/teachers");

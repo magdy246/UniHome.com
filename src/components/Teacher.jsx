@@ -70,6 +70,8 @@ export default function Teacher() {
         );
         const userData = res?.data?.data?.user;
         setDataApi(userData);
+        console.log(userData);
+        
 
         // Sessions data for FullCalendar
         if (userData?.sessions.length > 0) {

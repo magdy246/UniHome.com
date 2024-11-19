@@ -23,9 +23,6 @@ const DesignWallet = () => {
   const { dataUse } = useContext(apiWallet);
   let nameUser = JSON.parse(localStorage.getItem("user"));
 
-  console.log(dataUse);
-
-
   const walletData = dataUse && dataUse.length > 0 ? dataUse[0] : { balance: 0 };
 
   return (
@@ -47,6 +44,7 @@ const DesignWallet = () => {
         <meta name="twitter:image" content="/src/components/Assets/images/UniHome.png" />
         <link rel="canonical" href="https://unih0me.com/wallet" />
       </Helmet>
+      
       <h1 className="text-center text-6xl font-bold text-white my-6 relative">
         <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">{t("Wallet")}</span>
         <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>

@@ -148,16 +148,17 @@ export default function About() {
                   key={testimonial.id}
                   className="p-4 transition-transform duration-300 hover:scale-105"
                 >
-                  <div className="h-full bg-white dark:bg-gray-900 shadow-lg rounded-lg overflow-hidden p-5">
-                    <div className="flex justify-center items-center">
+                  <div className="h-96 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg bg-white dark:bg-gray-900 shadow-lg rounded-lg overflow-hidden">
+                    <div className="relative w-full h-full">
                       <img
                         src={testimonial.image}
                         alt={testimonial.title}
-                        className="w-full rounded-md max-w-sm md:max-w-md lg:max-w-lg"
+                        className="absolute inset-0 w-full h-full object-cover rounded-md"
                       />
                     </div>
                   </div>
                 </div>
+
               ))
             ) : (
               <p>Loading testimonials...</p>

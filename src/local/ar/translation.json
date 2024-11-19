@@ -195,7 +195,7 @@
   "Questions": "الأسئلة",
   "Results": "النتائج",
   "My Wallet": "محفظتي",
-  "To ensure accuracy and security, regularly review your wallet details by verifying transaction histories, checking balances, and confirming the authenticity of each entry.Stay vigilant for any discrepancies and update your information as needed to maintain full control over your account.": "لضمان الدقة والأمان، راجع تفاصيل محفظتك بانتظام من خلال التحقق من سجلات المعاملات، والتحقق من الأرصدة، والتأكد من صحة كل إدخال. كن متيقظًا لأي تناقضات وقم بتحديث معلوماتك حسب الحاجة للحفاظ على السيطرة الكاملة على حسابك.",
+  "To ensure accuracy and security, regularly review your wallet details by verifying transaction histories, checking balances, and confirming the authenticity of each entry.Stay vigilant for any discrepancies and update your information as needed to maintain full control over your account.": "ان الرقم الحالي هو سعر المحاضرات وليس سعر الكورس الذي دفعت ثمنه. لضمان الدقة والأمان، راجع تفاصيل محفظتك بانتظام من خلال التحقق من سجلات المعاملات، والتحقق من الأرصدة، والتأكد من صحة كل إدخال. كن متيقظًا لأي تناقضات وقم بتحديث معلوماتك حسب الحاجة للحفاظ على السيطرة الكاملة على حسابك.",
   "Your Wallet Balance.": "رصيد محفظتك.",
   "Id": "Id",
   "Credit": "دائن",
@@ -500,5 +500,34 @@
   "Vietnam": "فيتنام",
   "Yemen": "اليمن",
   "Zambia": "زامبيا",
-  "Zimbabwe": "زيمبابوي"
+  "Zimbabwe": "زيمبابوي",
+  "policy": {
+    "title": "مرحبا بك في دعم UniHome",
+    "introduction": "يسر فريق دعم UniHome مساعدتك في استفساراتك. من خلال هذه المنصة، نضمن أن طلابنا يتلقون الدعم الذي يحتاجونه بكفاءة.",
+    "commitment": "نحن نفهم أن الوصول إلى حل قد يستغرق وقتًا أطول من المتوقع، ونود أن نؤكد لكم أننا ملتزمون بحل مشاكلكم في أسرع وقت ممكن بفضل دعم فريقنا المتفاني.",
+    "rights": {
+      "title": "حقوقك",
+      "description1": "يمكنك تحديد موارد متعددة للدعم الإضافي إذا لزم الأمر. يمكنك أيضًا اختيار مزود موارد بديل لهذا الدعم.",
+      "description2": "لديك الحق في إلغاء أي خدمة دعم في غضون 24 ساعة من تفعيلها وإعادة تخصيصها لمورد آخر.",
+      "description3": "يمكنك تغيير المورد في أي وقت؛ ومع ذلك، سيتم تقديم الدعم فقط في غضون الـ 24 ساعة التالية.",
+      "description4": "إذا قررت لاحقًا أنك تريد الإلغاء، يمكنك إيقاف الخدمة من خلال الدعم الفني إذا لزم الأمر.",
+      "description5": "إذا قمت بإعادة تخصيص الدعم، فيجب القيام بذلك قبل 24 ساعة من وقت البدء."
+    },
+    "contact": {
+      "title": "الاتصال بالدعم",
+      "description": "يمكنك التواصل مع UniHome من خلال وظيفة الدردشة إذا كنت بحاجة إلى مساعدة في استفساراتك بعد إضافة أو تعديل مورد."
+    },
+    "updates": {
+      "title": "القرارات والتحديثات",
+      "description": "يمكن إدارة التغييرات والإضافات والإلغاءات في خدمات الدعم على www.unih0me.com."
+    },
+    "escalation": {
+      "title": "سياسة التصعيد",
+      "description": "يمكنك تصعيد أي طلب دعم غير محلول مع UniHome إذا كانت لديك مخاوف أو تحتاج إلى دعم إضافي."
+    },
+    "retention": {
+      "title": "سياسة الاحتفاظ بالبيانات",
+      "description": "قد يقوم فريق دعم UniHome بمراجعة وتحديث طلبك. إذا كان من غير الممكن تقديم المزيد من الخدمة، سيتم الاحتفاظ بطلبك وفقًا لسياسة الخصوصية الخاصة بـ UniHome."
+    }
+  }
 }

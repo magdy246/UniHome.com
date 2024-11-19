@@ -198,7 +198,7 @@
     "Questions": "Questions",
     "Results": "Results",
     "My Wallet": "My Wallet",
-    "To ensure accuracy and security, regularly review your wallet details by verifying transaction histories, checking balances, and confirming the authenticity of each entry.Stay vigilant for any discrepancies and update your information as needed to maintain full control over your account.": "To ensure accuracy and security, regularly review your wallet details by verifying transaction histories, checking balances, and confirming the authenticity of each entry.Stay vigilant for any discrepancies and update your information as needed to maintain full control over your account.",
+    "To ensure accuracy and security, regularly review your wallet details by verifying transaction histories, checking balances, and confirming the authenticity of each entry.Stay vigilant for any discrepancies and update your information as needed to maintain full control over your account.": "The current amount is the price of the lectures, not the price of the course you paid for. To ensure accuracy and security, regularly review your wallet details by verifying transaction histories, checking balances, and confirming the authenticity of each entry.Stay vigilant for any discrepancies and update your information as needed to maintain full control over your account.",
     "Your Wallet Balance.": "Your Wallet Balance.",
     "Id": "Id",
     "Credit": "Credit",
@@ -495,5 +495,34 @@
     "Vietnam": "Vietnam",
     "Yemen": "Yemen",
     "Zambia": "Zambia",
-    "Zimbabwe": "Zimbabwe"
+    "Zimbabwe": "Zimbabwe",
+    "policy": {
+        "title": "Welcome to UniHome Support",
+        "introduction": "The UniHome Support team is pleased to assist you with your inquiries. Through this platform, we ensure that you, our students, receive the support you need efficiently.",
+        "commitment": "We understand that reaching a solution may sometimes take longer than expected, and we want to assure you that we are committed to resolving your issues as quickly as possible, thanks to the support of our dedicated team.",
+        "rights": {
+            "title": "Your Rights",
+            "description1": "You can specify multiple resources for additional support if needed. You can also choose an alternative resource provider for this support.",
+            "description2": "You have the right to cancel any support service within 24 hours of its activation and to reassign it to another resource.",
+            "description3": "You can change the resource at any time; however, support will only be provided within the next 24 hours.",
+            "description4": "If you decide later that you want to cancel, you can turn off the service through technical support if needed.",
+            "description5": "If you reassign support, it should be done 24 hours before the start time."
+        },
+        "contact": {
+            "title": "Contact Support",
+            "description": "You can contact UniHome through the Chat function if you need assistance with your inquiries after adding or adjusting a resource."
+        },
+        "updates": {
+            "title": "Decisions and Updates",
+            "description": "Changes, additions, and cancellations of support services can be managed on www.unih0me.com."
+        },
+        "escalation": {
+            "title": "Escalation Policy",
+            "description": "You can escalate any unresolved support request with UniHome if you have concerns or need additional support."
+        },
+        "retention": {
+            "title": "Data Retention Policy",
+            "description": "The UniHome Support team may review and update your request. If it is not possible to provide further service, your request will be retained as per UniHome's privacy policy."
+        }
+    }
 }
