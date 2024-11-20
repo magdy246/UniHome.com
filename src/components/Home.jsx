@@ -31,21 +31,22 @@ export default function Home() {
 
   const [refAPI, setRefAPI] = useState("");
 
+  // Function to fetch user data
   async function userData() {
     try {
       const token = localStorage.getItem("accessToken");
-      let res = await axios.get("https://yousab-tech.com/unihome/public/api/auth/profile", {
+      const res = await axios.get("https://yousab-tech.com/unihome/public/api/auth/profile", {
         headers: {
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
-      }
-      )
+      });
       localStorage.setItem("user", JSON.stringify(res?.data?.data));
     } catch (error) {
-      console.log(error);
+      console.log("Error fetching user data:", error);
     }
   }
 
+  // Function to refresh token
   async function refreshToken() {
     const token = localStorage.getItem("accessToken");
     try {
@@ -59,36 +60,25 @@ export default function Home() {
         }
       );
 
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("user");
+      // Update local storage with new token and user data
       localStorage.setItem("accessToken", response.data.access_token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
       setRefAPI(response.data.access_token);
-
     } catch (error) {
       console.error("Error refreshing token:", error);
     }
   }
 
+  // Effect to handle token from URL
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('access_token'); // Adjust this if your token is in a fragment
+    const token = urlParams.get("access_token"); // Adjust if needed
     if (token) {
+      // Save token in localStorage and refresh
       localStorage.setItem("accessToken", token);
-      refreshToken();
-      userData()
-      navigate("/"); // Redirect user to home page or any other page
-    }
-  }, [navigate]);
-
-  // This will run once after redirection from Google
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('access_token'); // Adjust this if your token is in a fragment
-    if (token) {
-      localStorage.setItem("accessToken", token);
-      userData()
-      navigate("/"); // Redirect user to home page or any other page
+      refreshToken(); // Refresh the token to ensure validity
+      userData(); // Fetch user data
+      navigate("/"); // Redirect to the home page or any other page
     }
   }, [navigate]);
 
