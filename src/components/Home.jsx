@@ -42,7 +42,7 @@ export default function Home() {
       });
       localStorage.setItem("user", JSON.stringify(res?.data?.data));
     } catch (error) {
-      console.log("Error fetching user data:", error);
+      console.error("Error fetching user data:", error);
     }
   }
 
@@ -72,9 +72,9 @@ export default function Home() {
   // Effect to handle token from URL
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get("access_token"); // Adjust if needed
+    const token = urlParams.get("token"); // Use 'token' key instead of 'access_token'
     if (token) {
-      // Save token in localStorage and refresh
+      // Save token in localStorage and process it
       localStorage.setItem("accessToken", token);
       refreshToken(); // Refresh the token to ensure validity
       userData(); // Fetch user data
