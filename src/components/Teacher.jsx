@@ -71,7 +71,7 @@ export default function Teacher() {
         const userData = res?.data?.data?.user;
         setDataApi(userData);
         console.log(userData);
-        
+
 
         // Sessions data for FullCalendar
         if (userData?.sessions.length > 0) {
@@ -328,7 +328,7 @@ export default function Teacher() {
               <div className="text-center">
                 <FaChalkboardTeacher className="text-4xl text-yellow-500 mb-2 mx-auto" />
                 <p className="text-gray-800 font-semibold">
-                  <span className="block text-3xl">{dataApi?.sessions?.length}</span>{" "}
+                  <span className="block text-3xl">{dataApi?.lessons || "0"}</span>{" "}
                   {t("Sessions")}
                 </p>
               </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import imgLogin from "../Assets/LogIN.png";
 import axios from "axios";
 // import Cookies from "js-cookie";
@@ -17,6 +17,57 @@ export default function Login() {
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [refAPI, setRefAPI] = useState("");
+
+  async function userData() {
+    try {
+      const token = localStorage.getItem("accessToken");
+      let res = await axios.get("https://yousab-tech.com/unihome/public/api/auth/profile", {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        },
+      }
+      )
+      localStorage.setItem("user", JSON.stringify(res?.data?.data));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function refreshToken() {
+    const token = localStorage.getItem("accessToken");
+    try {
+      const response = await axios.post(
+        `https://yousab-tech.com/unihome/public/api/auth/refresh`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("user");
+      localStorage.setItem("accessToken", response.data.access_token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      setRefAPI(response.data.access_token);
+
+    } catch (error) {
+      console.error("Error refreshing token:", error);
+    }
+  }
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('access_token'); // Adjust this if your token is in a fragment
+    if (token) {
+      localStorage.setItem("accessToken", token);
+      refreshToken();
+      userData()
+      navigate("/"); // Redirect user to home page or any other page
+    }
+  }, [navigate]);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
