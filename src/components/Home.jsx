@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet';
 import SliderTeatcher from "./SliderTeatcher";
 import Header from "./Header";
 import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -13,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   let navigate = useNavigate();
+  const [refAPI, setRefAPI] = useState("");
 
   async function userData() {
     try {
@@ -26,23 +26,6 @@ export default function Home() {
       localStorage.setItem("user", JSON.stringify(res?.data?.data));
     } catch (error) {
       console.log(error);
-    }
-  }
-
-  const [refAPI, setRefAPI] = useState("");
-
-  // Function to fetch user data
-  async function userData() {
-    try {
-      const token = localStorage.getItem("accessToken");
-      const res = await axios.get("https://yousab-tech.com/unihome/public/api/auth/profile", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      localStorage.setItem("user", JSON.stringify(res?.data?.data));
-    } catch (error) {
-      console.error("Error fetching user data:", error);
     }
   }
 
@@ -60,7 +43,6 @@ export default function Home() {
         }
       );
 
-      // Update local storage with new token and user data
       localStorage.setItem("accessToken", response.data.access_token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
       setRefAPI(response.data.access_token);
@@ -69,16 +51,26 @@ export default function Home() {
     }
   }
 
-  // Effect to handle token from URL
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get("token"); // Use 'token' key instead of 'access_token'
+    const token = urlParams.get('access_token');
     if (token) {
-      // Save token in localStorage and process it
       localStorage.setItem("accessToken", token);
-      refreshToken(); // Refresh the token to ensure validity
-      userData(); // Fetch user data
-      navigate("/"); // Redirect to the home page or any other page
+      userData()
+      navigate("/");
+    }
+  }, [navigate]);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get("token");
+    if (token) {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("user");
+      localStorage.setItem("accessToken", token);
+      userData();
+      refreshToken();
+      navigate("/");
     }
   }, [navigate]);
 

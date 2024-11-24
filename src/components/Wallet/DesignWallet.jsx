@@ -44,7 +44,7 @@ const DesignWallet = () => {
         <meta name="twitter:image" content="/src/components/Assets/images/UniHome.png" />
         <link rel="canonical" href="https://unih0me.com/wallet" />
       </Helmet>
-      
+
       <h1 className="text-center text-6xl font-bold text-white my-6 relative">
         <span className="bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">{t("Wallet")}</span>
         <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-orange-500 to-blue-500"></span>
@@ -71,7 +71,7 @@ const DesignWallet = () => {
 
             <div className="flex select-none flex-col md:flex-row justify-between items-end">
               <p className="text-gray-600 text-sm mb-3 md:mb-0 w-full md:w-1/2">
-                {t("To ensure accuracy and security, regularly review your wallet details by verifying transaction histories, checking balances, and confirming the authenticity of each entry.Stay vigilant for any discrepancies and update your information as needed to maintain full control over your account.")}
+                {t("To ensure accuracy, the number of sessions is converted into the price by appending zeros to the count (e.g., 32 sessions = 3200 EGP). Conversely, the actual number of sessions can be determined by removing the zeros from the price. For full security, it is recommended to regularly review the wallet, including checking balances, transaction records, and data accuracy. Any discrepancies should be addressed immediately, and information should be updated as needed to maintain full control over the account.")}
               </p>
               <div className="flex flex-col items-end w-full md:w-1/2">
                 <div className="text-4xl font-bold text-green-500">

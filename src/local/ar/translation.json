@@ -195,7 +195,7 @@
   "Questions": "الأسئلة",
   "Results": "النتائج",
   "My Wallet": "محفظتي",
-  "To ensure accuracy and security, regularly review your wallet details by verifying transaction histories, checking balances, and confirming the authenticity of each entry.Stay vigilant for any discrepancies and update your information as needed to maintain full control over your account.": "ان الرقم الحالي هو سعر المحاضرات وليس سعر الكورس الذي دفعت ثمنه. لضمان الدقة والأمان، راجع تفاصيل محفظتك بانتظام من خلال التحقق من سجلات المعاملات، والتحقق من الأرصدة، والتأكد من صحة كل إدخال. كن متيقظًا لأي تناقضات وقم بتحديث معلوماتك حسب الحاجة للحفاظ على السيطرة الكاملة على حسابك.",
+  "To ensure accuracy, the number of sessions is converted into the price by appending zeros to the count (e.g., 32 sessions = 3200 EGP). Conversely, the actual number of sessions can be determined by removing the zeros from the price. For full security, it is recommended to regularly review the wallet, including checking balances, transaction records, and data accuracy. Any discrepancies should be addressed immediately, and information should be updated as needed to maintain full control over the account.": "لضمان الدقة،الرقم الحالي يعبر عن عدد المحاضرات وليس سعر الكورس يتم تحويل عدد المحاضرات إلى سعر عن طريق إضافة أصفار بجانب العدد (على سبيل المثال: 32 محاضرة = 3200 جنيه). في المقابل، يمكن معرفة عدد المحاضرات الحقيقي بحذف الأصفار من السعر. لضمان الأمان الكامل، يُنصح بمراجعة المحفظة بشكل دوري، بما في ذلك التحقق من الرصيد وسجلات المعاملات وصحة البيانات. إذا وُجدت أي تناقضات، يجب معالجتها فورًا مع تحديث المعلومات عند الحاجة للحفاظ على السيطرة الكاملة على الحساب.",
   "Your Wallet Balance.": "رصيد محفظتك.",
   "Id": "Id",
   "Credit": "دائن",

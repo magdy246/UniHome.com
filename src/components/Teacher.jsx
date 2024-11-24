@@ -72,7 +72,6 @@ export default function Teacher() {
         setDataApi(userData);
         console.log(userData);
 
-
         // Sessions data for FullCalendar
         if (userData?.sessions.length > 0) {
           const sessionEvents = userData.sessions.map((session) => {
