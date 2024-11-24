@@ -53,23 +53,16 @@ export default function Home() {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('access_token');
-    if (token) {
-      localStorage.setItem("accessToken", token);
-      userData()
-      navigate("/");
-    }
-  }, [navigate]);
-
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
+    const accessToken = urlParams.get("access_token");
     const token = urlParams.get("token");
-    if (token) {
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("user");
-      localStorage.setItem("accessToken", token);
+
+    if (accessToken || token) {
+      localStorage.setItem("accessToken", accessToken || token);
       userData();
-      refreshToken();
+      if (token) {
+        localStorage.removeItem("user");
+        refreshToken();
+      }
       navigate("/");
     }
   }, [navigate]);
