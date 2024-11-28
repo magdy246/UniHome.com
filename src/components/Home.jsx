@@ -59,10 +59,6 @@ export default function Home() {
     if (accessToken || token) {
       localStorage.setItem("accessToken", accessToken || token);
       userData();
-      if (token) {
-        localStorage.removeItem("user");
-        refreshToken();
-      }
       navigate("/");
     }
   }, [navigate]);

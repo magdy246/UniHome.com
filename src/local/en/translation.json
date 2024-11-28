@@ -189,6 +189,8 @@
     "Completed": "Completed",
     "Incompleted": "Incompleted",
     "Cancelled": "Cancelled",
+    "Cancel": "Cancel",
+    "Ok":"Ok",
     "Date": "Date",
     "Details": "Details",
     "Status": "Status",

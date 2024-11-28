@@ -138,7 +138,9 @@ export default function Teacher() {
     const { sessionBreak, sessionDate } = info.event.extendedProps;
     const currentDate = new Date();
     const sessionDateObj = new Date(sessionDate);
-    const counter = currentDate <= sessionDateObj ? 0 : 1;
+    const currentTime = `${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;
+    const sessionTime = `${sessionDateObj.getHours()}:${sessionDateObj.getMinutes()}:${sessionDateObj.getSeconds()}`;
+    const counter = currentTime <= sessionTime ? 0 : 1;
     const eventData = info.event.extendedProps;
     const eventId = Number(info.event._def.publicId);
     const singleSession = session.find((e) => e.id === eventId);
@@ -169,7 +171,6 @@ export default function Teacher() {
         }
       );
       setPopupEvent(null);
-      toast.success(t("Transaction successful!"));
       setEvents((prevEvents) =>
         prevEvents.map((event) =>
           event.id === singleSession.id ? { ...event, status: 1 } : event
@@ -177,7 +178,22 @@ export default function Teacher() {
       );
 
     } catch (error) {
-      toast.success(t(`Transaction successful! But if you don't have money in your wallet the session will be never Booked`));
+      toast(
+        <div className="flex flex-col items-start gap-4">
+          <p className="text-sm font-medium">
+            {t("Transaction successful! But if you don't have money in your wallet the session will be never Booked")}
+          </p>
+          <button
+            className="px-4 py-2 text-white bg-blue-500 rounded-3xl hover:bg-blue-600"
+            onClick={() => toast.dismiss()}
+          >
+            {t("Ok")}
+          </button>
+        </div>,
+        {
+          duration: 6000
+        }
+      );
     }
   };
 
@@ -203,7 +219,7 @@ export default function Teacher() {
                 onClose();
                 handleBookingConfirm();
               }}
-              className="px-4 py-2 text-white bg-green-500 rounded"
+              className="px-4 py-2 mx-2 text-white bg-green-500 rounded"
             >
               {t("Confirm Booking")}
             </button>

@@ -168,11 +168,9 @@ const routes = [
       {
         path: "TeacherS/:Teacher",
         element: (
-          <ProtectedRoute>
-            <Suspense fallback={<LottieHandler animationData={Loader} />}>
-              <Teacher />
-            </Suspense>
-          </ProtectedRoute>
+          <Suspense fallback={<LottieHandler animationData={Loader} />}>
+            <Teacher />
+          </Suspense>
         ),
       },
       {

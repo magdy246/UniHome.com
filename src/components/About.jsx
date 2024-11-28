@@ -148,12 +148,13 @@ export default function About() {
                   key={testimonial.id}
                   className="p-4 transition-transform duration-300 hover:scale-105"
                 >
-                  <div className="h-96 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg bg-white dark:bg-gray-900 shadow-lg rounded-lg overflow-hidden">
+                  <div className="h-96 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg bg-gradient-to-t from-orange-500 to-purple-500 
+            hover:from-purple-500 hover:to-orange-500  dark:bg-gray-900 shadow-lg rounded-lg overflow-hidden">
                     <div className="relative w-full h-full">
                       <img
                         src={testimonial.image}
                         alt={testimonial.title}
-                        className="absolute inset-0 w-full h-full object-cover rounded-md"
+                        className="absolute inset-0 w-full h-full object-contain rounded-md"
                       />
                     </div>
                   </div>
